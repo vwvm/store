@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -9,3 +12,4 @@ spring:
 mybatis:
   mapper-locations: classpath:mappers/*Mapper.xml
   type-aliases-package: org.blackbox.store.beans.entity
+
