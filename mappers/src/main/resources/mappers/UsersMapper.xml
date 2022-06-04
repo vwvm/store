@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.blackbox.store.mappers.dao.UsersDao">
+
+    <resultMap id="UsersMap" type="org.blackbox.store.beans.entity.Users">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="realname" property="realName"/>
+        <result column="user_img" property="userImg"/>
+    </resultMap>
+
+    <select id="queryUserByName" resultMap="UsersMap">
+        select
+            user_id, username, password, realname, user_img
+        from 
+            users
+        where
+            username = #{username}
+    </select>
+</mapper>
+

@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:43306/store
+      username: root
+      password: root
+
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml
+  type-aliases-package: org.blackbox.store.beans.entity
