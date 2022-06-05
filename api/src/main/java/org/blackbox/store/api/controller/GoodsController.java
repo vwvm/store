@@ -3,6 +3,7 @@ package org.blackbox.store.api.controller;
 import io.swagger.annotations.Api;
 import org.blackbox.store.commons.vo.ResultVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,19 +16,24 @@ public class GoodsController {
     public ResultVO addGoods(){
         return null;
     }
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public ResultVO deleteGoods(){
+    @RequestMapping(value = "/{gid}", method = RequestMethod.DELETE)
+    public ResultVO deleteGoods(@PathVariable("gid") int goodsId){
+        System.out.println(goodsId);
         return null;
     }
-    @RequestMapping(value = "/delete", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResultVO updateGoods(int goodsId){
         return null;
     }
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResultVO listGoods(){
         return null;
     }
 
-
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResultVO getGoods(@PathVariable("id") int goodsId){
+        System.out.println("get" + goodsId);
+        return null;
+    }
 
 }
