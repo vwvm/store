@@ -36,8 +36,8 @@
     </select>
 
     <insert id="insertUsers">
-        insert into users(username, password, user_regtime, user_modtime)
-        values (#{username}, #{password}, #{userRegtime}, #{userModtime})
+        insert into users(username, password, user_regtime, user_modtime, user_img)
+        values (#{username}, #{password}, #{userRegtime}, #{userModtime}, #{userImg})
     </insert>
 </mapper>
 

@@ -55,6 +55,7 @@ public class UsersServiceImpl implements UsersService {
                 users.setPassword(md5Pwd);
                 users.setUserRegtime(new Date());
                 users.setUserModtime(new Date());
+                users.setUserImg("img/default.png");
                 int i = usersDao.insertUsers(users);
                 if (i > 0) {
                     return new ResultVO(10000, "注册成功", null);
