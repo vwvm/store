@@ -1,0 +1,7 @@
+采用前后分离
+采用restful规范
+swagger接口文档
+mybatis连接数据库
+使用druid
+模块化开发
+使用json数据交互

@@ -7,17 +7,37 @@
         <id column="user_id" property="userId"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
-        <result column="realname" property="realName"/>
+        <result column="nickname" property="nickname"/>
         <result column="user_img" property="userImg"/>
+        <result column="user_mobile" property="userMobile"/>
+        <result column="user_email" property="userEmail"/>
+        <result column="realname" property="realName"/>
+        <result column="user_sex" property="userSex"/>
+        <result column="user_birth" property="userBirth"/>
+        <result column="user_regtime" property="userRegtime"/>
+        <result column="user_modtime" property="userModtime"/>
     </resultMap>
 
     <select id="queryUserByName" resultMap="UsersMap">
-        select
-            user_id, username, password, realname, user_img
-        from 
-            users
-        where
-            username = #{username}
+        select user_id,
+               username,
+               password,
+               nickname,
+               realname,
+               user_img,
+               user_mobile,
+               user_email,
+               user_sex,
+               user_birth,
+               user_regtime,
+               user_modtime
+        from users
+        where username = #{username}
     </select>
+
+    <insert id="insertUsers">
+        insert into users(username, password, user_regtime, user_modtime)
+        values (#{username}, #{password}, #{userRegtime}, #{userModtime})
+    </insert>
 </mapper>
 

@@ -5,4 +5,6 @@ import org.blackbox.store.commons.vo.ResultVO;
 public interface UsersService {
 
     public ResultVO checkLogin(String userName, String pwd);
+
+    public ResultVO usersRegister(String userName, String pwd);
 }
