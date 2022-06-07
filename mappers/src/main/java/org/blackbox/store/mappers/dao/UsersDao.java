@@ -2,7 +2,7 @@ package org.blackbox.store.mappers.dao;
 
 import org.blackbox.store.beans.entity.Users;
 
-public interface UsersDao {
+public interface UsersDao extends BaseDao<Users> {
 
     /**
      * 根据用户名查询用户信息

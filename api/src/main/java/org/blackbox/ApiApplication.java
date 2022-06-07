@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("org.blackbox.store.mappers.dao")
+@MapperScan(basePackages = {"org.blackbox.store.mappers.dao", "org.blackbox.store.mappers.mapper"})
 public class ApiApplication {
 
     public static void main(String[] args) {

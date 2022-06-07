@@ -30,7 +30,7 @@ public class UsersServiceImpl implements UsersService {
             String md5Pwd = MD5Utils.md5(pwd);
             //密码匹配
             if (users.getPassword().equals(md5Pwd)) {
-                return new ResultVO(10000, "登录成功", null);
+                return new ResultVO(10000, "登录成功", users);
 
                 //密码错误
             } else {

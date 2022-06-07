@@ -9,7 +9,13 @@ spring:
       username: root
       password: root
 
-mybatis:
+mybatis-plus:
   mapper-locations: classpath:mappers/*Mapper.xml
   type-aliases-package: org.blackbox.store.beans.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      #全局主键自增
+      id-type: auto
 
