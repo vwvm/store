@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.blackbox.store.mappers.dao.UserDao">
+<mapper namespace="org.blackbox.store.mappers.mapper.UserMapper">
 
     <resultMap id="UserMap" type="org.blackbox.store.beans.entity.User">
         <id column="id" property="id"/>
@@ -18,5 +18,16 @@
         where
             username = #{username}
     </select>
+
+    <select id="selectPageVo" resultType="User">
+        select
+            id, username, password, img, age
+        from
+            user
+        where
+            age > #{age}
+    </select>
 </mapper>
+
+
 

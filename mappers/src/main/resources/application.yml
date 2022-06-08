@@ -11,6 +11,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mappers/*Mapper.xml
+  #配置类型别名对应的包
   type-aliases-package: org.blackbox.store.beans.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
