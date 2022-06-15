@@ -12,7 +12,7 @@ import lombok.*;
 @TableName("user")
 public class User {
 
-    @ApiModelProperty(dataType = "int", required = false)
+    @ApiModelProperty(dataType = "int", required = false, value = "主键，id")
     @TableId(type = IdType.AUTO)
     private Long id;
 
@@ -27,10 +27,19 @@ public class User {
     @TableField("img")
     private String userImg;
 
-    @ApiModelProperty(dataType = "int", required = false)
-    @TableLogic
-    private Integer isDeleted;
+    @ApiModelProperty(dataType = "int", required = false, value = "性别,1表示男,2表示女,0表示未知")
+    private Integer sex;
 
     @ApiModelProperty(dataType = "int", required = false)
     private Integer age;
+
+    @ApiModelProperty(dataType = "int", required = false, value = "乐观锁字段")
+    @Version
+    private Integer version;
+
+    @ApiModelProperty(dataType = "int", required = false, value = "逻辑删除字段")
+    @TableLogic
+    private Integer isDeleted;
+
+
 }

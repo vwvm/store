@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 @SpringBootTest(classes = ApiApplication.class)
 @ExtendWith(SpringExtension.class)
 class UserServiceImplTest {
@@ -38,4 +39,19 @@ class UserServiceImplTest {
         boolean b = userService.saveBatch(list);
         System.out.println(b);
     }
+
+    @Test
+    void t1(StringBuilder s){
+        String str = "abcde";
+        StringBuilder stringBuilder = new StringBuilder(str);
+        System.out.println(new StringBuilder(str).reverse());
+    }
+
+    @Test
+    void t2(StringBuilder s){
+        String str = "abcde";
+
+
+    }
+
 }

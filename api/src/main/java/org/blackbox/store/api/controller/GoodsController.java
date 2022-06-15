@@ -13,25 +13,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class GoodsController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResultVO addGoods(){
+    public ResultVO addGoods() {
         return null;
     }
+
     @RequestMapping(value = "/{gid}", method = RequestMethod.DELETE)
-    public ResultVO deleteGoods(@PathVariable("gid") int goodsId){
+    public ResultVO deleteGoods(@PathVariable("gid") int goodsId) {
         System.out.println(goodsId);
         return null;
     }
+
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public ResultVO updateGoods(int goodsId){
+    public ResultVO updateGoods(int goodsId) {
         return null;
     }
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResultVO listGoods(){
+    public ResultVO listGoods() {
         return null;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResultVO getGoods(@PathVariable("id") int goodsId){
+    public ResultVO getGoods(@PathVariable("id") int goodsId) {
         System.out.println("get" + goodsId);
         return null;
     }

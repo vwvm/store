@@ -20,8 +20,11 @@ class MybatisPlusConfigTest {
     @Resource
     private UserMapper userMapper;
 
+    /**
+     * 分页插件测试
+     */
     @Test
-    void pageTest(){
+    void pageTest() {
         Page<User> page = new Page<>(1, 3);
         userMapper.selectPage(page, null);
         System.out.println(page);
@@ -30,6 +33,25 @@ class MybatisPlusConfigTest {
         System.out.println(page.getTotal());
         System.out.println(page.hasPrevious());
         System.out.println(page.hasNext());
+    }
+
+    /**
+     * 乐观锁测试
+     */
+    @Test
+    void productTest() {
+        User userA = userMapper.selectById(1);
+        System.out.println("用户A获取年龄" + userA.getAge());
+        User userB = userMapper.selectById(1);
+        System.out.println("用户B获取年龄" + userB.getAge());
+        //用户A操作年龄+20
+        userA.setAge(userA.getAge() + 20);
+        int updateByIdA = userMapper.updateById(userA);
+        //用户A操作年龄-20
+        userB.setAge(userB.getAge() - 20);
+        int updateByIdB = userMapper.updateById(userB);
+        System.out.println(updateByIdA);
+        System.out.println(updateByIdB);
 
     }
 }
