@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.blackbox.store.beans.entity.Users;
 import org.blackbox.store.commons.vo.ResultVO;
 import org.blackbox.store.services.service.UsersService;
 import org.springframework.stereotype.Controller;

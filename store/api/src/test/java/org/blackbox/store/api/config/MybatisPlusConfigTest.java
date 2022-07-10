@@ -11,8 +11,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.annotation.Resource;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest(classes = ApiApplication.class)
 @ExtendWith(SpringExtension.class)
 class MybatisPlusConfigTest {
