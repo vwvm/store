@@ -1,7 +1,43 @@
-# Vue 3 + Vite
+# store-ui
+## 项目背景
+做一个电商项目
+## 上手指南
+### 安装要求
+node.js
+### 安装步骤
+```
+git clone https://github.com/a1647010108/store.git
+cd store
+npm install
+npm run dev 
+```
+### 测试
+检查依赖环境是否正常的
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### 部署
+<>
 
-## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+### 框架或者技术选型
+- vue
+- vite
+- element-plus
+- axios
+- scss
+- 
+
+### 贡献者
+来不来不
+
+### 版本控制
+git
+
+
+### 作者
+1647010108@qq.com
+
+### 版权说明:
+仅针对开源项目,内部开发没有必要
+
+### 鸣谢:
+做一个有礼貌的人
