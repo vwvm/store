@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.annotation.Resource;
+import java.util.ArrayDeque;
 
 @SpringBootTest(classes = ApiApplication.class)
 @ExtendWith(SpringExtension.class)
@@ -52,4 +53,24 @@ class MybatisPlusConfigTest {
         System.out.println(updateByIdB);
 
     }
+
+    public static void main(String[] args) {
+        System.out.println(Main(new int[]{10,1,2,3,4,5,6,1,2,3}));
+    }
+
+    static int Main(int[] nums) {
+
+        var ans = 0;
+        var st = new ArrayDeque<int[]>();
+        for (var num : nums) {
+            var maxT = 0;
+            while (!st.isEmpty() && st.peek()[0] <= num)
+                maxT = Math.max(maxT, st.pop()[1]);
+            maxT = st.isEmpty() ? 0 : maxT + 1;
+            ans = Math.max(ans, maxT);
+            st.push(new int[]{num, maxT});
+        }
+        return ans;
+    }
+
 }
