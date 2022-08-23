@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.blackbox.store.beans.entity.Users;
+import org.blackbox.store.commons.utils.JwtUtils;
 import org.blackbox.store.commons.utils.MD5Utils;
 import org.blackbox.store.commons.vo.ResStatus;
 import org.blackbox.store.commons.vo.ResultVO;
@@ -41,19 +42,10 @@ public class UsersServiceImpl implements UsersService {
             //密码匹配
             if (users.getPassword().equals(md5Pwd)) {
                 //使用jwt生成规则
-                JwtBuilder builder = Jwts.builder();
-                String key = "ssssssssssdfdsafasfdssdfsfsfssfs";
-                SignatureAlgorithm signatureAlgorithm=SignatureAlgorithm.HS256;
-                SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes());
                 HashMap<String, Object> map = new HashMap<>();
-                String token = builder.setSubject(name)                    //主题携带数据
-                        .setIssuedAt(new Date())            // 设置token生成时间
-                        .setId("" + users.getUserId())      //设置用户id为token is id
-                        .setClaims(map)                     //可以存放权限信息
-                        .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))  //设置过期时间
-                        .signWith(secretKey, signatureAlgorithm)     //设置加密方式和加密密码
-                        .compact();
-
+                map.put("userId", users.getUserId());
+                map.put("username", users.getUsername());
+                String token = JwtUtils.createJwt(map);
                 return new ResultVO(ResStatus.OK, token, users);
 
                 //密码错误

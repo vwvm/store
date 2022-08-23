@@ -98,6 +98,7 @@ export default {
           if (res.data.code === 0) {
             //登录验证成功后
             setCookieValue("token", res.data.msg)
+            console.log(res.data.msg)
             window.location.href = "/index";
           } else {
             this.tips = "账号或者密码错误"
