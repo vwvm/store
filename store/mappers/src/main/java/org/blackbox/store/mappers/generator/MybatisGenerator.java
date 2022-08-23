@@ -31,7 +31,7 @@ public class MybatisGenerator {
     private static void generatorB(DataSourceConfig.Builder builder1) {
         FastAutoGenerator.create(builder1)
                 //全局配置
-                .globalConfig(builder -> builder.outputDir("F:/project/synthetical/")
+                .globalConfig(builder -> builder.outputDir("F:/project/synthetical/store")
                         .author("BlackBox")
                         .disableOpenDir())
                 //包配置

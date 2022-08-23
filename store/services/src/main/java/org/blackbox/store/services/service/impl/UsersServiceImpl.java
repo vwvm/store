@@ -1,6 +1,7 @@
 package org.blackbox.store.services.service.impl;
 
 import org.blackbox.store.beans.entity.Users;
+import org.blackbox.store.commons.utils.Base64Utils;
 import org.blackbox.store.commons.utils.MD5Utils;
 import org.blackbox.store.commons.vo.ResStatus;
 import org.blackbox.store.commons.vo.ResultVO;
@@ -30,7 +31,8 @@ public class UsersServiceImpl implements UsersService {
             String md5Pwd = MD5Utils.md5(pwd);
             //密码匹配
             if (users.getPassword().equals(md5Pwd)) {
-                return new ResultVO(ResStatus.OK, "登录成功", users);
+                String token = Base64Utils.encode(name + "token");
+                return new ResultVO(ResStatus.OK, token, users);
 
                 //密码错误
             } else {
