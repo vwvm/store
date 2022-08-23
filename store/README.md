@@ -27,7 +27,20 @@ git clone https://github.com/vwvm/store.git
 - druid
 - swagger3
 - Test5
--
+- 
+具体依赖如下
+- commons
+  - lombok
+  - swagger3
+- beans
+  - lombok
+  - swagger3
+- mappers
+  - mysql-driver
+- servers
+- api
+
+
 
 ## 贡献者
 来不来不

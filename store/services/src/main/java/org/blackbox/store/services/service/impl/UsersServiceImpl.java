@@ -1,7 +1,12 @@
 package org.blackbox.store.services.service.impl;
 
+
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.blackbox.store.beans.entity.Users;
-import org.blackbox.store.commons.utils.Base64Utils;
 import org.blackbox.store.commons.utils.MD5Utils;
 import org.blackbox.store.commons.vo.ResStatus;
 import org.blackbox.store.commons.vo.ResultVO;
@@ -11,13 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 
 @Service
 public class UsersServiceImpl implements UsersService {
 
     @Resource
     private UsersDao usersDao;
+
     @Override
     @Transactional
     public ResultVO checkLogin(String name, String pwd) {
@@ -31,7 +40,20 @@ public class UsersServiceImpl implements UsersService {
             String md5Pwd = MD5Utils.md5(pwd);
             //密码匹配
             if (users.getPassword().equals(md5Pwd)) {
-                String token = Base64Utils.encode(name + "token");
+                //使用jwt生成规则
+                JwtBuilder builder = Jwts.builder();
+                String key = "ssssssssssdfdsafasfdssdfsfsfssfs";
+                SignatureAlgorithm signatureAlgorithm=SignatureAlgorithm.HS256;
+                SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes());
+                HashMap<String, Object> map = new HashMap<>();
+                String token = builder.setSubject(name)                    //主题携带数据
+                        .setIssuedAt(new Date())            // 设置token生成时间
+                        .setId("" + users.getUserId())      //设置用户id为token is id
+                        .setClaims(map)                     //可以存放权限信息
+                        .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))  //设置过期时间
+                        .signWith(secretKey, signatureAlgorithm)     //设置加密方式和加密密码
+                        .compact();
+
                 return new ResultVO(ResStatus.OK, token, users);
 
                 //密码错误
