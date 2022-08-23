@@ -6,7 +6,7 @@
 node.js
 ### 安装步骤
 ```
-git clone https://github.com/a1647010108/store.git
+git clone https://github.com/vwvm/store.git
 cd store
 npm install
 npm run dev 

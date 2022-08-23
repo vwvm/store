@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import {reactive} from "vue";
+import {setCookieValue} from "../../static/js/cookie_utils.js";
 import axios from "axios";
 
 const baseUrl = "http://localhost:8080";
@@ -96,6 +96,8 @@ export default {
           }
         }).then((res) => {
           if (res.data.code === 0) {
+            //登录验证成功后
+            setCookieValue("token", res.data.msg)
             window.location.href = "/index";
           } else {
             this.tips = "账号或者密码错误"
