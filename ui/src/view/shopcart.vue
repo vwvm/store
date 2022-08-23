@@ -304,7 +304,7 @@ export default {
       method:"get",
       url:baseurl + "/shoppingCart/list",
       params:{
-        token:this.token
+        token: this.token
       }
     }).then(function (res) {
         console.log(res);

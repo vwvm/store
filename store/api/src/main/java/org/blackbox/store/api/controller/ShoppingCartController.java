@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.blackbox.store.commons.utils.Base64Utils;
 import org.blackbox.store.commons.vo.ResStatus;
 import org.blackbox.store.commons.vo.ResultVO;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,10 +35,11 @@ public class ShoppingCartController {
     @GetMapping("/list")
     public ResultVO listCarts(String token){
         //获取token
-
-        
+        String decode = Base64Utils.decode(token);
         //校验token
-
-        return new ResultVO(ResStatus.OK, "success", null);
+        if (decode.endsWith("token")){
+            return new ResultVO(ResStatus.OK, "success", null);
+        }
+        return new ResultVO(ResStatus.NO, "token不合法", null);
     }
 }
