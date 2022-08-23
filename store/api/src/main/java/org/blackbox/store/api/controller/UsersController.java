@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
-//允许跨域注解
 @ResponseBody
 @CrossOrigin
 @RequestMapping("/users")

@@ -52,11 +52,10 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
-        <!-- swagger-ui插件 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
-            <artifactId>swagger-bootstrap-ui</artifactId>
-            <version>1.9.6</version>
+            <artifactId>knife4j-spring-ui</artifactId>
+            <version>3.0.3</version>
         </dependency>
     </dependencies>
 

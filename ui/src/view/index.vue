@@ -25,7 +25,7 @@
         <div class="menu-hd">
           <a id="mc-menu-hd" href="shopcart.html" target="_top">
             <i class="am-icon-shopping-cart  am-icon-fw"></i>
-            <span>购物车</span>
+            <li><router-link to="/shopcart">购物车</router-link></li>
             <strong id="J_MiniCartNum" class="h"></strong>
           </a>
         </div>
@@ -41,7 +41,7 @@
   <div class="nav white">
 
     <div class="logoBig">
-      <img src="static/images/logo.png" style="margin-left: 0px">
+      <img src="../assets/images/logo.png" style="margin-left: 0" alt="logo">
     </div>
 
     <div class="search-bar pr">
@@ -59,7 +59,7 @@
     <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
       <ul class="am-slides">
         <li v-if="indexImgs.length>0" v-for="img,index in indexImgs" :class="'banner'+(index+1)">
-          <a><img :src="'static/images/'+img.imgUrl" /></a>
+          <a><img :src="'static/images/'+img.imgUrl"/></a>
         </li>
       </ul>
     </div>
@@ -92,7 +92,7 @@
               <div class="category-info">
                 <h3 class="category-name b-category-name">
                   <i><img :src="'static/images/'+c1.categoryIcon"></i>
-                  <a class="ml-22" :title="c1.categoryName">{{c1.categoryName}}</a>
+                  <a class="ml-22" :title="c1.categoryName">{{ c1.categoryName }}</a>
                 </h3>
                 <em>&gt;</em>
               </div>
@@ -104,9 +104,10 @@
                       <div class="sort-side">
                         <!--每个dl代表一个二级分类-->
                         <dl class="dl-sort" v-for="c2 in c1.categories">
-                          <dt><span :title="c2.categoryName">{{c2.categoryName}}</span></dt>
+                          <dt><span :title="c2.categoryName">{{ c2.categoryName }}</span></dt>
                           <dd v-for="c3 in c2.categories">
-                            <a :title="c3.categoryName" :href="'search.html?cid='+c3.categoryId"><span>{{c3.categoryName}}</span></a>
+                            <a :title="c3.categoryName"
+                               :href="'search.html?cid='+c3.categoryId"><span>{{ c3.categoryName }}</span></a>
                           </dd>
                         </dl>
                       </div>
@@ -129,22 +130,22 @@
   <!--小导航 -->
   <div class="am-g am-g-fixed smallnav">
     <div class="am-u-sm-3">
-      <a href="sort.html"><img src="static/images/navsmall.jpg" />
+      <a href="sort.html"><img src="static/images/navsmall.jpg"/>
         <div class="title">商品分类</div>
       </a>
     </div>
     <div class="am-u-sm-3">
-      <a href="#"><img src="static/images/huismall.jpg" />
+      <a href="#"><img src="static/images/huismall.jpg"/>
         <div class="title">大聚惠</div>
       </a>
     </div>
     <div class="am-u-sm-3">
-      <a href="#"><img src="static/images/mansmall.jpg" />
+      <a href="#"><img src="static/images/mansmall.jpg"/>
         <div class="title">个人中心</div>
       </a>
     </div>
     <div class="am-u-sm-3">
-      <a href="#"><img src="static/images/moneysmall.jpg" />
+      <a href="#"><img src="static/images/moneysmall.jpg"/>
         <div class="title">投资理财</div>
       </a>
     </div>
@@ -172,7 +173,7 @@
               <img :src="'static/'+userimg"/>
             </a>
             <em>
-              Hi,<span class="s-name">{{username}}</span>
+              Hi,<span class="s-name">{{ username }}</span>
               <a href="#"><p>点击更多优惠活动</p></a>
             </em>
           </div>
@@ -211,11 +212,11 @@
       <a v-for="rp in recommendProducts" :href="'introduction.html?pid='+rp.productId">
         <div class="am-u-sm-4 am-u-lg-3 ">
           <div class="info ">
-            <h3>{{rp.productName}}</h3>
-            <h4>销量：{{rp.soldNum}}</h4>
+            <h3>{{ rp.productName }}</h3>
+            <h4>销量：{{ rp.soldNum }}</h4>
           </div>
           <div class="recommendationMain one">
-            <img v-if="rp.imgs.length>0"  :src="'static/pimgs/'+rp.imgs[0].url"/>
+            <img v-if="rp.imgs.length>0" :src="'static/pimgs/'+rp.imgs[0].url"/>
           </div>
         </div>
       </a>
@@ -261,7 +262,7 @@
         <h4>活动</h4>
         <h3>每期活动 优惠享不停 </h3>
         <span class="more ">
-                              <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+                              <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;"></i></a>
                         </span>
       </div>
       <div class="am-g am-g-fixed ">
@@ -318,8 +319,8 @@
         <!--甜点-->
         <div class="am-container ">
           <div class="shopTitle ">
-            <h4>{{rc.categoryName}}</h4>
-            <h3>{{rc.categorySlogan}}</h3>
+            <h4>{{ rc.categoryName }}</h4>
+            <h3>{{ rc.categorySlogan }}</h3>
             <!--<div class="today-brands ">
               <a href="# ">桂花糕</a>
               <a href="# ">奶皮酥</a>
@@ -329,7 +330,7 @@
               <a href="# ">豌豆黄</a>
             </div>-->
             <span class="more ">
-		                    <a href="# ">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+		                    <a href="# ">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;"></i></a>
 		                        </span>
           </div>
         </div>
@@ -352,75 +353,80 @@
                   零食大礼包
                 </div>
               </div>
-              <img :src="'static/images/'+rc.categoryPic" />
+              <img :src="'static/images/'+rc.categoryPic"/>
             </a>
             <div class="triangle-topright"></div>
           </div>
 
           <div class="am-u-sm-7 am-u-md-4 text-two sug" v-if="rc.products.length > 0">
             <div class="outer-con ">
-              <div class="title ">{{rc.products[0].productName}}</div>
+              <div class="title ">{{ rc.products[0].productName }}</div>
               <div class="sub-title ">
-                销量：{{rc.products[0].soldNum}}
+                销量：{{ rc.products[0].soldNum }}
               </div>
               <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
             </div>
-            <a href="# "><img v-if="rc.products[0].imgs.length>0" :src="'static/pimgs/'+rc.products[0].imgs[0].url" /></a>
+            <a href="# "><img v-if="rc.products[0].imgs.length>0"
+                              :src="'static/pimgs/'+rc.products[0].imgs[0].url"/></a>
           </div>
 
           <div class="am-u-sm-7 am-u-md-4 text-two" v-if="rc.products.length > 1">
             <div class="outer-con ">
-              <div class="title ">{{rc.products[1].productName}}</div>
+              <div class="title ">{{ rc.products[1].productName }}</div>
               <div class="sub-title ">
-                销量：{{rc.products[1].soldNum}}
+                销量：{{ rc.products[1].soldNum }}
               </div>
               <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
             </div>
-            <a href="# "><img  v-if="rc.products[1].imgs.length>0" :src="'static/pimgs/'+rc.products[1].imgs[0].url" /></a>
+            <a href="# "><img v-if="rc.products[1].imgs.length>0"
+                              :src="'static/pimgs/'+rc.products[1].imgs[0].url"/></a>
           </div>
 
 
-          <div class="am-u-sm-3 am-u-md-2 text-three big"  v-if="rc.products.length > 2">
+          <div class="am-u-sm-3 am-u-md-2 text-three big" v-if="rc.products.length > 2">
             <div class="outer-con ">
-              <div class="title ">{{rc.products[2].productName}}</div>
-              <div class="sub-title ">销量：{{rc.products[2].soldNum}}</div>
+              <div class="title ">{{ rc.products[2].productName }}</div>
+              <div class="sub-title ">销量：{{ rc.products[2].soldNum }}</div>
               <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
             </div>
-            <a href="# "><img  v-if="rc.products[2].imgs.length>0" :src="'static/pimgs/'+rc.products[2].imgs[0].url" /></a>
+            <a href="# "><img v-if="rc.products[2].imgs.length>0"
+                              :src="'static/pimgs/'+rc.products[2].imgs[0].url"/></a>
           </div>
 
           <div class="am-u-sm-3 am-u-md-2 text-three sug" v-if="rc.products.length > 3">
             <div class="outer-con ">
-              <div class="title ">{{rc.products[3].productName}}</div>
-              <div class="sub-title ">销量：{{rc.products[3].soldNum}}</div>
+              <div class="title ">{{ rc.products[3].productName }}</div>
+              <div class="sub-title ">销量：{{ rc.products[3].soldNum }}</div>
               <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
             </div>
-            <a href="# "><img  v-if="rc.products[3].imgs.length>0" :src="'static/pimgs/'+rc.products[3].imgs[0].url" /></a>
+            <a href="# "><img v-if="rc.products[3].imgs.length>0"
+                              :src="'static/pimgs/'+rc.products[3].imgs[0].url"/></a>
           </div>
 
           <div class="am-u-sm-3 am-u-md-2 text-three " v-if="rc.products.length > 4">
             <div class="outer-con ">
-              <div class="title ">{{rc.products[4].productName}}</div>
-              <div class="sub-title ">销量：{{rc.products[4].soldNum}}</div>
+              <div class="title ">{{ rc.products[4].productName }}</div>
+              <div class="sub-title ">销量：{{ rc.products[4].soldNum }}</div>
               <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
             </div>
-            <a href="# "><img  v-if="rc.products[4].imgs.length>0" :src="'static/pimgs/'+rc.products[4].imgs[0].url" /></a>
+            <a href="# "><img v-if="rc.products[4].imgs.length>0"
+                              :src="'static/pimgs/'+rc.products[4].imgs[0].url"/></a>
           </div>
 
           <div class="am-u-sm-3 am-u-md-2 text-three last big " v-if="rc.products.length > 5">
             <div class="outer-con ">
-              <div class="title ">{{rc.products[5].productName}}</div>
-              <div class="sub-title ">销量：{{rc.products[5].soldNum}}</div>
+              <div class="title ">{{ rc.products[5].productName }}</div>
+              <div class="sub-title ">销量：{{ rc.products[5].soldNum }}</div>
               <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
             </div>
-            <a href="# "><img  v-if="rc.products[5].imgs.length>0" :src="'static/pimgs/'+rc.products[5].imgs[0].url" /></a>
+            <a href="# "><img v-if="rc.products[5].imgs.length>0"
+                              :src="'static/pimgs/'+rc.products[5].imgs[0].url"/></a>
           </div>
 
         </div>
         <div class="clear "></div>
       </div>
     </template>
-
 
 
     <div class="footer ">
@@ -451,7 +457,7 @@
     <div class="navCir">
       <li class="active"><a href="home.html"><i class="am-icon-home "></i>首页</a></li>
       <li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-      <li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>
+      <li><router-link to="/shopcart">购物车</router-link></li>
       <li><a href="person/index.html"><i class="am-icon-user"></i>我的</a></li>
     </div>
 

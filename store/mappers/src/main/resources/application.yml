@@ -44,4 +44,3 @@ mybatis-plus:
       id-type: auto
   #通用枚举包位置
   type-enums-package: org.blackbox.store.beans.enums
-

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * <p>
@@ -20,8 +21,9 @@ import org.springframework.stereotype.Controller;
  * @since 2022-08-23
  */
 @Controller
-@RequestMapping("/shoppingCart")
 @CrossOrigin
+@ResponseBody
+@RequestMapping("/shoppingCart")
 @Api(value = "提供购物车相关接口", tags = "购物车")
 public class ShoppingCartController {
 
@@ -31,6 +33,11 @@ public class ShoppingCartController {
     })
     @GetMapping("/list")
     public ResultVO listCarts(String token){
+        //获取token
+
+        
+        //校验token
+
         return new ResultVO(ResStatus.OK, "success", null);
     }
 }

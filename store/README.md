@@ -25,7 +25,7 @@ git clone https://github.com/vwvm/store.git
 - mybatis-generator 代码生成器
 - dynamic-datasource mybatis多数据源
 - druid
-- swagger2
+- swagger3
 - Test5
 -
 
