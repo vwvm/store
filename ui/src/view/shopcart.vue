@@ -303,7 +303,7 @@ export default {
     axios({
       method:"get",
       url:baseurl + "/shoppingCart/list",
-      params:{
+      headers:{
         token: this.token
       }
     }).then(function (res) {
