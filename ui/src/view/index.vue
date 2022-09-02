@@ -467,11 +467,13 @@
 
 <script>
 
+import {getCookieValue} from "../../static/js/cookie_utils.js";
+
 export default {
   name: "index",
   data() {
     return {
-      username: "",
+      username: "您未登录",
       userimg: "",
       isLogin: false,
       indexImgs: [],
@@ -481,6 +483,15 @@ export default {
       keyword: ""
     }
   },
+  created() {
+    const token = getCookieValue("token");
+    if (token !== null && token !== ""){
+      this.isLogin = true;
+      this.username = getCookieValue("username")
+      console.log(this.username)
+      this.userImg = getCookieValue("userImg")
+    }
+  }
 }
 </script>
 

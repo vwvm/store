@@ -95,10 +95,12 @@ export default {
             password: this.password,
           }
         }).then((res) => {
+          const resData = res.data
           if (res.data.code === 0) {
             //登录验证成功后
-            setCookieValue("token", res.data.msg)
-            console.log(res.data.msg)
+            setCookieValue("token", resData.data.msg);
+            setCookieValue("username", resData.data.username);
+            setCookieValue("userImg", resData.data.userImg)
             window.location.href = "/index";
           } else {
             this.tips = "账号或者密码错误"
