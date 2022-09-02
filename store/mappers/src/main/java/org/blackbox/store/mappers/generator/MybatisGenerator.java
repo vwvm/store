@@ -7,9 +7,7 @@ import com.baomidou.mybatisplus.generator.config.TemplateType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * <h3>store</h3>
@@ -49,6 +47,12 @@ public class MybatisGenerator {
                 .templateConfig(builder -> builder.disable(TemplateType.XML))
                 //模板引擎
                 .templateEngine(new FreemarkerTemplateEngine())
+//                .injectionConfig(consumer -> {
+//                    Map<String, String> customFile = new HashMap<>();
+//                    // DTO
+//                    customFile.put("DTO.java", "/templates/entityDTO.java.ftl");
+//                    consumer.customFile(customFile);
+//                })
                 //执行
                 .execute();
     }
