@@ -2,6 +2,7 @@ package org.blackbox.store.mappers.mapper;
 
 import org.blackbox.store.beans.entity.IndexImg;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -13,9 +14,10 @@ import java.util.List;
  * @author BlackBox
  * @since 2022-09-02
  */
+@Component
 public interface IndexImgMapper extends BaseMapper<IndexImg> {
 
     //查询轮播图：status=1 按照seq排序
-    public List<IndexImg> listIndexImg();
+    List<IndexImg> listIndexImg();
 
 }

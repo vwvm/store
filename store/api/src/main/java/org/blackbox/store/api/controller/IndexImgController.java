@@ -1,7 +1,16 @@
 package org.blackbox.store.api.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.blackbox.store.commons.vo.ResultVO;
+import org.blackbox.store.services.service.IIndexImgService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -11,11 +20,20 @@ import org.springframework.stereotype.Controller;
  * @author BlackBox
  * @since 2022-09-02
  */
-@Controller
-@RequestMapping("/indexImg")
+@RestController
+@CrossOrigin
+@RequestMapping("/test/indexImg")
+@Api(value = "提供轮播图功能", tags = "轮播图")
 public class IndexImgController {
 
-    public static void main(String[] args) {
+    @Resource
+    private IIndexImgService iIndexImgService;
 
+    @ApiOperation("返回轮播图列表")
+    @ApiImplicitParams({
+    })
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResultVO indexImgList() {
+        return iIndexImgService.indexImgList();
     }
 }

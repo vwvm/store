@@ -2,6 +2,7 @@ package org.blackbox.store.services.service;
 
 import org.blackbox.store.beans.entity.IndexImg;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.blackbox.store.commons.vo.ResultVO;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IIndexImgService extends IService<IndexImg> {
 
+    ResultVO indexImgList();
 }
