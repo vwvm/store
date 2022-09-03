@@ -44,9 +44,9 @@ public class MybatisGenerator {
                 //策略配置
                 .strategyConfig((scanner, builder) -> builder.addInclude(scanner.apply("请输入表名")))
                 //模板配置
-                .templateConfig(builder -> builder.disable(TemplateType.XML))
+//                .templateConfig(builder -> builder.disable(TemplateType.XML))
                 //模板引擎
-                .templateEngine(new FreemarkerTemplateEngine())
+//                .templateEngine(new FreemarkerTemplateEngine())
 //                .injectionConfig(consumer -> {
 //                    Map<String, String> customFile = new HashMap<>();
 //                    // DTO

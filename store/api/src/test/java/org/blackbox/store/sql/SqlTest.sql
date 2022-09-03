@@ -1,0 +1,1 @@
+select * from index_img where status =1 order by seq
