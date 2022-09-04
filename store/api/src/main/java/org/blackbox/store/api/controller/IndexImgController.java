@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/test/indexImg")
+@RequestMapping("/index")
 @Api(value = "提供轮播图功能", tags = "轮播图")
 public class IndexImgController {
 
@@ -32,7 +32,7 @@ public class IndexImgController {
     @ApiOperation("返回轮播图列表")
     @ApiImplicitParams({
     })
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/img list", method = RequestMethod.GET)
     public ResultVO indexImgList() {
         return iIndexImgService.indexImgList();
     }

@@ -56,14 +56,12 @@
     </div>
     <div class="clear"></div>
     <div class="banner">
-      <!--轮播 -->
-      <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-        <ul class="am-slides">
-          <li v-if="indexImgs.length>0" v-for="img,index in indexImgs" :class="'banner'+(index+1)">
-            <a><img :src="'static/images/'+img.imgUrl"/></a>
-          </li>
-        </ul>
-      </div>
+      <!--轮播 走马灯-->
+      <el-carousel :interval="5000" arrow="always">
+        <el-carousel-item v-if="indexImages.length>0" v-for="(img,index) in indexImages" :key="index+1">
+          <img :src="'/src/assets/images/'+img.imgUrl" :alt="img.imgUrl"/>
+        </el-carousel-item>
+      </el-carousel>
       <div class="clear"></div>
     </div>
 
@@ -170,9 +168,7 @@
 
           <div class="mod-vip">
             <div class="m-baseinfo" v-if="isLogin">
-              <a href="person/index.html">
-                <img :src="'static/'+userimg"/>
-              </a>
+                <img :src="userImg" alt="用户头像" style="height: 20px ; width: 20px"/>
               <em>
                 Hi,<span class="s-name">{{ username }}</span>
                 <a href="#"><p>点击更多优惠活动</p></a>
@@ -474,15 +470,17 @@
 <script>
 
 import {getCookieValue} from "../../static/js/cookie_utils.js";
+import axios from "axios";
+import {getCurrentInstance} from "vue";
 
 export default {
   name: "index",
   data() {
     return {
       username: "您未登录",
-      userimg: "",
+      userImg: "",
       isLogin: false,
-      indexImgs: [],
+      indexImages: [],
       categories: [],
       recommendProducts: [],
       recommendCategories: [],
@@ -493,10 +491,18 @@ export default {
     const token = getCookieValue("token");
     if (token !== null && token !== "") {
       this.isLogin = true;
-      this.username = getCookieValue("username")
-      console.log(this.username)
-      this.userImg = getCookieValue("userImg")
+      this.username = getCookieValue("username");
+      this.userImg = '/src/assets/images/' + getCookieValue("userImg");
+      console.log(this.userImg)
     }
+    const { appContext : { config: { globalProperties } } } = getCurrentInstance()
+    let baseUrl = "http://127.0.0.1:8080";
+    const url = baseUrl + "/index/img list"
+    console.log(url)
+    axios.get(url).then((res) => {
+      const vo = res.data;
+      this.indexImages = vo.data;
+    })
   }
 }
 </script>
