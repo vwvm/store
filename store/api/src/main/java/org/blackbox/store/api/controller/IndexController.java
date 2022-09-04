@@ -24,7 +24,7 @@ import javax.annotation.Resource;
 @CrossOrigin
 @RequestMapping("/index")
 @Api(value = "提供轮播图功能", tags = "轮播图")
-public class IndexImgController {
+public class IndexController {
 
     @Resource
     private IIndexImgService iIndexImgService;

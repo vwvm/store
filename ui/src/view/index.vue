@@ -55,15 +55,7 @@
       </div>
     </div>
     <div class="clear"></div>
-    <div class="banner">
-      <!--轮播 走马灯-->
-      <el-carousel :interval="5000" arrow="always">
-        <el-carousel-item v-if="indexImages.length>0" v-for="(img,index) in indexImages" :key="index+1">
-          <img :src="'/src/assets/images/'+img.imgUrl" :alt="img.imgUrl"/>
-        </el-carousel-item>
-      </el-carousel>
-      <div class="clear"></div>
-    </div>
+
 
     <div class="long-title"><span class="all-goods">全部分类</span></div>
     <div class="nav-cont">
@@ -80,75 +72,85 @@
       </div>
     </div>
 
-    <!--侧边导航 -->
-    <div id="nav" class="navfull">
-      <div class="area clearfix">
-        <div class="category-content" id="guide_2">
-
-          <div class="category">
-            <ul class="category-list" id="js_climit_li">
-              <li v-for="c1 in categories" class="appliance js_toggle relative">
-                <div class="category-info">
-                  <h3 class="category-name b-category-name">
-                    <i><img :src="'static/images/'+c1.categoryIcon"></i>
-                    <a class="ml-22" :title="c1.categoryName">{{ c1.categoryName }}</a>
-                  </h3>
-                  <em>&gt;</em>
-                </div>
-                <!--一级分类下的二级分类-->
-                <div class="menu-item menu-in top">
-                  <div class="area-in">
-                    <div class="area-bg">
-                      <div class="menu-srot">
-                        <div class="sort-side">
-                          <!--每个dl代表一个二级分类-->
-                          <dl class="dl-sort" v-for="c2 in c1.categories">
-                            <dt><span :title="c2.categoryName">{{ c2.categoryName }}</span></dt>
-                            <dd v-for="c3 in c2.categories">
-                              <a :title="c3.categoryName"
-                                 :href="'search.html?cid='+c3.categoryId"><span>{{ c3.categoryName }}</span></a>
-                            </dd>
-                          </dl>
-                        </div>
-
+    <el-container>
+      <el-aside>
+        <!--侧边导航 -->
+        <div class="category">
+          <ul class="category-list" id="js_climit_li">
+            <li v-for="c1 in categories" class="appliance js_toggle relative">
+              <div class="category-info">
+                <h3 class="category-name b-category-name">
+                  <i><img :src="'static/images/'+c1.categoryIcon"></i>
+                  <a class="ml-22" :title="c1.categoryName">{{ c1.categoryName }}</a>
+                </h3>
+                <em>&gt;</em>
+              </div>
+              <!--一级分类下的二级分类-->
+              <div class="menu-item menu-in top">
+                <div class="area-in">
+                  <div class="area-bg">
+                    <div class="menu-srot">
+                      <div class="sort-side">
+                        <!--每个dl代表一个二级分类-->
+                        <dl class="dl-sort" v-for="c2 in c1.categories">
+                          <dt><span :title="c2.categoryName">{{ c2.categoryName }}</span></dt>
+                          <dd v-for="c3 in c2.categories">
+                            <a :title="c3.categoryName"
+                               :href="'search.html?cid='+c3.categoryId"><span>{{ c3.categoryName }}</span></a>
+                          </dd>
+                        </dl>
                       </div>
+
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <b class="arrow"></b>
-              </li>
-            </ul>
-          </div>
-
+              <b class="arrow"></b>
+            </li>
+          </ul>
         </div>
+      </el-aside>
 
-      </div>
-    </div>
+      <el-main>
+        <!--轮播 走马灯-->
+        <el-carousel :interval="5000" arrow="always">
+          <el-carousel-item v-if="indexImages.length>0" v-for="(img,index) in indexImages" :key="index+1">
+            <img :src="'/src/assets/images/'+img.imgUrl" :alt="img.imgUrl" :class="'images' + index"
+                 style="object-fit: cover;object-position: center"/>
+          </el-carousel-item>
+        </el-carousel>
 
-    <!--小导航 -->
-    <div class="am-g am-g-fixed smallnav">
-      <div class="am-u-sm-3">
-        <a href="sort.html"><img src="static/images/navsmall.jpg"/>
-          <div class="title">商品分类</div>
-        </a>
-      </div>
-      <div class="am-u-sm-3">
-        <a href="#"><img src="static/images/huismall.jpg"/>
-          <div class="title">大聚惠</div>
-        </a>
-      </div>
-      <div class="am-u-sm-3">
-        <a href="#"><img src="static/images/mansmall.jpg"/>
-          <div class="title">个人中心</div>
-        </a>
-      </div>
-      <div class="am-u-sm-3">
-        <a href="#"><img src="static/images/moneysmall.jpg"/>
-          <div class="title">投资理财</div>
-        </a>
-      </div>
-    </div>
+
+      </el-main>
+      <el-aside>
+        <!--小导航 -->
+        <div class="am-g am-g-fixed smallnav">
+          <div class="am-u-sm-3">
+            <a href="sort.html"><img src="static/images/navsmall.jpg"/>
+              <div class="title">商品分类</div>
+            </a>
+          </div>
+          <div class="am-u-sm-3">
+            <a href="#"><img src="static/images/huismall.jpg"/>
+              <div class="title">大聚惠</div>
+            </a>
+          </div>
+          <div class="am-u-sm-3">
+            <a href="#"><img src="static/images/mansmall.jpg"/>
+              <div class="title">个人中心</div>
+            </a>
+          </div>
+          <div class="am-u-sm-3">
+            <a href="#"><img src="static/images/moneysmall.jpg"/>
+              <div class="title">投资理财</div>
+            </a>
+          </div>
+        </div>
+      </el-aside>
+
+    </el-container>
+
 
     <!--走马灯 -->
     <div class="marqueen">
@@ -168,7 +170,7 @@
 
           <div class="mod-vip">
             <div class="m-baseinfo" v-if="isLogin">
-                <img :src="userImg" alt="用户头像" style="height: 20px ; width: 20px"/>
+              <img :src="userImg" alt="用户头像" style="height: 20px ; width: 20px"/>
               <em>
                 Hi,<span class="s-name">{{ username }}</span>
                 <a href="#"><p>点击更多优惠活动</p></a>
@@ -495,7 +497,7 @@ export default {
       this.userImg = '/src/assets/images/' + getCookieValue("userImg");
       console.log(this.userImg)
     }
-    const { appContext : { config: { globalProperties } } } = getCurrentInstance()
+    const {appContext: {config: {globalProperties}}} = getCurrentInstance()
     let baseUrl = "http://127.0.0.1:8080";
     const url = baseUrl + "/index/img list"
     console.log(url)
