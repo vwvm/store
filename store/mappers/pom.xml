@@ -53,13 +53,13 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>3.5.1</version>
+            <version>3.5.2</version>
         </dependency>
         <!-- druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.11</version>
+            <version>1.2.12</version>
         </dependency>
         <!-- 代码生成器 -->
         <dependency>
@@ -71,6 +71,12 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.5.3</version>
+        </dependency>
+        <!-- mybatis-plus测试依赖 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter-test</artifactId>
+            <version>3.5.2</version>
         </dependency>
 
     </dependencies>

@@ -59,6 +59,10 @@ public class MybatisGenerator {
 
 
     private static void generatorA(DataSourceConfig.Builder builder1) {
+//        String templatePath = "/templates/entity.java.ftl";
+//        templateConfig.setXml(null);
+//        mpg.setTemplate(templateConfig);
+
         FastAutoGenerator.create(builder1)
                 // 全局配置
                 .globalConfig((scanner, builder) -> builder.author(scanner.apply("请输入作者名称？")).fileOverride())
