@@ -3,6 +3,7 @@ package org.blackbox.store.services.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.blackbox.store.beans.entity.Category;
+import org.blackbox.store.commons.vo.ResultVO;
 
 /**
  * <p>
@@ -13,5 +14,7 @@ import org.blackbox.store.beans.entity.Category;
  * @since 2022-09-15
  */
 public interface ICategoryService extends IService<Category> {
+
+    public ResultVO categoryList();
 
 }

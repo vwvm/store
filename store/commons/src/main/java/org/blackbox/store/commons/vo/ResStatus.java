@@ -1,5 +1,8 @@
 package org.blackbox.store.commons.vo;
 
+/**
+ * 返回格式代码以及含义
+ */
 public class ResStatus {
 
     public static final int OK = 0;

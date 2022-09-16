@@ -4,11 +4,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.blackbox.store.commons.vo.ResultVO;
+import org.blackbox.store.mappers.mapper.CategoryMapper;
+import org.blackbox.store.services.service.ICategoryService;
 import org.blackbox.store.services.service.IIndexImgService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -17,17 +17,25 @@ import javax.annotation.Resource;
  * 轮播图  前端控制器
  * </p>
  * 1.0.0
+ *
  * @author BlackBox
  * @since 2022-09-02
  */
 @RestController
 @CrossOrigin
 @RequestMapping("/index")
-@Api(value = "提供轮播图功能", tags = "轮播图")
+@Api(value = "提供首页所需的功能", tags = "首页接口")
 public class IndexController {
 
     @Resource
     private IIndexImgService iIndexImgService;
+
+    private final ICategoryService categoryService;
+
+    @Autowired
+    public IndexController(ICategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @ApiOperation("返回轮播图列表")
     @ApiImplicitParams({
@@ -35,5 +43,11 @@ public class IndexController {
     @RequestMapping(value = "/img list", method = RequestMethod.GET)
     public ResultVO indexImgList() {
         return iIndexImgService.indexImgList();
+    }
+
+    @GetMapping("/category-list")
+    @ApiOperation("商品类别查询接口")
+    public ResultVO categoryList(){
+       return categoryService.categoryList();
     }
 }
