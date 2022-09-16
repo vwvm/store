@@ -18,6 +18,16 @@ import java.util.List;
 @Repository
 public interface CategoryMapper extends BaseMapper<Category> {
 
+    /**
+     * @return 查询集合
+     * 使用连接查询
+     */
     List<CategoryBean> selectAllCategory();
+
+    /**
+     * @return 查询集合
+     * 使用子查询
+     */
+    List<CategoryBean> selectAllCategoryB(int parentId);
 
 }

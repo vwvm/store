@@ -32,7 +32,7 @@ class CategoryMapperTest {
     @Test
     void selectAllCategory() {
 
-        List<CategoryBean> categoryBeans = categoryMapper.selectAllCategory();
+        List<CategoryBean> categoryBeans = categoryMapper.selectAllCategoryB(0);
         System.out.println("测试开始");
         for(CategoryBean categoryBean: categoryBeans){
             System.out.println("\t" + categoryBean);

@@ -24,6 +24,17 @@
         </collection>
     </resultMap>
 
+    <resultMap id="categoryBeanMapB" type="org.blackbox.store.beans.bean.CategoryBean">
+        <id column="category_id1" jdbcType="INTEGER" property="categoryId"/>
+        <result column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
+        <result column="parent_id1" jdbcType="INTEGER" property="parentId"/>
+        <result column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
+        <result column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
+        <result column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
+        <collection property="categoryBeanList" column="category_id" select="selectAllCategoryB"/>
+    </resultMap>
+
     <select id="selectAllCategory" resultMap="categoryBeanMap">
         select c1.category_id       'category_id1',
                c1.category_name     'category_name1',
@@ -47,6 +58,19 @@
                  left join category c3
                            on c3.parent_id = c2.category_id
         where c1.category_level = 1
+    </select>
+    <!-- 根据夫集的分类id查询子集分类 -->
+    <select id="selectAllCategoryB" resultMap="categoryBeanMapB">
+        select category_id,
+               category_name,
+               category_level,
+               parent_id,
+               category_icon,
+               category_slogan,
+               category_pic,
+               category_bg_color
+        from category
+        where parent_id = #{parentId}
     </select>
 
 </mapper>
