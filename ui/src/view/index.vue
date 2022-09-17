@@ -498,8 +498,8 @@ export default {
       console.log(this.userImg)
     }
     const {appContext: {config: {globalProperties}}} = getCurrentInstance()
-    let baseUrl = "http://127.0.0.1:8080";
-    const url = baseUrl + "/index/img list"
+    let baseUrl = import.meta.env.VITE_API_DOMAIN
+    const url = baseUrl + "/index/img-list"
     console.log(url)
     axios.get(url).then((res) => {
       const vo = res.data;

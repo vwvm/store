@@ -40,7 +40,7 @@ public class IndexController {
     @ApiOperation("返回轮播图列表")
     @ApiImplicitParams({
     })
-    @RequestMapping(value = "/img list", method = RequestMethod.GET)
+    @RequestMapping(value = "/img-list", method = RequestMethod.GET)
     public ResultVO indexImgList() {
         return iIndexImgService.indexImgList();
     }
