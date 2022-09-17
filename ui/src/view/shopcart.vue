@@ -198,7 +198,7 @@
       <div class="footer">
         <div class="footer-hd">
           <p>
-            <a href="#">锋迷商城</a>
+            <a href="#">商城</a>
             <b>|</b>
             <a href="#">商城首页</a>
             <b>|</b>
@@ -209,7 +209,7 @@
         </div>
         <div class="footer-bd">
           <p>
-            <a href="#">关于千锋</a>
+            <a href="#">关于</a>
             <a href="#">合作伙伴</a>
             <a href="#">联系我们</a>
             <a href="#">网站地图</a>
