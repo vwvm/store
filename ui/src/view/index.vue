@@ -1,10 +1,10 @@
 <template>
 
-  <link href="/src/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-  <link href="/src/assets/css/admin.css" rel="stylesheet" type="text/css" />
-  <link href="/src/assets/css/demo.css" rel="stylesheet" type="text/css" />
+  <link href="/src/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
+  <link href="/src/assets/css/admin.css" rel="stylesheet" type="text/css"/>
+  <link href="/src/assets/css/demo.css" rel="stylesheet" type="text/css"/>
   <link href="/src/assets/css/hmstyle.css" rel="stylesheet" type="text/css"/>
-  <link href="/src/assets/css/skin.css" rel="stylesheet" type="text/css" />
+  <link href="/src/assets/css/skin.css" rel="stylesheet" type="text/css"/>
 
   <!--顶部导航条 -->
   <el-header>
@@ -87,7 +87,7 @@
             <li v-for="c1 in categories" class="appliance js_toggle relative">
               <div class="category-info">
                 <h3 class="category-name b-category-name">
-                  <i><img :src="'static/images/'+c1.categoryIcon"></i>
+                  <i><img :src="'/src/assets/images/'+c1.categoryIcon"></i>
                   <a class="ml-22" :title="c1.categoryName">{{ c1.categoryName }}</a>
                 </h3>
                 <em>&gt;</em>
@@ -320,7 +320,7 @@
       </div>
       <div class="clear "></div>
 
-      <template v-for="rc,index in recommendCategories">
+      <template v-for="(rc,index) in recommendCategories">
         <div v-if="rc.products.length > 0" :id="'f'+(index+1)">
           <!--甜点-->
           <div class="am-container ">
@@ -513,10 +513,12 @@ export default {
     })
     const categoryUrl = baseUrl + "/index/category-list";
     axios({
-      method:"get",
-      url:categoryUrl,
+      method: "get",
+      url: categoryUrl,
     }).then(res => {
       this.categories = res.data.data
+      console.log(this.categories)
+      console.log(this.categories.categoryName)
     })
   }
 }

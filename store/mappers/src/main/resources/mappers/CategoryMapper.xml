@@ -8,6 +8,7 @@
         <result column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
         <result column="parent_id1" jdbcType="INTEGER" property="parentId"/>
         <result column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
+        <result column="category_icon1" jdbcType="VARCHAR" property="categoryIcon"/>
         <result column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
         <result column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
         <collection property="categoryBeanList" ofType="org.blackbox.store.beans.bean.CategoryBean">
