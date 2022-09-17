@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import {setCookieValue} from "../../static/js/cookie_utils.js";
+import {setCookieValue} from "../assets/js/cookie_utils.js";
 import axios from "axios";
 
 const baseUrl = "http://localhost:8080";

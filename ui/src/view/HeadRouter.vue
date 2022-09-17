@@ -14,6 +14,7 @@
               <li><router-link to="/login">登录</router-link> </li>
               <li><router-link to="/elementPlusTest">element-plus-test</router-link> </li>
               <li><router-link to="/register">register</router-link></li>
+              <li><router-link to="/exampleBlock">exampleBlock</router-link></li>
             </ul>
             <button type="button" @click="test">打开关于</button>
           </td>

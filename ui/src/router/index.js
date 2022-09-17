@@ -12,6 +12,7 @@ import elementPlusTest from "../view/elementPlusTest.vue";
 import register from "../view/register.vue";
 import index from "../view/index.vue"
 import shopcart from "../view/shopcart.vue";
+import exampleBlock from "/src/view/exampleBlock.vue"
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
@@ -32,6 +33,7 @@ const routes = [
     { path: '/register', component: register},
     { path: '/index', component: index},
     { path: '/shopcart', component: shopcart},
+    { path: '/exampleBlock', component: exampleBlock},
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置

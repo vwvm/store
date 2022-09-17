@@ -80,44 +80,8 @@
     </div>
 
     <el-container>
-      <el-aside>
-        <!--侧边导航 -->
-        <div class="category">
-          <ul class="category-list" id="js_climit_li">
-            <li v-for="c1 in categories" class="appliance js_toggle relative">
-              <div class="category-info">
-                <h3 class="category-name b-category-name">
-                  <i><img :src="'/src/assets/images/'+c1.categoryIcon"></i>
-                  <a class="ml-22" :title="c1.categoryName">{{ c1.categoryName }}</a>
-                </h3>
-                <em>&gt;</em>
-              </div>
-              <!--一级分类下的二级分类-->
-              <div class="menu-item menu-in top">
-                <div class="area-in">
-                  <div class="area-bg">
-                    <div class="menu-srot">
-                      <div class="sort-side">
-                        <!--每个dl代表一个二级分类-->
-                        <dl class="dl-sort" v-for="c2 in c1.categories">
-                          <dt><span :title="c2.categoryName">{{ c2.categoryName }}</span></dt>
-                          <dd v-for="c3 in c2.categories">
-                            <a :title="c3.categoryName"
-                               :href="'search.html?cid='+c3.categoryId"><span>{{ c3.categoryName }}</span></a>
-                          </dd>
-                        </dl>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <b class="arrow"></b>
-            </li>
-          </ul>
-        </div>
-      </el-aside>
+      <!--侧边导航 -->
+      <el-cascader-panel :options="categoryBeanList" :props="{label:'categoryName',children:'categoryBeanList'}"/>
 
       <el-main>
         <!--轮播 走马灯-->
@@ -478,7 +442,7 @@
 
 <script>
 
-import {getCookieValue} from "../../static/js/cookie_utils.js";
+import {getCookieValue} from "../assets/js/cookie_utils.js";
 import axios from "axios";
 import {getCurrentInstance} from "vue";
 
@@ -490,7 +454,7 @@ export default {
       userImg: "",
       isLogin: false,
       indexImages: [],
-      categories: [],
+      categoryBeanList: [],
       recommendProducts: [],
       recommendCategories: [],
       keyword: ""
@@ -516,14 +480,19 @@ export default {
       method: "get",
       url: categoryUrl,
     }).then(res => {
-      this.categories = res.data.data
-      console.log(this.categories)
-      console.log(this.categories.categoryName)
+      this.categoryBeanList = res.data.data
+      console.log(this.categoryBeanList)
+      console.log(this.categoryBeanList.categoryName)
     })
+  },
+  methods: {
+    hallo: function () {
+      console.log("hallo")
+    }
   }
 }
 </script>
 
-<style scoped>
+<style scoped src="/src/assets/css/index.css">
 
 </style>

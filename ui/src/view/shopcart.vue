@@ -42,9 +42,9 @@
     <!--悬浮搜索框-->
 
     <div class="nav white">
-      <div class="logo"><img src="static/images/logo.png" /></div>
+      <div class="logo"><img src="static/images/logo.png"/></div>
       <div class="logoBig">
-        <li><img src="static/images/logobig.png" /></li>
+        <li><img src="static/images/logobig.png"/></li>
       </div>
 
       <div class="search-bar pr">
@@ -88,7 +88,7 @@
         <div class="clear"></div>
 
         <div class="clear"></div>
-        <template v-for="sc,index in shopcarts">
+        <template v-for="(sc,index) in shopcarts">
           <tr class="item-list">
             <div class="bundle  bundle-last ">
 
@@ -102,18 +102,21 @@
                   </li>
                   <li class="td td-item">
                     <div class="item-pic">
-                      <a href="#" target="_blank" :data-title="sc.productName" class="J_MakePoint" data-point="tbcart.8.12">
-                        <img :src="'static/pimgs/'+sc.productImg" height="70"  class="itempic J_ItemImg"></a>
+                      <a href="#" target="_blank" :data-title="sc.productName" class="J_MakePoint"
+                         data-point="tbcart.8.12">
+                        <img :src="'static/pimgs/'+sc.productImg" height="70" class="itempic J_ItemImg"></a>
                     </div>
                     <div class="item-info">
                       <div class="item-basic-info">
-                        <a :href="'introduction.html?pid='+sc.productId" target="_blank" :title="sc.productName" class="item-title J_MakePoint" data-point="tbcart.8.11">{{sc.productName}} {{sc.skuName}}</a>
+                        <a :href="'introduction.html?pid='+sc.productId" target="_blank" :title="sc.productName"
+                           class="item-title J_MakePoint" data-point="tbcart.8.11">{{ sc.productName }}
+                          {{ sc.skuName }}</a>
                       </div>
                     </div>
                   </li>
                   <li class="td td-info">
                     <div class="item-props item-props-can">
-                      <span class="sku-line">{{sc.skuProps}}</span>
+                      <span class="sku-line">{{ sc.skuProps }}</span>
                       <i class="theme-login am-icon-sort-desc"></i>
                     </div>
                   </li>
@@ -121,10 +124,10 @@
                     <div class="item-price price-promo-promo">
                       <div class="price-content">
                         <div class="price-line">
-                          <em class="price-original">{{sc.originalPrice}}</em>
+                          <em class="price-original">{{ sc.originalPrice }}</em>
                         </div>
                         <div class="price-line">
-                          <em class="J_Price price-now" tabindex="0">{{sc.sellPrice}}</em>
+                          <em class="J_Price price-now" tabindex="0">{{ sc.sellPrice }}</em>
                         </div>
                       </div>
                     </div>
@@ -133,16 +136,18 @@
                     <div class="amount-wrapper ">
                       <div class="item-amount ">
                         <div class="sl">
-                          <input class="min am-btn" name="" type="button" value="-" :data-id="index" @click="changeNum" data-oper="-"/>
-                          <input class="text_box" name="" type="text" :value="sc.cartNum" style="width:30px;" />
-                          <input class="add am-btn" name="" type="button" value="+" :data-id="index" @click="changeNum"  data-oper="+" />
+                          <input class="min am-btn" name="" type="button" value="-" :data-id="index" @click="changeNum"
+                                 data-oper="-"/>
+                          <input class="text_box" name="" type="text" :value="sc.cartNum" style="width:30px;"/>
+                          <input class="add am-btn" name="" type="button" value="+" :data-id="index" @click="changeNum"
+                                 data-oper="+"/>
                         </div>
                       </div>
                     </div>
                   </li>
                   <li class="td td-sum">
                     <div class="td-inner">
-                      <em tabindex="0" class="J_ItemSum number">{{sc.sellPrice * sc.cartNum}}</em>
+                      <em tabindex="0" class="J_ItemSum number">{{ sc.sellPrice * sc.cartNum }}</em>
                     </div>
                   </li>
                   <li class="td td-op">
@@ -173,7 +178,7 @@
         <div class="float-bar-right">
           <div class="amount-sum">
             <span class="txt">已选商品</span>
-            <em id="J_SelectedItemsCount">{{opts.length}}</em><span class="txt">件</span>
+            <em id="J_SelectedItemsCount">{{ opts.length }}</em><span class="txt">件</span>
             <div class="arrow-box">
               <span class="selected-items-arrow"></span>
               <span class="arrow"></span>
@@ -181,7 +186,7 @@
           </div>
           <div class="price-sum">
             <span class="txt">合计:</span>
-            <strong class="price">¥<em id="J_Total">{{totalPrice}}</em></strong>
+            <strong class="price">¥<em id="J_Total">{{ totalPrice }}</em></strong>
           </div>
           <div class="btn-area" @click="gotoOrderAdd">
             <a href="#" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
@@ -242,10 +247,10 @@
             <div class="theme-options">
               <div class="cart-title number">数量</div>
               <dd>
-                <input class="min am-btn am-btn-default" name="" type="button" value="-" />
-                <input class="text_box" name="" type="text" value="1" style="width:30px;" />
-                <input class="add am-btn am-btn-default" name="" type="button" value="+" />
-                <span  class="tb-hidden">库存<span class="stock">1000</span>件</span>
+                <input class="min am-btn am-btn-default" name="" type="button" value="-"/>
+                <input class="text_box" name="" type="text" value="1" style="width:30px;"/>
+                <input class="add am-btn am-btn-default" name="" type="button" value="+"/>
+                <span class="tb-hidden">库存<span class="stock">1000</span>件</span>
               </dd>
 
             </div>
@@ -258,7 +263,7 @@
           </div>
           <div class="theme-signin-right">
             <div class="img-info">
-              <img src="static/images/kouhong.jpg_80x80.jpg" />
+              <img src="static/images/kouhong.jpg_80x80.jpg"/>
             </div>
             <div class="text-info">
               <span class="J_Price price-now">¥39.00</span>
@@ -283,31 +288,32 @@
 </template>
 
 <script>
-import {getCookieValue, setCookieValue} from "../../static/js/cookie_utils.js";
+import {getCookieValue, setCookieValue} from "../assets/js/cookie_utils.js";
 import axios from "axios";
+
 const baseurl = "http://localhost:8080"
 
 export default {
   name: "shopcart",
-  data(){
-    return{
-      shopcarts:[],
-      token:null,
-      opts:[],
-      totalPrice:0.00
+  data() {
+    return {
+      shopcarts: [],
+      token: null,
+      opts: [],
+      totalPrice: 0.00
     }
   },
   created: function () {
     this.token = getCookieValue("token");
     console.log("token:" + this.token)
     axios({
-      method:"get",
-      url:baseurl + "/shoppingCart/list",
-      headers:{
+      method: "get",
+      url: baseurl + "/shoppingCart/list",
+      headers: {
         token: this.token
       }
     }).then(function (res) {
-        console.log(res);
+      console.log(res);
     })
   }
 }
