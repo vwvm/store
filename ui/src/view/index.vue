@@ -81,7 +81,8 @@
 
     <el-container>
       <!--侧边导航 -->
-      <el-cascader-panel :options="categoryBeanList" :props="{label:'categoryName',children:'categoryBeanList'}"/>
+      <el-cascader-panel :options="categoryBeanList"
+                         :props="{expandTrigger:'hover' , label:'categoryName',children:'categoryBeanList', } "/>
 
       <el-main>
         <!--轮播 走马灯-->

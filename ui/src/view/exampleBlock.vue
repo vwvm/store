@@ -3,7 +3,7 @@
     <span class="example-demonstration"
     >Child options expand when clicked (default)</span
     >
-    <el-cascader v-model="value" :aria-label="'ff'" :options="options" @change="handleChange" />
+    <el-cascader v-model="value" :options="options" @change="handleChange" />
   </div>
   <div class="example-block">
     <span class="example-demonstration">Child options expand when hovered</span>
