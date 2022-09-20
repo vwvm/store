@@ -3,14 +3,19 @@ package org.blackbox.store.api.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.blackbox.store.beans.bean.ProductBean;
+import org.blackbox.store.commons.vo.ResStatus;
 import org.blackbox.store.commons.vo.ResultVO;
 import org.blackbox.store.mappers.mapper.CategoryMapper;
+import org.blackbox.store.mappers.mapper.ProductMapper;
 import org.blackbox.store.services.service.ICategoryService;
 import org.blackbox.store.services.service.IIndexImgService;
+import org.blackbox.store.services.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -29,7 +34,8 @@ public class IndexController {
 
     @Resource
     private IIndexImgService iIndexImgService;
-
+    @Resource
+    private IProductService productService;
     private final ICategoryService categoryService;
 
     @Autowired
@@ -47,7 +53,14 @@ public class IndexController {
 
     @GetMapping("/category-list")
     @ApiOperation("商品类别查询接口")
-    public ResultVO categoryList(){
-       return categoryService.categoryList();
+    public ResultVO categoryList() {
+        return categoryService.categoryList();
+    }
+
+    @GetMapping("/category-recommends")
+    @ApiOperation("查询推荐商品接口")
+    public ResultVO recommendProductsList() {
+
+        return productService.recommendProductsList();
     }
 }

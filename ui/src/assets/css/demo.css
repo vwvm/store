@@ -209,7 +209,7 @@ time, mark, audio, video {
 /*分类*/
 .nav-table{max-width:1000px;margin: 0px auto;height: 45px;position: relative;overflow: hidden;}
 .all-goods{font-size: 16px;}
-.long-title{background:#d2364c;color:#fff ;height: 45px;line-height: 45px;display:block;position: absolute;width:150px ;text-align: center;font-size:16px ;top:0px;z-index: 6;}
+.long-title{background:#d2364c;color:#fff ;height: 45px;line-height: 45px;display:block;position: relative;width:150px ;text-align: center;font-size:16px ;top:0px;z-index: 6;}
 .nav-cont{position: absolute;padding-left:150px;display:block;width:100% ;top:0px}
 .nav-cont li{float: left;height: 45px;line-height: 45px;}
 .nav-cont li::before{content: '\20';display: inline-block;height: 16px;border-right: 1px solid #d9d9d9;width: 0;vertical-align: middle;margin-left: -1px;}

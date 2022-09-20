@@ -112,7 +112,7 @@ hr{margin:5px 0px;}
 .blog-tit p span{font-family:Microsoft YaHei !important; color: rgb(192, 0, 0); font-size: 18px;}
 /*底部*/
 
-.footer{display:none; text-align: center;border-top: 2px solid #F8F8F8 margin-top:20px; padding-top: 5px;}
+.footer{display:none; text-align: center;border-top: 2px solid #F8F8F8; margin-top:20px; padding-top: 5px;}
 .main-wrap {background-color:#fff;}
 @media only screen and (min-width:640px) 
 {	

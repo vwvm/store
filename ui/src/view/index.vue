@@ -494,6 +494,8 @@ export default {
 }
 </script>
 
-<style scoped src="/src/assets/css/index.css">
-
-</style>
+<style scoped src="/src/assets/css/index.css"></style>
+<style scoped src="/src/assets/css/admin.css"></style>
+<style scoped src="/src/assets/css/demo.css"></style>
+<style scoped src="/src/assets/css/hmstyle.css"></style>
+<style scoped src="/src/assets/css/skin.css"></style>
