@@ -2,7 +2,6 @@ package org.blackbox.store.beans.bean;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,7 +15,6 @@ import java.util.List;
  * @author BlackBox
  * @since 2022-09-15
  */
-@TableName("category")
 @Data
 public class CategoryBean implements Serializable {
 
@@ -35,9 +33,9 @@ public class CategoryBean implements Serializable {
 
     /**
      * 分类层级 分类得类型，
-     1:一级大分类
-     2:二级分类
-     3:三级小分类
+     * 1:一级大分类
+     * 2:二级分类
+     * 3:三级小分类
      */
     private Integer categoryLevel;
 
@@ -66,91 +64,14 @@ public class CategoryBean implements Serializable {
      */
     private String categoryBgColor;
 
+    /**
+     * 子类别查询
+     */
     private List<CategoryBean> categoryBeanList;
 
-    public Integer getCategoryId() {
-        return categoryId;
-    }
+    /**
+     * 子商品查询
+     */
+    private List<ProductBean> productBeanList;
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Integer getCategoryLevel() {
-        return categoryLevel;
-    }
-
-    public void setCategoryLevel(Integer categoryLevel) {
-        this.categoryLevel = categoryLevel;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getCategoryIcon() {
-        return categoryIcon;
-    }
-
-    public void setCategoryIcon(String categoryIcon) {
-        this.categoryIcon = categoryIcon;
-    }
-
-    public String getCategorySlogan() {
-        return categorySlogan;
-    }
-
-    public void setCategorySlogan(String categorySlogan) {
-        this.categorySlogan = categorySlogan;
-    }
-
-    public String getCategoryPic() {
-        return categoryPic;
-    }
-
-    public void setCategoryPic(String categoryPic) {
-        this.categoryPic = categoryPic;
-    }
-
-    public String getCategoryBgColor() {
-        return categoryBgColor;
-    }
-
-    public void setCategoryBgColor(String categoryBgColor) {
-        this.categoryBgColor = categoryBgColor;
-    }
-
-    public List<CategoryBean> getCategoryBeanList() {
-        return categoryBeanList;
-    }
-
-    public void setCategoryBeanList(List<CategoryBean> categoryBeanList) {
-        this.categoryBeanList = categoryBeanList;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryBean{" +
-                "categoryId=" + categoryId +
-                ", categoryName='" + categoryName + '\'' +
-                ", categoryLevel=" + categoryLevel +
-                ", parentId=" + parentId +
-                ", categoryIcon='" + categoryIcon + '\'' +
-                ", categorySlogan='" + categorySlogan + '\'' +
-                ", categoryPic='" + categoryPic + '\'' +
-                ", categoryBgColor='" + categoryBgColor + '\'' +
-                '}';
-    }
 }

@@ -30,4 +30,10 @@ public interface CategoryMapper extends BaseMapper<Category> {
      */
     List<CategoryBean> selectAllCategoryB(int parentId);
 
+
+    /**
+     * @return 查询集合
+     * 查询一级类别
+     */
+    List<CategoryBean> selectFirstLevelCategory();
 }

@@ -3,11 +3,7 @@ package org.blackbox.store.api.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.blackbox.store.beans.bean.ProductBean;
-import org.blackbox.store.commons.vo.ResStatus;
 import org.blackbox.store.commons.vo.ResultVO;
-import org.blackbox.store.mappers.mapper.CategoryMapper;
-import org.blackbox.store.mappers.mapper.ProductMapper;
 import org.blackbox.store.services.service.ICategoryService;
 import org.blackbox.store.services.service.IIndexImgService;
 import org.blackbox.store.services.service.IProductService;
@@ -15,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * <p>

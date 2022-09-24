@@ -173,7 +173,7 @@
 
     <div class="shopMain" id="shopmain">
 
-      <!--今日推荐 -->
+      <!--新品推荐 -->
 
       <div class="am-g am-g-fixed recommendation">
         <div class="clock am-u-sm-3">
@@ -187,44 +187,12 @@
               <h4>销量：{{ rp.soldNum }}</h4>
             </div>
             <div class="recommendationMain one">
-              <img v-if="rp.imgs.length>0" :src="'static/pimgs/'+rp.imgs[0].url"/>
+              <img v-if="rp.imgs.length>0" :src="'/src/static/pimgs/'+rp.imgs[0].url"/>
             </div>
           </div>
         </a>
-        <!--<a href="introduction.html">
-          <div class="am-u-sm-4 am-u-lg-3 ">
-            <div class="info ">
-              <h3>{{recommendProducts[0].productName}}</h3>
-              <h4>{{recommendProducts[0].content}}</h4>
-            </div>
-            <div class="recommendationMain one">
-              <img :src="'static/pimgs/'+recommendProducts[0].imgs[0].url"></img>
-            </div>
-          </div>
-        </a>
-        <a href="introduction.html">
-          <div class="am-u-sm-4 am-u-lg-3 ">
-            <div class="info ">
-              <h3>{{recommendProducts[1].productName}}</h3>
-              <h4>{{recommendProducts[1].content}}</h4>
-            </div>
-            <div class="recommendationMain two">
-              <img :src="'static/pimgs/'+recommendProducts[1].imgs[0].url"></img>
-            </div>
-          </div>
-        </a>
-        <a href="introduction.html">
-          <div class="am-u-sm-4 am-u-lg-3 ">
-            <div class="info ">
-              <h3>{{recommendProducts[2].productName}}</h3>
-              <h4>{{recommendProducts[2].content}}</h4>
-            </div>
-            <div class="recommendationMain three">
-              <img :src="'static/pimgs/'+recommendProducts[2].imgs[0].url"></img>
-            </div>
-          </div>
-        </a>	-->
       </div>
+
       <div class="clear "></div>
       <!--热门活动 -->
 
@@ -234,7 +202,7 @@
           <h3>每期活动 优惠享不停 </h3>
           <span class="more ">
                               <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;"></i></a>
-                        </span>
+          </span>
         </div>
         <div class="am-g am-g-fixed ">
           <div class="am-u-sm-3 ">
@@ -421,7 +389,7 @@
           <a href="# ">合作伙伴</a>
           <a href="# ">联系我们</a>
           <a href="# ">网站地图</a>
-          <em>© qfedu.com 版权所有</em>
+          <em>© .com 版权所有</em>
         </p>
       </div>
     </div>
@@ -461,30 +429,41 @@ export default {
       keyword: ""
     }
   },
+  //渲染html前调用
   created() {
     const token = getCookieValue("token");
     if (token !== null && token !== "") {
       this.isLogin = true;
       this.username = getCookieValue("username");
       this.userImg = '/src/assets/images/' + getCookieValue("userImg");
-      console.log(this.userImg)
     }
     const {appContext: {config: {globalProperties}}} = getCurrentInstance()
     let baseUrl = import.meta.env.VITE_API_DOMAIN
+    //轮播图
     const url = baseUrl + "/index/img-list"
     axios.get(url).then((res) => {
       const vo = res.data;
       this.indexImages = vo.data;
     })
+    //商品列表
     const categoryUrl = baseUrl + "/index/category-list";
     axios({
       method: "get",
       url: categoryUrl,
     }).then(res => {
       this.categoryBeanList = res.data.data
-      console.log(this.categoryBeanList)
-      console.log(this.categoryBeanList.categoryName)
     })
+    // 商品推荐
+    const categoryRecommends = baseUrl + "/index/category-recommends"
+    axios({
+      method: "get",
+      url: categoryRecommends,
+    }).then(res => {
+      this.recommendProducts = res.data.data
+      console.log(res.data.data)
+    })
+    //分类商品推荐
+    
   },
   methods: {
     hallo: function () {
