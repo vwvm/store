@@ -31,10 +31,24 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         this.categoryMapper = categoryMapper;
     }
 
+    /**
+     * @return ResultVO
+     * 查询分类列表，包含子分类
+     */
     @Override
     public ResultVO categoryList() {
         List<CategoryBean> categoryBeanList = categoryMapper.selectAllCategory();
         return new ResultVO(ResStatus.OK, "success", categoryBeanList);
 
+    }
+
+    /**
+     * @return ResultVO
+     * 查询1级分类列表，当前分类下销量前6商品
+     */
+    @Override
+    public ResultVO firstLevelCategoryList() {
+        List<CategoryBean> categoryBeanList = categoryMapper.selectFirstLevelCategory();
+        return new ResultVO(ResStatus.OK, "success", categoryBeanList);
     }
 }

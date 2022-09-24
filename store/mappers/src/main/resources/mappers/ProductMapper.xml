@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.blackbox.store.mappers.mapper.ProductMapper">
+
+    <resultMap id="ProductBeanMap" type="org.blackbox.store.beans.bean.ProductBean">
+        <id column="product_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>
+        <result column="sold_num" jdbcType="INTEGER" property="soldNum"/>
+        <result column="product_status" jdbcType="INTEGER" property="productStatus"/>
+        <result column="content" jdbcType="TIMESTAMP" property="content"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
+        <collection property="imgs" select="org.blackbox.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
+                    column="product_id"/>
+    </resultMap>
+
+    <resultMap id="selectCategoryProductsMap" type="org.blackbox.store.beans.bean.ProductBean">
+        <id column="product_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>
+        <result column="sold_num" jdbcType="INTEGER" property="soldNum"/>
+        <result column="product_status" jdbcType="INTEGER" property="productStatus"/>
+        <result column="content" jdbcType="TIMESTAMP" property="content"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
+        <collection property="imgs" select="org.blackbox.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
+                    column="product_id"/>
+    </resultMap>
+    <!-- 查询前3 -->
+    <select id="selectRecommendProducts" resultMap="ProductBeanMap">
+        select product_id,
+               product_name,
+               category_id,
+               root_category_id,
+               sold_num,
+               product_status,
+               content,
+               create_time,
+               update_time
+        from product
+        order by create_time desc
+        limit 0,3
+    </select>
+
+    <!--  查询前6  -->
+    <select id="selectCategoryProducts" resultMap="ProductBeanMap">
+        select product_id,
+               product_name,
+               category_id,
+               root_category_id,
+               sold_num,
+               product_status,
+               content,
+               create_time,
+               update_time
+        from product
+        where root_category_id = #{id}
+        order by sold_num desc
+        limit 0,6
+    </select>
+</mapper>

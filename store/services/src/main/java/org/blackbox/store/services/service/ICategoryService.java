@@ -15,6 +15,8 @@ import org.blackbox.store.commons.vo.ResultVO;
  */
 public interface ICategoryService extends IService<Category> {
 
-    public ResultVO categoryList();
+    ResultVO categoryList();
+
+    ResultVO firstLevelCategoryList();
 
 }

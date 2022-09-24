@@ -31,7 +31,10 @@ public class IndexController {
     private IIndexImgService iIndexImgService;
     @Resource
     private IProductService productService;
-    private final ICategoryService categoryService;
+    @Resource
+    private ICategoryService categoryService;
+
+
 
     @Autowired
     public IndexController(ICategoryService categoryService) {
@@ -52,10 +55,17 @@ public class IndexController {
         return categoryService.categoryList();
     }
 
-    @GetMapping("/category-recommends")
-    @ApiOperation("查询推荐商品接口")
-    public ResultVO recommendProductsList() {
+    @GetMapping("/product-recommends")
+    @ApiOperation("新品推荐商品接口")
+    public ResultVO productRecommendsList() {
 
         return productService.recommendProductsList();
+    }
+
+    @GetMapping("/category-recommends")
+    @ApiOperation("分类推荐商品接口")
+    public ResultVO categoryRecommendsList() {
+
+        return categoryService.firstLevelCategoryList();
     }
 }
