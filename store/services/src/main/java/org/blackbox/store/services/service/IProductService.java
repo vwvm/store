@@ -16,4 +16,6 @@ public interface IProductService extends IService<Product> {
 
     ResultVO recommendProductsList();
 
+    ResultVO getProductBasicInfo(String productId);
+
 }

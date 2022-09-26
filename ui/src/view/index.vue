@@ -124,7 +124,6 @@
     </el-container>
 
 
-    <!--走马灯 -->
     <div class="marqueen">
       <span class="marqueen-title">商城头条</span>
       <div class="demo">
@@ -253,8 +252,26 @@
       </div>
       <div class="clear "></div>
 
-      <template v-for="(rc,index) in recommendCategories">
-        <div v-if="rc.products.length > 0" :id="'f'+(index+1)">
+      <hr @click="test()">
+      {{ indexImages }}
+      <hr>
+      {{categoryBeanList}}
+      <hr>
+      {{recommendProducts}}
+      <hr>
+      {{ recommendCategory }}
+      <hr>
+      <P v-if="number === 10">
+        {{ recommendCategory }}
+      </P>
+      {{number}}
+      <hr>
+
+
+      <div v-for="(rc,index) in recommendCategory">
+        <div style="width: 300px;height: 300px">hhhhhh</div>
+
+        <div v-if="rc.productBeanList.length > 0" :id="'f'+(index+1)">
           <!--甜点-->
           <div class="am-container ">
             <div class="shopTitle ">
@@ -297,75 +314,75 @@
               <div class="triangle-topright"></div>
             </div>
 
-            <div class="am-u-sm-7 am-u-md-4 text-two sug" v-if="rc.products.length > 0">
+            <div class="am-u-sm-7 am-u-md-4 text-two sug" v-if="rc.productBeanLIst.length > 0">
               <div class="outer-con ">
-                <div class="title ">{{ rc.products[0].productName }}</div>
+                <div class="title ">{{ rc.productBeanLIst[0].productName }}</div>
                 <div class="sub-title ">
-                  销量：{{ rc.products[0].soldNum }}
+                  销量：{{ rc.productBeanLIst[0].soldNum }}
                 </div>
                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
               </div>
-              <a href="# "><img v-if="rc.products[0].imgs.length>0"
-                                :src="'static/pimgs/'+rc.products[0].imgs[0].url"/></a>
+              <a href="# "><img v-if="rc.productBeanLIst[0].imgs.length>0"
+                                :src="'static/pimgs/'+rc.productBeanLIst[0].imgs[0].url"/></a>
             </div>
 
-            <div class="am-u-sm-7 am-u-md-4 text-two" v-if="rc.products.length > 1">
+            <div class="am-u-sm-7 am-u-md-4 text-two" v-if="rc.productBeanLIst.length > 1">
               <div class="outer-con ">
-                <div class="title ">{{ rc.products[1].productName }}</div>
+                <div class="title ">{{ rc.productBeanLIst[1].productName }}</div>
                 <div class="sub-title ">
-                  销量：{{ rc.products[1].soldNum }}
+                  销量：{{ rc.productBeanLIst[1].soldNum }}
                 </div>
                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
               </div>
-              <a href="# "><img v-if="rc.products[1].imgs.length>0"
-                                :src="'static/pimgs/'+rc.products[1].imgs[0].url"/></a>
+              <a href="# "><img v-if="rc.productBeanLIst[1].imgs.length>0"
+                                :src="'static/pimgs/'+rc.productBeanLIst[1].imgs[0].url"/></a>
             </div>
 
 
-            <div class="am-u-sm-3 am-u-md-2 text-three big" v-if="rc.products.length > 2">
+            <div class="am-u-sm-3 am-u-md-2 text-three big" v-if="rc.productBeanLIst.length > 2">
               <div class="outer-con ">
-                <div class="title ">{{ rc.products[2].productName }}</div>
-                <div class="sub-title ">销量：{{ rc.products[2].soldNum }}</div>
+                <div class="title ">{{ rc.productBeanLIst[2].productName }}</div>
+                <div class="sub-title ">销量：{{ rc.productBeanLIst[2].soldNum }}</div>
                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
               </div>
-              <a href="# "><img v-if="rc.products[2].imgs.length>0"
-                                :src="'static/pimgs/'+rc.products[2].imgs[0].url"/></a>
+              <a href="# "><img v-if="rc.productBeanLIst[2].imgs.length>0"
+                                :src="'static/pimgs/'+rc.productBeanLIst[2].imgs[0].url"/></a>
             </div>
 
-            <div class="am-u-sm-3 am-u-md-2 text-three sug" v-if="rc.products.length > 3">
+            <div class="am-u-sm-3 am-u-md-2 text-three sug" v-if="rc.productBeanLIst.length > 3">
               <div class="outer-con ">
-                <div class="title ">{{ rc.products[3].productName }}</div>
-                <div class="sub-title ">销量：{{ rc.products[3].soldNum }}</div>
+                <div class="title ">{{ rc.productBeanLIst[3].productName }}</div>
+                <div class="sub-title ">销量：{{ rc.productBeanLIst[3].soldNum }}</div>
                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
               </div>
-              <a href="# "><img v-if="rc.products[3].imgs.length>0"
-                                :src="'static/pimgs/'+rc.products[3].imgs[0].url"/></a>
+              <a href="# "><img v-if="rc.productBeanLIst[3].imgs.length>0"
+                                :src="'static/pimgs/'+rc.productBeanLIst[3].imgs[0].url"/></a>
             </div>
 
-            <div class="am-u-sm-3 am-u-md-2 text-three " v-if="rc.products.length > 4">
+            <div class="am-u-sm-3 am-u-md-2 text-three " v-if="rc.productBeanLIst.length > 4">
               <div class="outer-con ">
-                <div class="title ">{{ rc.products[4].productName }}</div>
-                <div class="sub-title ">销量：{{ rc.products[4].soldNum }}</div>
+                <div class="title ">{{ rc.productBeanLIst[4].productName }}</div>
+                <div class="sub-title ">销量：{{ rc.productBeanLIst[4].soldNum }}</div>
                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
               </div>
-              <a href="# "><img v-if="rc.products[4].imgs.length>0"
-                                :src="'static/pimgs/'+rc.products[4].imgs[0].url"/></a>
+              <a href="# "><img v-if="rc.productBeanLIst[4].imgs.length>0"
+                                :src="'static/pimgs/'+rc.productBeanLIst[4].imgs[0].url"/></a>
             </div>
 
-            <div class="am-u-sm-3 am-u-md-2 text-three last big " v-if="rc.products.length > 5">
+            <div class="am-u-sm-3 am-u-md-2 text-three last big " v-if="rc.productBeanLIst.length > 5">
               <div class="outer-con ">
-                <div class="title ">{{ rc.products[5].productName }}</div>
-                <div class="sub-title ">销量：{{ rc.products[5].soldNum }}</div>
+                <div class="title ">{{ rc.productBeanLIst[5].productName }}</div>
+                <div class="sub-title ">销量：{{ rc.productBeanLIst[5].soldNum }}</div>
                 <i class="am-icon-shopping-basket am-icon-md  seprate"></i>
               </div>
-              <a href="# "><img v-if="rc.products[5].imgs.length>0"
-                                :src="'static/pimgs/'+rc.products[5].imgs[0].url"/></a>
+              <a href="# "><img v-if="rc.productBeanLIst[5].imgs.length>0"
+                                :src="'static/pimgs/'+rc.productBeanLIst[5].imgs[0].url"/></a>
             </div>
 
           </div>
           <div class="clear "></div>
         </div>
-      </template>
+      </div>
 
     </div>
   </el-main>
@@ -425,8 +442,9 @@ export default {
       indexImages: [],
       categoryBeanList: [],
       recommendProducts: [],
-      recommendCategories: [],
-      keyword: ""
+      recommendCategory: [],
+      keyword: "",
+      number:0,
     }
   },
   //渲染html前调用
@@ -437,7 +455,6 @@ export default {
       this.username = getCookieValue("username");
       this.userImg = '/src/assets/images/' + getCookieValue("userImg");
     }
-    const {appContext: {config: {globalProperties}}} = getCurrentInstance()
     let baseUrl = import.meta.env.VITE_API_DOMAIN
     //轮播图
     const url = baseUrl + "/index/img-list"
@@ -450,24 +467,38 @@ export default {
     axios({
       method: "get",
       url: categoryUrl,
-    }).then(res => {
-      this.categoryBeanList = res.data.data
+    }).then((res) => {
+      const vo = res.data;
+      this.categoryBeanList = vo.data
     })
     // 商品推荐
     const categoryRecommends = baseUrl + "/index/category-recommends"
     axios({
       method: "get",
       url: categoryRecommends,
-    }).then(res => {
+    }).then((res) => {
       this.recommendProducts = res.data.data
-      console.log(res.data.data)
     })
     //分类商品推荐
-    
+    const categoryProductsRecommend = baseUrl + "/index/category-recommends"
+    axios({
+      method: "get",
+      url: categoryProductsRecommend,
+    }).then((res) => {
+      const vo = res.data;
+      this.recommendCategory = vo.data
+      console.log(this.recommendCategory)
+      this.number = 10
+    })
   },
   methods: {
     hallo: function () {
       console.log("hallo")
+    },
+    test:function (){
+      console.log(this.recommendCategory)
+      console.log(this.categoryBeanList)
+      this.number++
     }
   }
 }

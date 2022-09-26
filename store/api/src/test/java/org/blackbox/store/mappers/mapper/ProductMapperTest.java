@@ -9,13 +9,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ApiApplication.class)
 class ProductMapperTest {
-
-    @Resource
-    private ProductImgMapper productImgMapper;
 
     @Resource
     private ProductMapper productMapper;
@@ -28,5 +26,10 @@ class ProductMapperTest {
         }
     }
 
+    @Test
+    void testSelectBy(){
+        productMapper.selectByMap(Map.of("product_id","1","product_status",1));
+
+    }
 
 }
