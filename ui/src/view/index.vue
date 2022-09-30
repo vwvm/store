@@ -24,9 +24,7 @@
 
         <a href="index.html" target="_top" class="h">商城首页</a>
 
-
         <a href="user-center.html" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a>
-
 
         <a id="mc-menu-hd" href="shopcart.html" target="_top">
           <i class="am-icon-shopping-cart  am-icon-fw"></i>
@@ -41,8 +39,6 @@
       </el-col>
     </el-row>
   </el-header>
-
-
   <!--悬浮搜索框-->
   <el-main>
 
@@ -92,8 +88,6 @@
                  style="object-fit: cover;object-position: center"/>
           </el-carousel-item>
         </el-carousel>
-
-
       </el-main>
       <el-aside>
         <!--小导航 -->
@@ -120,7 +114,6 @@
           </div>
         </div>
       </el-aside>
-
     </el-container>
 
 
@@ -130,7 +123,7 @@
 
         <ul>
           <li class="title-first"><a target="_blank" href="#">
-            <img src="static/images/TJ2.jpg"/>
+            <img src="/src/assets/images/TJ2.jpg"/>
             <span>[特惠]</span>商城爆品1分秒
           </a></li>
           <li class="title-first"><a target="_blank" href="#">
@@ -173,10 +166,9 @@
     <div class="shopMain" id="shopmain">
 
       <!--新品推荐 -->
-
       <div class="am-g am-g-fixed recommendation">
         <div class="clock am-u-sm-3">
-          <img src="static/images/2016.png" style="border-radius: 50%;"/>
+          <img src="/src/assets/images/2016.png" style="border-radius: 50%;"/>
           <p>新品<br>推荐</p>
         </div>
         <a v-for="rp in recommendProducts" :href="'introduction.html?pid='+rp.productId">
@@ -251,21 +243,6 @@
         </div>
       </div>
       <div class="clear "></div>
-
-      <hr @click="test()">
-      {{ indexImages }}
-      <hr>
-      {{categoryBeanList}}
-      <hr>
-      {{recommendProducts}}
-      <hr>
-      {{ recommendCategory }}
-      <hr>
-      <P v-if="number === 10">
-        {{ recommendCategory }}
-      </P>
-      {{number}}
-      <hr>
 
 
       <div v-for="(rc,index) in recommendCategory">
@@ -423,16 +400,34 @@
     <li><a href="person/index.html"><i class="am-icon-user"></i>我的</a></li>
   </div>
 
+  <button style="font-size: 300px" @click="test()">test</button>
+  <button style="font-size: 50px" @click="test()">新品推荐</button>
+  <a v-for="rp in recommendProducts">
+      <div class="info ">
+        <button>{{rp}}</button>
+        <h3>{{ rp.productName }}</h3>
+        <h4>销量：{{ rp.soldNum }}</h4>
+      </div>
+  </a>
+
 
 </template>
 
 <script>
 
-import {getCookieValue} from "../assets/js/cookie_utils.js";
+import {getCookieValue} from "/src/assets/js/cookie_utils.js";
 import axios from "axios";
-import {getCurrentInstance} from "vue";
+import {getCurrentInstance, reactive} from "vue";
+// import getUrlParam from "/src/assets/js/url_utils.js"
+
 
 export default {
+  // setup(){
+  //   const recommendCategory = reactive({recommendCategory: []})
+  //   return {
+  //     recommendCategory
+  //   }
+  // },
   name: "index",
   data() {
     return {
@@ -441,14 +436,28 @@ export default {
       isLogin: false,
       indexImages: [],
       categoryBeanList: [],
-      recommendProducts: [],
-      recommendCategory: [],
+      a: {},
+      b: {},
+      recommendProducts: reactive(this.b),
+      recommendCategory: reactive(this.a),
       keyword: "",
-      number:0,
+      number: 0,
+    }
+  },
+  computed: {
+    recommendProduct: {
+      get: function () {
+        return this.recommendProducts
+      },
+      set: function (value) {
+        this.recommendProducts = value
+      }
     }
   },
   //渲染html前调用
   created() {
+
+    const vm = this
     const token = getCookieValue("token");
     if (token !== null && token !== "") {
       this.isLogin = true;
@@ -472,7 +481,7 @@ export default {
       this.categoryBeanList = vo.data
     })
     // 商品推荐
-    const categoryRecommends = baseUrl + "/index/category-recommends"
+    const categoryRecommends = baseUrl + "/index/product-recommends"
     axios({
       method: "get",
       url: categoryRecommends,
@@ -486,17 +495,16 @@ export default {
       url: categoryProductsRecommend,
     }).then((res) => {
       const vo = res.data;
-      this.recommendCategory = vo.data
-      console.log(this.recommendCategory)
-      this.number = 10
+      vm.recommendCategory = vo.data
     })
   },
   methods: {
     hallo: function () {
       console.log("hallo")
     },
-    test:function (){
-      console.log(this.recommendCategory)
+    test: function () {
+
+      console.log(this.recommendProducts)
       console.log(this.categoryBeanList)
       this.number++
     }
