@@ -3,7 +3,7 @@
 <mapper namespace="org.blackbox.store.mappers.mapper.ProductMapper">
 
     <resultMap id="ProductBeanMap" type="org.blackbox.store.beans.bean.ProductBean">
-        <id column="product_id" jdbcType="INTEGER" property="categoryId"/>
+        <id column="product_id" jdbcType="INTEGER" property="productId"/>
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
         <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
         <result column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>
@@ -17,7 +17,7 @@
     </resultMap>
 
     <resultMap id="selectCategoryProductsMap" type="org.blackbox.store.beans.bean.ProductBean">
-        <id column="product_id" jdbcType="INTEGER" property="categoryId"/>
+        <id column="product_id" jdbcType="INTEGER" property="productId"/>
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
         <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
         <result column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>

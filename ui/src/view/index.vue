@@ -171,11 +171,12 @@
           <img src="/src/assets/images/2016.png" style="border-radius: 50%;"/>
           <p>新品<br>推荐</p>
         </div>
-        <a v-for="rp in recommendProducts" :href="'introduction.html?pid='+rp.productId">
+        <a v-for="rp in recommendProducts" :href="'introduction?pid='+rp.productId">
           <div class="am-u-sm-4 am-u-lg-3 ">
             <div class="info ">
               <h3>{{ rp.productName }}</h3>
               <h4>销量：{{ rp.soldNum }}</h4>
+              id：{{rp.productId}}
             </div>
             <div class="recommendationMain one">
               <img v-if="rp.imgs.length>0" :src="'/src/static/pimgs/'+rp.imgs[0].url"/>

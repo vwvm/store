@@ -23,7 +23,7 @@ public class ProductBean implements Serializable {
     /**
      * 商品主键id
      */
-    private String productId;
+    private Integer productId;
 
     /**
      * 商品名称 商品名称
@@ -67,11 +67,11 @@ public class ProductBean implements Serializable {
 
     private List<ProductImg> imgs;
 
-    public String getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
