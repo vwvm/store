@@ -26,7 +26,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                                 "/webjars/**",
                                 "/v3/**"
                                 ,"/test/**"
-                                ,"/index/**"
+                                ,"/index/**",
+                                "/product/**"
                         )
                 );
     }

@@ -11,7 +11,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "element-plus": "^2.2.13",
-    "jquery": "^3.6.0",
+    "jquery": "^3.6.1",
     "scss": "^0.2.4",
     "unocss": "^0.45.7",
     "vue": "^3.2.37",

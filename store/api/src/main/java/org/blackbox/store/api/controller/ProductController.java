@@ -19,9 +19,9 @@ import javax.annotation.Resource;
  * @author BlackBox
  * @since 2022-09-18
  */
-@Controller
+@RestController
 @CrossOrigin
-@RequestMapping("/index")
+@RequestMapping("/product")
 @Api(value = "商品信息相关表",tags = "商品管理")
 public class ProductController {
 

@@ -1,4 +1,4 @@
-function getUrlParam(key) {
+export function getUrlParam(key) {
     const url = decodeURI(window.location.toString()) ;
     const arr = url.split("?");
     if (arr.length > 1){

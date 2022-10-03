@@ -1,6 +1,7 @@
 package org.blackbox.store.api.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.blackbox.store.commons.vo.ResultVO;
@@ -67,5 +68,15 @@ public class IndexController {
     public ResultVO categoryRecommendsList() {
 
         return categoryService.firstLevelCategoryList();
+    }
+
+
+    @ApiOperation("商品基本信息接口")
+    @GetMapping("/detail-info/{pid}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(dataType = "string", name = "pid", value = "商品id", required = true),
+    })
+    public ResultVO getProductBasicInfo(@PathVariable String pid){
+        return productService.getProductBasicInfo(pid);
     }
 }

@@ -108,7 +108,7 @@
                     </div>
                     <div class="item-info">
                       <div class="item-basic-info">
-                        <a :href="'introduction.html?pid='+sc.productId" target="_blank" :title="sc.productName"
+                        <a :href="'introduction?pid='+sc.productId" target="_blank" :title="sc.productName"
                            class="item-title J_MakePoint" data-point="tbcart.8.11">{{ sc.productName }}
                           {{ sc.skuName }}</a>
                       </div>
