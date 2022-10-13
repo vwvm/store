@@ -139,11 +139,11 @@
         <div class="tb-detail-price">
           <dl class="price iteminfo_price">
             <dt>促销价</dt>
-            <dd><em>¥</em><b class="sys_item_price">{{ productSkus[0].sellPrice }}</b></dd>
+            <dd><em>¥</em><b class="sys_item_price">{{ productSkus[currentSkuIndex].sellPrice }}</b></dd>
           </dl>
           <dl class="price iteminfo_mktprice">
             <dt>原价</dt>
-            <dd><em>¥</em><b class="sys_item_mktprice">{{ productSkus[0].originalPrice }}</b></dd>
+            <dd><em>¥</em><b class="sys_item_mktprice">{{ productSkus[currentSkuIndex].originalPrice }}</b></dd>
           </dl>
           <div class="clear"></div>
         </div>
@@ -214,10 +214,10 @@
                         <template v-for="(sku,index) in productSkus">
                           <!--如果当前套餐是正在显示的套餐，则添加选中效果-->
                           <li v-if="index===currentSkuIndex" class="sku-line selected" :data-index="index"
-                              @click="changeSku">{{ sku.skuName }}<i></i></li>
+                              @click="changeSku(index)">{{ sku.skuName }}<i></i></li>
                           <!--否则不添加选中效果-->
-                          <li v-else class="sku-line" :data-index="index" @click="changeSku">
-                            {{ sku.skuName }}<i></i></li>
+                          <li v-else class="sku-line" :data-index="index"
+                              @click="changeSku(index)">{{ sku.skuName }}<i></i></li>
                         </template>
                       </ul>
                     </div>
@@ -468,6 +468,7 @@
 import {getUrlParam} from "/src/assets/js/url_utils.js"
 import axios from "axios";
 import $ from 'jquery'
+import {getCookieValue} from "../assets/js/cookie_utils.js";
 
 const baseUrl = import.meta.env.VITE_API_DOMAIN
 
@@ -475,6 +476,10 @@ export default {
   name: "introduction",
   data() {
     return {
+      username: "您未登录",
+      userImg: "",
+      isLogin: false,
+
       productId: "",
       products: {
         productName: "",
@@ -482,9 +487,18 @@ export default {
       },
       productImgs: [],
       productSkus: [],
+      currentSkuIndex:0, // 当前选择套餐id
     }
   },
   created() {
+    // 登录信息
+    const token = getCookieValue("token");
+    if (token !== null && token !== "") {
+      this.isLogin = true;
+      this.username = getCookieValue("username");
+      this.userImg = '/src/assets/images/' + getCookieValue("userImg");
+    }
+
     // 获取url传递的id
     this.productId = getUrlParam("pid")
 
@@ -513,6 +527,13 @@ export default {
     //初始化套餐属性的选择效果
     //initChoose();
   },
+  methods:{
+    changeSku:function(index){
+
+     this.currentSkuIndex =  index
+     console.log(this.currentSkuIndex)
+    }
+  }
 }
 
 

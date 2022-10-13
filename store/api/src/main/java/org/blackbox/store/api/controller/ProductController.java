@@ -36,4 +36,13 @@ public class ProductController {
     public ResultVO getProductBasicInfo(@PathVariable String pid){
         return productService.getProductBasicInfo(pid);
     }
+
+    @ApiOperation("商品详细信息接口")
+    @GetMapping("/detail-params/{pid}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(dataType = "string", name = "pid", value = "商品id", required = true),
+    })
+    public ResultVO getProductParams(@PathVariable String pid){
+        return productService.getProductBasicInfo(pid);
+    }
 }

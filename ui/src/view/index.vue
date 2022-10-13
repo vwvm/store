@@ -458,12 +458,14 @@ export default {
   created() {
 
     const vm = this
+    // 登录信息
     const token = getCookieValue("token");
     if (token !== null && token !== "") {
       this.isLogin = true;
       this.username = getCookieValue("username");
       this.userImg = '/src/assets/images/' + getCookieValue("userImg");
     }
+
     let baseUrl = import.meta.env.VITE_API_DOMAIN
     //轮播图
     const url = baseUrl + "/index/img-list"

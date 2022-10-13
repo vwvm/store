@@ -18,4 +18,6 @@ public interface IProductService extends IService<Product> {
 
     ResultVO getProductBasicInfo(String productId);
 
+    ResultVO getProductParamsById(String productId);
+
 }

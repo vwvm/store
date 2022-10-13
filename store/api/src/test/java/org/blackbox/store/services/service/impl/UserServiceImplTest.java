@@ -28,19 +28,6 @@ class UserServiceImplTest {
     }
 
     @Test
-    void insertBatchTest() {
-        List<User> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            User user = new User();
-            user.setUserName("" + i);
-            user.setPassword("" + i + i);
-            list.add(user);
-        }
-        boolean b = userService.saveBatch(list);
-        System.out.println(b);
-    }
-
-    @Test
     void t1(StringBuilder s){
         String str = "abcde";
         StringBuilder stringBuilder = new StringBuilder(str);

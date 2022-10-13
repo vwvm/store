@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.blackbox.store.beans.bean.ProductBean;
 import org.blackbox.store.beans.entity.Product;
 import org.blackbox.store.beans.entity.ProductImg;
+import org.blackbox.store.beans.entity.ProductParams;
 import org.blackbox.store.beans.entity.ProductSku;
 import org.blackbox.store.commons.vo.ResStatus;
 import org.blackbox.store.commons.vo.ResultVO;
 import org.blackbox.store.mappers.mapper.ProductImgMapper;
 import org.blackbox.store.mappers.mapper.ProductMapper;
+import org.blackbox.store.mappers.mapper.ProductParamsMapper;
 import org.blackbox.store.mappers.mapper.ProductSkuMapper;
 import org.blackbox.store.services.service.IProductService;
 import org.springframework.stereotype.Service;
@@ -32,12 +34,12 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Resource
     private ProductMapper productMapper;
-
     @Resource
     private ProductImgMapper productImgMapper;
-
     @Resource
     private ProductSkuMapper productSkuMapper;
+    @Resource
+    private ProductParamsMapper productParamsMapper;
 
 
     @Override
@@ -67,5 +69,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         } else {
             return new ResultVO(ResStatus.NO, "商品不存在", null);
         }
+    }
+
+    @Override
+    public ResultVO getProductParamsById(String productId) {
+        List<ProductParams> productParams = productParamsMapper.selectByMap(Map.of("product_id", productId));
+        if (productParams.size() > 0){
+            return new ResultVO(ResStatus.OK, "success", productParams.get(0));
+        }
+        return new ResultVO(ResStatus.NO, "商品三无", null);
     }
 }
