@@ -43,6 +43,6 @@ public class ProductController {
             @ApiImplicitParam(dataType = "string", name = "pid", value = "商品id", required = true),
     })
     public ResultVO getProductParams(@PathVariable String pid){
-        return productService.getProductBasicInfo(pid);
+        return productService.getProductParamsById(pid);
     }
 }
