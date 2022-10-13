@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiOperation;
 import org.blackbox.store.commons.vo.ResultVO;
 import org.blackbox.store.services.service.IProductService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 

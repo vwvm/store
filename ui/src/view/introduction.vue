@@ -119,7 +119,7 @@
             <template v-for="(img,index) in productImgs">
               <li :class="{'tb-selected':index===0}">
                 <div class="tb-pic tb-s40">
-                  <a href="#"><img :src="'/src/assets/pimgs/'+img.url" :mid="'static/pimgs/'+img.url"
+                  <a href="#"><img :src="'/src/assets/pimgs/'+img.url" :mid="'/src/assets/pimgs/'+img.url"
                                    :big="'/src/assets/pimgs/'+img.url"></a>
                 </div>
               </li>
@@ -297,7 +297,415 @@
       </div>
       <div class="clear"></div>
     </div>
+    <!-- introduce-->
+    <div class="introduce">
+      <div class="browse">
+        <div class="mc">
+          <ul>
+            <div class="mt">
+              <h2>看了又看</h2>
+            </div>
 
+            <li class="first">
+              <div class="p-img">
+                <a  href="#"> <img class="" src="/src/assets/images/browse1.jpg"> </a>
+              </div>
+              <div class="p-name"><a href="#">
+                【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
+              </a>
+              </div>
+              <div class="p-price"><strong>￥35.90</strong></div>
+            </li>
+            <li>
+              <div class="p-img">
+                <a  href="#"> <img class="" src="/src/assets/images/browse1.jpg"> </a>
+              </div>
+              <div class="p-name"><a href="#">
+                【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
+              </a>
+              </div>
+              <div class="p-price"><strong>￥35.90</strong></div>
+            </li>
+            <li>
+              <div class="p-img">
+                <a  href="#"> <img class="" src="/src/assets/images/browse1.jpg"> </a>
+              </div>
+              <div class="p-name"><a href="#">
+                【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
+              </a>
+              </div>
+              <div class="p-price"><strong>￥35.90</strong></div>
+            </li>
+            <li>
+              <div class="p-img">
+                <a  href="#"> <img class="" src="/src/assets/images/browse1.jpg"> </a>
+              </div>
+              <div class="p-name"><a href="#">
+                【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
+              </a>
+              </div>
+              <div class="p-price"><strong>￥35.90</strong></div>
+            </li>
+            <li>
+              <div class="p-img">
+                <a  href="#"> <img class="" src="/src/assets/images/browse1.jpg"> </a>
+              </div>
+              <div class="p-name"><a href="#">
+                【三只松鼠_开口松子218g】零食坚果特产炒货东北红松子原味
+              </a>
+              </div>
+              <div class="p-price"><strong>￥35.90</strong></div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="introduceMain">
+        <div class="am-tabs" data-am-tabs>
+          <ul class="am-avg-sm-3 am-tabs-nav am-nav am-nav-tabs">
+            <li class="am-active">
+              <a href="#"><span class="index-needs-dt-txt">宝贝详情</span></a>
+            </li>
+            <li>
+              <a href="#"><span class="index-needs-dt-txt">全部评价</span></a>
+            </li>
+            <li>
+              <a href="#"><span class="index-needs-dt-txt">猜你喜欢</span></a>
+            </li>
+          </ul>
+
+          <div class="am-tabs-bd">
+            <!--商品参数和商品细节-->
+            <div class="am-tab-panel am-fade am-in am-active">
+              <div class="J_Brand">
+
+                <div class="attr-list-hd tm-clear">
+                  <h4>产品参数：</h4></div>
+                <div class="clear"></div>
+                <ul id="J_AttrUL">
+                  <li title="">产地:&nbsp;{{productParams.productPlace}}</li>
+                  <li title="">保质期:&nbsp;{{productParams.footPeriod}}</li>
+                  <li title="">品牌:&nbsp;{{productParams.brand}}</li>
+                  <li title="">生产厂商:&nbsp;{{productParams.factoryName}}</li>
+                  <li title="">生产地址:&nbsp;{{productParams.factoryAddress}}</li>
+                  <li title="">包装方式:&nbsp;{{productParams.packagingMethod}}</li>
+                  <li title="">规格重量:&nbsp;{{productParams.weight}}</li>
+                  <li title="">储存方式：&nbsp;{{productParams.storageMethod}}</li>
+                  <li title="">食用方式：&nbsp;{{productParams.eatMethod}} </li>
+                </ul>
+                <div class="clear"></div>
+              </div>
+
+              <div class="details">
+                <div class="attr-list-hd after-market-hd">
+                  <h4>商品细节</h4>
+                </div>
+<!--                <div class="twlistNews" >-->
+<!--                  <span v-html="product.content"></span>-->
+<!--                </div>-->
+              </div>
+              <div class="clear"></div>
+            </div>
+
+            <!--商品评价-->
+            <div class="am-tab-panel am-fade">
+
+              <div class="actor-new">
+                <div class="rate">
+<!--                  <strong>{{commontsCountMap.percent}}<span>%</span></strong><br> <span>好评度</span>-->
+                </div>
+                <dl>
+                  <dt>买家印象</dt>
+                  <dd class="p-bfc">
+                    <q class="comm-tags"><span>味道不错</span><em>(2177)</em></q>
+                    <q class="comm-tags"><span>颗粒饱满</span><em>(1860)</em></q>
+                    <q class="comm-tags"><span>口感好</span><em>(1823)</em></q>
+                    <q class="comm-tags"><span>商品不错</span><em>(1689)</em></q>
+                    <q class="comm-tags"><span>香脆可口</span><em>(1488)</em></q>
+                    <q class="comm-tags"><span>个个开口</span><em>(1392)</em></q>
+                    <q class="comm-tags"><span>价格便宜</span><em>(1119)</em></q>
+                    <q class="comm-tags"><span>特价买的</span><em>(865)</em></q>
+                    <q class="comm-tags"><span>皮很薄</span><em>(831)</em></q>
+                  </dd>
+                </dl>
+              </div>
+              <div class="clear"></div>
+              <div class="tb-r-filter-bar">
+                <ul class=" tb-taglist am-avg-sm-4">
+                  <li class="tb-taglist-li tb-taglist-li-current">
+                    <div class="comment-info">
+<!--                      <span>全部评价</span><span class="tb-tbcr-num">({{commontsCountMap.total}})</span>-->
+                    </div>
+                  </li>
+
+                  <li class="tb-taglist-li tb-taglist-li-1">
+                    <div class="comment-info">
+<!--                      <span>好评</span><span class="tb-tbcr-num">({{commontsCountMap.goodTotal}})</span>-->
+                    </div>
+                  </li>
+
+                  <li class="tb-taglist-li tb-taglist-li-0">
+                    <div class="comment-info">
+<!--                      <span>中评</span><span class="tb-tbcr-num">({{commontsCountMap.midTotal}})</span>-->
+                    </div>
+                  </li>
+
+                  <li class="tb-taglist-li tb-taglist-li--1">
+                    <div class="comment-info">
+<!--                      <span>差评</span><span class="tb-tbcr-num">({{commontsCountMap.badTotal}})</span>-->
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="clear"></div>
+
+              <ul class="am-comments-list am-comments-list-flip">
+                <template v-for="commont in productCommonts">
+                  <li class="am-comment">
+                    <!-- 评论容器 -->
+                    <a href="">
+                      <!-- 评论者头像 -->
+                      <img class="am-comment-avatar" :src="'/src/assets/'+commont.userImg" />
+                    </a>
+
+                    <div class="am-comment-main">
+                      <!-- 评论内容容器 -->
+                      <header class="am-comment-hd">
+                        <!--<h3 class="am-comment-title">评论标题</h3>-->
+                        <div class="am-comment-meta">
+                          <!-- 评论元数据 -->
+                          <a href="#link-to-user" class="am-comment-author">
+                            {{commont.username.substring(0,2)+'*****'+ commont.username.substring(commont.username.length-1) }}
+                            <span v-if="commont.isAnonymous == 1">(匿名)</span>
+                            <span v-else>({{commont.nickname}})</span>
+                          </a>
+                          <!-- 评论者 -->
+                          评论于
+                          <time datetime="">{{commont.sepcName.substring(0,10)}}</time>
+                        </div>
+                      </header>
+
+                      <div class="am-comment-bd">
+                        <div class="tb-rev-item " data-id="255776406962">
+                          <div class="J_TbcRate_ReviewContent tb-tbcr-content ">
+                            {{commont.commContent}}
+                          </div>
+                          <div v-if="commont.replyStatus==1" class="tb-r-act-bar">
+                            <hr>
+                            <label style="color: gray; font-weight: bold;">商家回复：</label>
+                            <time datetime="">回复于{{commont.replyTime.substring(0,10)}}</time>
+                            <br/>
+                            {{commont.replyContent}}
+                          </div>
+                        </div>
+
+                      </div>
+                      <!-- 评论内容 -->
+                    </div>
+                  </li>
+                </template>
+
+              </ul>
+
+              <div class="clear"></div>
+
+              <!--分页 -->
+              <el-pagination background layout="prev, pager, next" :current-page="pageNum"
+                             :page-size="limit" :total="count"
+                             @current-change="pager"></el-pagination>
+              <div class="clear"></div>
+
+              <div class="tb-reviewsft">
+                <div class="tb-rate-alert type-attention">购买前请查看该商品的 <a href="#" target="_blank">购物保障</a>，明确您的售后保障权益。</div>
+              </div>
+
+            </div>
+
+            <!--猜你喜欢-->
+            <div class="am-tab-panel am-fade">
+              <div class="like">
+                <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="i-pic limit">
+                      <img src="/src/assets/images/imgsearch1.jpg" />
+                      <p>【良品铺子_开口松子】零食坚果特产炒货
+                        <span>东北红松子奶油味</span></p>
+                      <p class="price fl">
+                        <b>¥</b>
+                        <strong>298.00</strong>
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="clear"></div>
+
+              <!--分页 -->
+              <ul class="am-pagination am-pagination-right">
+                <li class="am-disabled"><a href="#">&laquo;</a></li>
+                <li class="am-active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+              <div class="clear"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="footer">
+          <div class="footer-hd">
+            <p>
+              <a href="#">锋迷商城</a>
+              <b>|</b>
+              <a href="#">商城首页</a>
+              <b>|</b>
+              <a href="#">支付宝</a>
+              <b>|</b>
+              <a href="#">物流</a>
+            </p>
+          </div>
+          <div class="footer-bd">
+            <p>
+              <a href="#">关于千锋</a>
+              <a href="#">合作伙伴</a>
+              <a href="#">联系我们</a>
+              <a href="#">网站地图</a>
+              <em>©qfedu.com 版权所有</em>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
   </div>
 
@@ -487,7 +895,9 @@ export default {
       },
       productImgs: [],
       productSkus: [],
-      currentSkuIndex:0, // 当前选择套餐id
+      currentSkuIndex: 0, // 当前选择套餐id
+      skuProps:{},        // 存放套餐属性
+      productParams:{},
     }
   },
   created() {
@@ -513,7 +923,22 @@ export default {
       this.products = vo.products[0];
       this.productImgs = vo.productImgs;
       this.productSkus = vo.productSkus;
+      const str = this.productSkus[0].untitled;
+      this.skuProps = eval("(" + str + ")");
+
     })
+
+    const productParamsUrl = baseUrl + "/product/detail-params/" + this.productId
+    axios({
+      method: "get",
+      url: productParamsUrl,
+    }).then((res) => {
+      const vo = res.data.data;
+      this.productParams = vo;
+      console.log(vo)
+    })
+
+
   },
   updated() {
     //每次重新渲染之后执行
@@ -527,11 +952,11 @@ export default {
     //初始化套餐属性的选择效果
     //initChoose();
   },
-  methods:{
-    changeSku:function(index){
+  methods: {
+    changeSku: function (index) {
 
-     this.currentSkuIndex =  index
-     console.log(this.currentSkuIndex)
+      this.currentSkuIndex = index
+      console.log(this.currentSkuIndex)
     }
   }
 }
