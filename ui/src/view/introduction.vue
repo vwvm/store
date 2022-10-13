@@ -400,9 +400,9 @@
                 <div class="attr-list-hd after-market-hd">
                   <h4>商品细节</h4>
                 </div>
-<!--                <div class="twlistNews" >-->
-<!--                  <span v-html="product.content"></span>-->
-<!--                </div>-->
+                <div class="twlistNews" >
+                  <span v-html="products.content"></span>
+                </div>
               </div>
               <div class="clear"></div>
             </div>
