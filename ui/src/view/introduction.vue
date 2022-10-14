@@ -476,7 +476,7 @@
                           <!-- 评论元数据 -->
                           <a href="#link-to-user" class="am-comment-author">
                             {{commont.username.substring(0,2)+'*****'+ commont.username.substring(commont.username.length-1) }}
-                            <span v-if="commont.isAnonymous == 1">(匿名)</span>
+                            <span v-if="commont.isAnonymous === 1">(匿名)</span>
                             <span v-else>({{commont.nickname}})</span>
                           </a>
                           <!-- 评论者 -->
@@ -898,6 +898,7 @@ export default {
       currentSkuIndex: 0, // 当前选择套餐id
       skuProps:{},        // 存放套餐属性
       productParams:{},
+      productCommonts:[],
     }
   },
   created() {
@@ -925,9 +926,9 @@ export default {
       this.productSkus = vo.productSkus;
       const str = this.productSkus[0].untitled;
       this.skuProps = eval("(" + str + ")");
-
     })
 
+    // 根据id获取商品详细信息
     const productParamsUrl = baseUrl + "/product/detail-params/" + this.productId
     axios({
       method: "get",
@@ -935,6 +936,17 @@ export default {
     }).then((res) => {
       const vo = res.data.data;
       this.productParams = vo;
+      console.log(vo)
+    })
+
+    // 根据id获取商品评价信息
+    const productCommentsUrl = baseUrl + "/product/detail-comments/" + this.productId
+    axios({
+      method: "get",
+      url: productCommentsUrl,
+    }).then((res) => {
+      const vo = res.data.data;
+      this.productCommonts = vo;
       console.log(vo)
     })
 

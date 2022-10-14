@@ -49,7 +49,7 @@ public class ProductController {
     }
 
     @ApiOperation("商品评价信息接口")
-    @GetMapping("/detail-c omments/{pid}")
+    @GetMapping("/detail-comments/{pid}")
     @ApiImplicitParams({
             @ApiImplicitParam(dataType = "string", name = "pid", value = "商品id", required = true),
     })

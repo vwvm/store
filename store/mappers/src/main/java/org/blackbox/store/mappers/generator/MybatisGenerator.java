@@ -3,8 +3,6 @@ package org.blackbox.store.mappers.generator;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateType;
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
 
 import java.util.*;
@@ -35,12 +33,12 @@ public class MybatisGenerator {
                 //包配置
                 .packageConfig(builder -> builder
                         .parent("store")
-                        .entity("beans/src/main/java/org/blackbox/store/beans/entity")
-                        .mapper("mappers/src/main/java/org/blackbox/store/mappers/mapper")
-                        .xml("mappers/src/main/resources/mappers")
-                        .service("services/src/main/java/org/blackbox/store/services/service")
-                        .controller("api/src/main/java/org/blackbox/store/api/controller")
-                        .serviceImpl("services/src/main/java/org/blackbox/store/services/service/impl"))
+                        .entity("beans.src.main.java.org.blackbox.store.beans.entity")
+                        .mapper("mappers.src.main.java.org.blackbox.store.mappers.mapper")
+                        .xml("mappers.src.main.resources.mappers")
+                        .service("services.src.main.java.org.blackbox.store.services.service")
+                        .controller("api.src.main.java.org.blackbox.store.api.controller")
+                        .serviceImpl("services.src.main.java.org.blackbox.store.services.service.impl"))
                 //策略配置
                 .strategyConfig((scanner, builder) -> builder.addInclude(scanner.apply("请输入表名")))
                 //模板配置
