@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.blackbox.store.mappers.mapper.ProductCommentsMapper">
+
+    <select id="selectProductCommentsById" resultType="org.blackbox.store.beans.bean.ProductCommentsBean">
+        select u.username,
+               u.nickname,
+               u.user_img,
+               c.comm_id,
+               c.product_id,
+               c.product_name,
+               c.order_item_id,
+               c.user_id,
+               c.is_anonymous,
+               c.comm_type,
+               c.comm_level,
+               c.comm_content,
+               c.comm_imgs,
+               c.sepc_name,
+               c.reply_status,
+               c.reply_content,
+               c.reply_time,
+               c.is_show
+        from product_comments c
+                 INNER JOIN
+             users u ON u.user_id = c.user_id
+        where c.product_id = #{productId};
+    </select>
+</mapper>
