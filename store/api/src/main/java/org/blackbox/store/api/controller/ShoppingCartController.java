@@ -1,23 +1,19 @@
 package org.blackbox.store.api.controller;
 
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.JwtParserBuilder;
-import io.jsonwebtoken.Jwts;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.blackbox.store.commons.utils.Base64Utils;
+import org.blackbox.store.beans.entity.ShoppingCart;
 import org.blackbox.store.commons.utils.JwtUtils;
 import org.blackbox.store.commons.vo.ResStatus;
 import org.blackbox.store.commons.vo.ResultVO;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.blackbox.store.services.service.IShoppingCartService;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -33,6 +29,9 @@ import java.util.Map;
 @RequestMapping("/shoppingCart")
 @Api(value = "提供购物车相关接口", tags = "购物车")
 public class ShoppingCartController {
+
+    @Resource
+    private IShoppingCartService shoppingCartService;
 
     @ApiOperation("购物车列表接口接口")
     @ApiImplicitParams({
@@ -50,5 +49,13 @@ public class ShoppingCartController {
         }
 
         return new ResultVO(ResStatus.NO, "token不合法", null);
+    }
+    @ApiOperation("购物车列表添加接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(dataType = "ShoppingCart", name = "shoppingCart", value = "商品信息", required = true),
+    })
+    @PostMapping("/addShoppingCart")
+    public ResultVO addShoppingCart(@RequestBody ShoppingCart shoppingCart, @RequestHeader("token") String token){
+        return shoppingCartService.addShoppingCart(shoppingCart);
     }
 }

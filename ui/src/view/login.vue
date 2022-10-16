@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import {setCookieValue} from "../assets/js/cookie_utils.js";
+import {getCookieValue, setCookieValue} from "../assets/js/cookie_utils.js";
 import axios from "axios";
 
 const baseUrl = "http://localhost:8080";
@@ -87,7 +87,6 @@ export default {
     doSubmit: function () {
       if (this.isRight) {
         this.tips = ""
-        console.log("T")
         const url = baseUrl + "/users/login";
         axios.get(url, {
           params: {
@@ -98,9 +97,11 @@ export default {
           const resData = res.data
           if (res.data.code === 0) {
             //登录验证成功后
-            setCookieValue("token", resData.data.msg);
+            setCookieValue("token", resData.msg);
             setCookieValue("username", resData.data.username);
             setCookieValue("userImg", resData.data.userImg)
+            setCookieValue("userId", resData.data.userId)
+            // console.log(resData.msg())
             window.location.href = "/index";
           } else {
             this.tips = "账号或者密码错误"

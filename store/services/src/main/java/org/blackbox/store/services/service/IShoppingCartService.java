@@ -2,6 +2,7 @@ package org.blackbox.store.services.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.blackbox.store.beans.entity.ShoppingCart;
+import org.blackbox.store.commons.vo.ResultVO;
 
 /**
  * <p>
@@ -12,5 +13,7 @@ import org.blackbox.store.beans.entity.ShoppingCart;
  * @since 2022-08-23
  */
 public interface IShoppingCartService extends IService<ShoppingCart> {
+
+    public ResultVO addShoppingCart(ShoppingCart shoppingCart);
 
 }

@@ -460,6 +460,7 @@ export default {
     const vm = this
     // 登录信息
     const token = getCookieValue("token");
+    console.log(token)
     if (token !== null && token !== "") {
       this.isLogin = true;
       this.username = getCookieValue("username");
