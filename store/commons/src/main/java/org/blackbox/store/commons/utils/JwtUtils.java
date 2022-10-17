@@ -14,9 +14,9 @@ import java.util.Map;
 public class JwtUtils {
     //@Value("{jwt.skin.key}")
     //key的大小必须大于或等于256bit,需要32位英文字符，一个英文字符为：8bit,一个中文字符为12bit
-    private static String key = "ssssssssssdfdsafasfdssdfsfsfssfs";
+    private static final String key = "ssssssssssdfdsafasfdssdfsfsfssfs";
     //设置加密算法
-    private static SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+    private static final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
     //获取header中的数据
     private static final Integer GET_HEADER_DATA = 0;
     //获取payload中的数据
@@ -54,7 +54,7 @@ public class JwtUtils {
      * @return jwp字符串
      */
     public static String createJwt(Map<String, Object> payLoad) {
-        Date exp = new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+        Date exp = new Date(System.currentTimeMillis() + 60 * 60 * 24 * 1000);
         return createJwt(exp, payLoad);
     }
 
@@ -64,24 +64,42 @@ public class JwtUtils {
      * @param jwsString
      * @return
      */
-    public static Boolean parseJwt(String jwsString) {
-        boolean result = false;
+    public static int parseJwt(String jwsString) {
+        int temp;
         try {
             Jwts.parserBuilder()
                     .setSigningKey(getSecretKey())//设置私钥
                     .build()
                     .parseClaimsJws(jwsString);//要解析的jws
-            result = true;
-        } catch (JwtException e) {
+            temp = 0;
+        } catch (ExpiredJwtException e) {
+            System.out.println("JWT过期：");
             System.out.println(e.getMessage());
+            temp = 1;
+        } catch (UnsupportedJwtException e) {
+            System.out.println("不支持的JWT：");
+            System.out.println(e.getMessage());
+            temp = 2;
+        } catch (MalformedJwtException e) {
+            System.out.println("JWT格式错误：");
+            System.out.println(e.getMessage());
+            temp = 3;
+        } catch (IllegalArgumentException e) {
+            System.out.println("非法请求：");
+            System.out.println(e.getMessage());
+            temp = 4;
+        } catch (Exception e) {
+            System.out.println("解析异常：");
+            System.out.println(e.getMessage());
+            temp = 5;
         }
-        return result;
+        return temp;
     }
 
 
     public static String getJson(String jwsString, Integer code) {
         //判断解析结果如果失败返回空，如果有全局异常处理，此处可抛自定义异常进行处理
-        if (!parseJwt(jwsString)) return null;
+        if (!(parseJwt(jwsString) == 0)) return null;
         //将jws中的数据编码串截取出来使用Base64解析成字节数组
         byte[] decodePayLoad = Base64Utils.decodeFromString(jwsString.split("\\.")[code]);
         return new String(decodePayLoad);

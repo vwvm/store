@@ -1002,6 +1002,7 @@ export default {
       }
     },
 
+    //添加购物车
     addShopCart: function () {
       //套餐属性变为字符串
       let propStr = ""

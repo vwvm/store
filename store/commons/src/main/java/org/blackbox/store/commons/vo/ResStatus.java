@@ -11,5 +11,15 @@ public class ResStatus {
     /**
      * token不合法
      */
-    public static final int TokenIsNotValid = 11001;
+    public static final int TOKEN_IS_NOT_VALID = 11001;
+
+    /**
+     * 未登录
+     */
+    public static final int NOT_LOGIN_IN = 20001;
+
+    /**
+     * 登录信息过期
+     */
+    public static final int LOGIN_INFORMATION_EXPIRED = 20002;
 }

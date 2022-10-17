@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * 登录认证拦截器
+ */
 @Component
 public class TokenInterceptor implements HandlerInterceptor {
 
@@ -25,14 +28,34 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         String token = request.getHeader("token");
         if (token == null) {
-            ResultVO resultVO = new ResultVO(ResStatus.NO, "请先登录", null);
+            ResultVO resultVO = new ResultVO(ResStatus.NOT_LOGIN_IN, "请先登录", null);
             doResponse(response, resultVO);
             return false;
         } else {
-            if (JwtUtils.parseJwt(token)) {
+            if (JwtUtils.parseJwt(token) == 0) {
                 return true;
-            }else {
-                ResultVO resultVO = new ResultVO(ResStatus.TokenIsNotValid, "token不合法", null);
+            }else if (JwtUtils.parseJwt(token) == 1){
+                ResultVO resultVO = new ResultVO(ResStatus.LOGIN_INFORMATION_EXPIRED, "登录信息过期", null);
+                doResponse(response, resultVO);
+                return false;
+            }
+            else if (JwtUtils.parseJwt(token) == 2){
+                ResultVO resultVO = new ResultVO(ResStatus.LOGIN_INFORMATION_EXPIRED, "不支持的JWT", null);
+                doResponse(response, resultVO);
+                return false;
+            }
+            else if (JwtUtils.parseJwt(token) == 3){
+                ResultVO resultVO = new ResultVO(ResStatus.LOGIN_INFORMATION_EXPIRED, "JWT格式错误", null);
+                doResponse(response, resultVO);
+                return false;
+            }
+            else if (JwtUtils.parseJwt(token) == 4){
+                ResultVO resultVO = new ResultVO(ResStatus.LOGIN_INFORMATION_EXPIRED, "非法请求", null);
+                doResponse(response, resultVO);
+                return false;
+            }
+            else{
+                ResultVO resultVO = new ResultVO(ResStatus.TOKEN_IS_NOT_VALID, "解析异常", null);
                 doResponse(response, resultVO);
                 return false;
             }

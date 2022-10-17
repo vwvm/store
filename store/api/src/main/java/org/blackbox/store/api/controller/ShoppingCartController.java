@@ -44,7 +44,7 @@ public class ShoppingCartController {
             return new ResultVO(ResStatus.NO, "请先登录", null);
         }
         //校验token
-        if (JwtUtils.parseJwt(token)){
+        if (JwtUtils.parseJwt(token) == 0){
             return new ResultVO(ResStatus.OK, "token校验成功", null);
         }
 
