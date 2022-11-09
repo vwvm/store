@@ -60,7 +60,8 @@ img{width:100%;}
 
 .category-content .menu-item{ left:83px;height:100%;background: #f8f8f8; }
 .category-content .menu-item.top{top: 36px;padding-right:10px ;}
-.category-content .menu-item.bottom{bottom: -2px;*bottom: -6px;bottom: -7px;}
+.category-content .menu-item.bottom{
+    *bottom: -6px;bottom: -7px;}
 .am-dimmer {background:#fff ;}
 
 @media only screen and (min-width: 640px) {

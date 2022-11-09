@@ -42,9 +42,9 @@
     <!--悬浮搜索框-->
 
     <div class="nav white">
-      <div class="logo"><img src="static/images/logo.png"/></div>
+      <div class="logo"><img src="/src/assets/images/logo.png" alt=""/></div>
       <div class="logoBig">
-        <li><img src="static/images/logobig.png"/></li>
+        <li><img src="/src/assets/images/logo.png" alt=""/></li>
       </div>
 
       <div class="search-bar pr">
@@ -262,7 +262,7 @@
           </div>
           <div class="theme-signin-right">
             <div class="img-info">
-              <img src="static/images/kouhong.jpg_80x80.jpg"/>
+              <img src="/src/assets/images/kouhong.jpg_80x80.jpg"/>
             </div>
             <div class="text-info">
               <span class="J_Price price-now">¥39.00</span>

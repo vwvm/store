@@ -21,7 +21,7 @@ export default defineConfig({
         }
     },
     server: {
-        port: 3000,
+        port: 9091,
         open: false,
         proxy: {
             '^api': {
@@ -30,5 +30,10 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, '')
             }
         }
-    }
+    },
+    build:{
+        chunkSizeWarningLimit:1500,
+        minify: false,
+    },
+    base:'./'
 })

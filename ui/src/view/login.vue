@@ -67,6 +67,7 @@
 <script>
 import {getCookieValue, setCookieValue} from "../assets/js/cookie_utils.js";
 import axios from "axios";
+import {getUrlParam} from "../assets/js/url_utils.js";
 
 const baseUrl = "http://localhost:8080";
 export default {
@@ -78,12 +79,20 @@ export default {
       tips: '',
       colorStyle: 'color:red',
       isRight: false,
+      returnUrl: null,
+      pid: 0,
+      sid: 0,
     }
   },
+  created() {
+    // 从商品详情页跳转到本页面时，获取提示信息
+    this.tips = getUrlParam("tips")
+    // 获取returnUrl\pid\sid
+    this.returnUrl = getUrlParam("returnUrl")
+    this.pid = getUrlParam("pid")
+    this.sid = getUrlParam("sid")
+  },
   methods: {
-    register: function () {
-
-    },
     doSubmit: function () {
       if (this.isRight) {
         this.tips = ""
@@ -102,7 +111,12 @@ export default {
             setCookieValue("userImg", resData.data.userImg)
             setCookieValue("userId", resData.data.userId)
             // console.log(resData.msg())
-            window.location.href = "/index";
+            if (this.returnUrl !== null) {
+              console.log("key")
+              window.location.href = this.returnUrl + "?pid=" + this.pid + "&sid=" + this.sid;
+            } else {
+              window.location.href = "/index";
+            }
           } else {
             this.tips = "账号或者密码错误"
           }

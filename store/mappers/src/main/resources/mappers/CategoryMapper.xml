@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.blackbox.store.mappers.mapper.CategoryMapper">
+<mapper namespace="org.vwvm.store.mappers.mapper.CategoryMapper">
 
-    <resultMap id="categoryBeanMap" type="org.blackbox.store.beans.bean.CategoryBean">
+    <resultMap id="categoryBeanMap" type="org.vwvm.store.beans.bean.CategoryBean">
         <id column="category_id1" jdbcType="INTEGER" property="categoryId"/>
         <result column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
         <result column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
@@ -11,12 +11,12 @@
         <result column="category_icon1" jdbcType="VARCHAR" property="categoryIcon"/>
         <result column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
         <result column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
-        <collection property="categoryBeanList" ofType="org.blackbox.store.beans.bean.CategoryBean">
+        <collection property="categoryBeanList" ofType="org.vwvm.store.beans.bean.CategoryBean">
             <id column="category_id2" jdbcType="INTEGER" property="categoryId"/>
             <result column="category_name2" jdbcType="VARCHAR" property="categoryName"/>
             <result column="category_level2" jdbcType="INTEGER" property="categoryLevel"/>
             <result column="parent_id2" jdbcType="INTEGER" property="parentId"/>
-            <collection property="categoryBeanList" ofType="org.blackbox.store.beans.bean.CategoryBean">
+            <collection property="categoryBeanList" ofType="org.vwvm.store.beans.bean.CategoryBean">
                 <id column="category_id3" jdbcType="INTEGER" property="categoryId"/>
                 <result column="category_name3" jdbcType="VARCHAR" property="categoryName"/>
                 <result column="category_level3" jdbcType="INTEGER" property="categoryLevel"/>
@@ -25,7 +25,7 @@
         </collection>
     </resultMap>
 
-    <resultMap id="categoryBeanMapB" type="org.blackbox.store.beans.bean.CategoryBean">
+    <resultMap id="categoryBeanMapB" type="org.vwvm.store.beans.bean.CategoryBean">
         <id column="category_id1" jdbcType="INTEGER" property="categoryId"/>
         <result column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
         <result column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
@@ -37,7 +37,7 @@
     </resultMap>
 
     <!--  查询一级分类子查询1级类别下的前6  -->
-    <resultMap id="selectFirstLevelCategoryMap" type="org.blackbox.store.beans.bean.CategoryBean">
+    <resultMap id="selectFirstLevelCategoryMap" type="org.vwvm.store.beans.bean.CategoryBean">
         <id column="category_id" jdbcType="INTEGER" property="categoryId"/>
         <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
         <result column="category_level" jdbcType="INTEGER" property="categoryLevel"/>
@@ -45,7 +45,7 @@
         <result column="category_slogan" jdbcType="VARCHAR" property="categorySlogan"/>
         <result column="category_pic" jdbcType="VARCHAR" property="categoryPic"/>
         <result column="category_bg_color" jdbcType="VARCHAR" property="categoryBgColor"/>
-        <collection property="productBeanList" column="category_id" select="org.blackbox.store.mappers.mapper.ProductMapper.selectCategoryProducts"/>
+        <collection property="productBeanList" column="category_id" select="org.vwvm.store.mappers.mapper.ProductMapper.selectCategoryProducts"/>
     </resultMap>
 
     <select id="selectAllCategory" resultMap="categoryBeanMap">

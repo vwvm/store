@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.blackbox.store.mappers.dao.UsersDao">
+<mapper namespace="org.vwvm.store.mappers.dao.UsersDao">
 
-    <resultMap id="UsersMap" type="org.blackbox.store.beans.entity.Users">
+    <resultMap id="UsersMap" type="org.vwvm.store.beans.entity.Users">
         <id column="user_id" property="userId"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>

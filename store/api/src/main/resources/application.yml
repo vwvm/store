@@ -1,0 +1,44 @@
+spring:
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+  datasource:
+    dynamic:
+      # 设置默认的数据源
+      primary: master
+      # 严格匹配,false使用默认数据源,true未匹配报出异常
+      strict: false
+      druid:
+        #初始化建立1个连接
+        initial-size: 1
+        #最大建立20个连接
+        max-active: 20
+        #最小空闲连接1
+        min-idle: 1
+        #获取连接的最大时间
+        max-wait: 60000
+      datasource:
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://10.20.82.12:43306/store
+          username: root
+          password: root
+        docker1:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://10.20.82.12:43306/store
+          username: root
+          password: root
+
+
+mybatis-plus:
+  mapper-locations: classpath:mappers/*Mapper.xml
+  #配置类型别名对应的包
+  type-aliases-package: org.vwvm.store.beans.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      #全局主键自增
+      id-type: auto

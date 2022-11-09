@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.blackbox.store.mappers.mapper.ProductMapper">
+<mapper namespace="org.vwvm.store.mappers.mapper.ProductMapper">
 
-    <resultMap id="ProductBeanMap" type="org.blackbox.store.beans.bean.ProductBean">
+    <resultMap id="ProductBeanMap" type="org.vwvm.store.beans.bean.ProductBean">
         <id column="product_id" jdbcType="INTEGER" property="productId"/>
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
         <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
@@ -12,11 +12,11 @@
         <result column="content" jdbcType="TIMESTAMP" property="content"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
-        <collection property="imgs" select="org.blackbox.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
+        <collection property="imgs" select="org.vwvm.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
                     column="product_id"/>
     </resultMap>
 
-    <resultMap id="selectCategoryProductsMap" type="org.blackbox.store.beans.bean.ProductBean">
+    <resultMap id="selectCategoryProductsMap" type="org.vwvm.store.beans.bean.ProductBean">
         <id column="product_id" jdbcType="INTEGER" property="productId"/>
         <result column="product_name" jdbcType="VARCHAR" property="productName"/>
         <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
@@ -26,7 +26,7 @@
         <result column="content" jdbcType="TIMESTAMP" property="content"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
-        <collection property="imgs" select="org.blackbox.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
+        <collection property="imgs" select="org.vwvm.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
                     column="product_id"/>
     </resultMap>
     <!-- 查询前3 -->

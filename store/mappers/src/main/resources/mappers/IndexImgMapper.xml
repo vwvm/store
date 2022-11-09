@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.blackbox.store.mappers.mapper.IndexImgMapper">
+<mapper namespace="org.vwvm.store.mappers.mapper.IndexImgMapper">
 
 
-    <resultMap id="IndexImgMap" type="org.blackbox.store.beans.entity.IndexImg">
+    <resultMap id="IndexImgMap" type="org.vwvm.store.beans.entity.IndexImg">
         <id column="img_id" jdbcType="VARCHAR" property="imgId"/>
         <result column="img_url" jdbcType="VARCHAR" property="imgUrl"/>
         <result column="img_bg_color" jdbcType="VARCHAR" property="imgBgColor"/>

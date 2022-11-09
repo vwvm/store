@@ -49,7 +49,7 @@
   <div class="nav white">
     <div class="logo"><img src="/src/assets/images/logo.png"/></div>
     <div class="logoBig">
-      <li><img src="src/assets/images/logo.png"/></li>
+      <li><img src="/src/assets/images/logo.png" alt=""/></li>
     </div>
     <div class="search-bar pr">
       <a name="index_none_header_sysc" href="#"></a>
@@ -916,6 +916,7 @@ export default {
 
     // 获取url传递的id
     this.productId = getUrlParam("pid")
+    this.currentSkuIndex = getUrlParam("sid") !== null ? getUrlParam("sid") : 0
 
     //根据id获取基本信息
     const detailInfoUrl = baseUrl + "/index/detail-info/" + this.productId
@@ -1018,7 +1019,6 @@ export default {
         "skuProps": propStr,
         "userId": getCookieValue("userId")
       }
-      console.log(cart)
       const addShoppingCartUrl = baseUrl + "/shoppingCart/addShoppingCart"
       axios({
         method: "post",
@@ -1028,7 +1028,18 @@ export default {
         },
         data: cart,
       }).then((res) => {
-        console.log(res)
+        const code = res.data.code
+        //等于0添加购物车成功
+        if (code === 0) {
+
+          
+          // 登录信息不正确
+        } else if (code === 20002) {
+          const params = "tips=请先登录&returnUrl=introduction&pid=" +
+              this.productId + "&sid=" +
+              this.productSkus[this.currentSkuIndex].skuId
+          window.location.href = "login?" + encodeURI(params)
+        }
       })
     }
   },

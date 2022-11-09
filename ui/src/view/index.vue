@@ -93,22 +93,22 @@
         <!--小导航 -->
         <div class="am-g am-g-fixed smallnav">
           <div class="am-u-sm-3">
-            <a href="sort.html"><img src="static/images/navsmall.jpg"/>
+            <a href="sort.html"><img src="/src/assets/images/navsmall.jpg"/>
               <div class="title">商品分类</div>
             </a>
           </div>
           <div class="am-u-sm-3">
-            <a href="#"><img src="static/images/huismall.jpg"/>
+            <a href="#"><img src="/src/assets/images/huismall.jpg" alt=""/>
               <div class="title">大聚惠</div>
             </a>
           </div>
           <div class="am-u-sm-3">
-            <a href="#"><img src="static/images/mansmall.jpg"/>
+            <a href="#"><img src="/src/assets/images/mansmall.jpg" alt=""/>
               <div class="title">个人中心</div>
             </a>
           </div>
           <div class="am-u-sm-3">
-            <a href="#"><img src="static/images/moneysmall.jpg"/>
+            <a href="#"><img src="/src/assets/images/moneysmall.jpg" alt=""/>
               <div class="title">投资理财</div>
             </a>
           </div>
@@ -128,7 +128,7 @@
           </a></li>
           <li class="title-first"><a target="_blank" href="#">
             <span>[公告]</span>商城与广州市签署战略合作协议
-            <img src="static/images/TJ.jpg"/>
+            <img src="/src/assets/images/TJ.jpg"/>
             <p>XXXXXXXXXXXXXXXXXX</p>
           </a></li>
 
@@ -158,7 +158,7 @@
           <li><a target="_blank" href="search.html"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
 
         </ul>
-        <div class="advTip"><img src="static/images/advTip.jpg"/></div>
+        <div class="advTip"><img src="/src/assets/images/advTip.jpg"/></div>
       </div>
     </div>
     <div class="clear"></div>
@@ -200,7 +200,7 @@
             <div class="icon-sale one "></div>
             <h4>秒杀</h4>
             <div class="activityMain ">
-              <img src="static/images/activity1.jpg "/>
+              <img src="/src/assets/images/activity1.jpg "/>
             </div>
             <div class="info ">
               <h3>春节送礼优选</h3>
@@ -211,7 +211,7 @@
             <div class="icon-sale two "></div>
             <h4>特惠</h4>
             <div class="activityMain ">
-              <img src="static/images/activity2.jpg "/>
+              <img src="/src/assets/images/activity2.jpg "/>
             </div>
             <div class="info ">
               <h3>春节送礼优选</h3>
@@ -222,7 +222,7 @@
             <div class="icon-sale three "></div>
             <h4>团购</h4>
             <div class="activityMain ">
-              <img src="static/images/activity3.jpg "/>
+              <img src="/src/assets/images/activity3.jpg "/>
             </div>
             <div class="info ">
               <h3>春节送礼优选</h3>
@@ -233,7 +233,7 @@
             <div class="icon-sale "></div>
             <h4>超值</h4>
             <div class="activityMain ">
-              <img src="static/images/activity.jpg "/>
+              <img src="/src/assets/images/activity.jpg "/>
             </div>
             <div class="info ">
               <h3>春节送礼优选</h3>
@@ -286,7 +286,7 @@
                     零食大礼包
                   </div>
                 </div>
-                <img :src="'static/images/'+rc.categoryPic"/>
+                <img :src="'/src/assets/images/'+rc.categoryPic"/>
               </a>
               <div class="triangle-topright"></div>
             </div>

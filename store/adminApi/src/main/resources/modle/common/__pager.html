@@ -1,0 +1,66 @@
+
+
+	<div th:fragment="paging" class="paging">
+		<script>
+
+			//修改url里的某个查询变量的值，如果不存在这个查询变量，则添加这个变量和值
+			function changeUrlArg(url, arg, val) {
+				var pattern = arg + '=([^&]*)';
+				var replaceText = arg + '=' + val;
+				return url= url.match(pattern) ? url.replace(eval('/(' + arg
+						+ '=)([^&]*)/gi'), replaceText) : (url.match('[\?]') ? url
+						+ '&' + replaceText : url + '?' + replaceText);
+			}
+
+			var paramPageSize = "[[${pagerItem.paramPageSize}]]";
+			var paramPageNum = "[[${pagerItem.paramPageNum}]]";
+			
+		</script>
+
+
+		<div class="aleft" style="display: inline-block; float: left;">
+			<span>共[[${pagerItem.rowCount}]]行，</span> </span><span><select
+				onchange="location.href=changeUrlArg(changeUrlArg(location.href,paramPageSize, this.options[this.options.selectedIndex].value),paramPageNum, '1');">
+
+				<option th:each="count:${#numbers.sequence(1,100)}" th:value="${count}" th:text="${count}" th:selected="${count==pagerItem.pageSize}" ></option>
+
+		</select>行/页</span>
+		</div>
+
+		<div class="aright" style="display: inline-block; float: right;">
+
+
+
+            <span th:if="${pagerItem.pageNum eq 1}">
+					&nbsp;<span style="color:#ccc">首页</span>
+					&nbsp;<span style="color:#ccc">上一页</span>
+            </span>
+			<span th:if="${pagerItem.pageNum ne 1}">
+					&nbsp;<span><a th:href="${pagerItem.firstPageUrl}">首页</a></span>
+					&nbsp;<span><a th:href="${pagerItem.prevPageUrl}">上一页</a></span>
+            </span>
+
+
+			<span th:if="${pagerItem.pageNum eq pagerItem.pageCount}">
+					&nbsp;<span style="color:#ccc">下一页 </span>
+					&nbsp;<span style="color:#ccc">尾页</span>
+            </span>
+			<span th:if="${pagerItem.pageNum ne pagerItem.pageCount}">
+					&nbsp;<span><a th:href="${pagerItem.nextPageUrl}">下一页</a></span>
+					&nbsp;<span><a th:href="${pagerItem.lastPageUrl}">尾页</a></span>
+            </span>
+
+
+
+			<span>&nbsp;&nbsp;&nbsp;&nbsp;跳到第 <select
+					onchange="location.href=changeUrlArg(location.href,paramPageNum, this.options[this.options.selectedIndex].value);">
+
+				<option th:each="count:${#numbers.sequence(1, pagerItem.pageCount)}" th:value="${count}" th:text="${count}" th:selected="${count==pagerItem.pageNum}" ></option>
+
+
+
+				</select>页 /共[[${pagerItem.pageCount}]]页
+
+		</div>
+
+	</div>
