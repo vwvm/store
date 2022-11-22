@@ -2,6 +2,7 @@ package org.vwvm.store.adminApi.controller;
 
 import com.liuvei.common.SysFun;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,12 @@ import java.nio.charset.StandardCharsets;
 @RequestMapping(UIConst.AREAPATH)
 public class LoginController extends BaseController {
 
-    @Resource
-    private IMemberService memberService;
+
+    private final IMemberService memberService;
+    @Autowired
+    public LoginController(IMemberService iMemberService){
+        this.memberService = iMemberService;
+    }
 
     @RequestMapping("/login")
     protected ModelAndView loginView(HttpServletRequest request, HttpServletResponse response) {

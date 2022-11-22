@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.vwvm.store.mappers.adminMapper.MemberMapper">
+
+    <select id="loadByName" resultType="org.vwvm.store.beans.adminBean.Member">
+        select *
+        from Member
+        where UserName = #{name}
+    </select>
+    <select id="countByName" resultType="java.lang.Long">
+        select count(1)
+        from Member
+        where userName like CONCAT(CONCAT('%', #{name}), '%')
+
+    </select>
+    <select id="pager" resultType="org.vwvm.store.beans.adminBean.Member">
+        select *
+        from Member
+        order by userId desc
+        limit #{pageNum}, #{pageSize}
+    </select>
+    <select id="pagerByName" resultType="org.vwvm.store.beans.adminBean.Member">
+        select *
+        from Member
+        where userName like CONCAT(CONCAT('%', #{name}), '%')
+        order by userId desc
+        limit #{pageNum}, #{pageSize}
+    </select>
+</mapper>

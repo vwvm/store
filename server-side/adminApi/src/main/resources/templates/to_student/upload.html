@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>动态添加文件上传列表</title>
+    <link th:href="@{/static/to_student/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/static/to_student/js/jquery.min.js}"></script>
+</head>
+<body>
+<div th:if="${uploadStatus}" style="color: red" th:text="${uploadStatus}">上传成功</div>
+<form th:action="@{/demo/uploadFile}" method="post" enctype="multipart/form-data">
+    上传文件:&nbsp;&nbsp;<input type="button" value="添加文件" onclick="add()"/>
+    <div id="file" style="margin-top: 10px;" th:value="文件上传区域">  </div>
+    <input id="submit" type="submit" value="上传"
+           style="display: none;margin-top: 10px;"/>
+</form>
+<script type="text/javascript">
+    // 动态添加上传按钮
+    function add(){
+        let innerdiv = "<div>";
+        innerdiv += "<input type='file' name='fileUpload' required='required'>" +
+            "<input type='button' value='删除' onclick='remove(this)'>";
+        innerdiv +="</div>";
+        $("#file").append(innerdiv);
+        // 打开上传按钮
+        $("#submit").css("display","block");
+    }
+    // 删除当前行<div>
+    function remove(obj) {
+        $(obj).parent().remove();
+        if($("#file div").length ==0){
+            $("#submit").css("display","none");
+        }
+    }
+</script>
+</body>
+</html>

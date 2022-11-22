@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>文件下载</title>
+</head>
+<body>
+<div style="margin-bottom: 10px">文件下载列表：</div>
+<table>
+    <tr>
+        <td>bloglogo.jpg</td>
+        <td><a th:href="@{/download(filename='bloglogo.jpg')}">下载文件</a></td>
+    </tr>
+    <tr>
+        <td>Spring Boot应用级开发教程.pdf</td>
+        <td><a th:href="@{/download(filename='Spring Boot应用级开发教程.pdf')}">
+            下载文件</a></td>
+    </tr>
+</table>
+</body>
+</html>
