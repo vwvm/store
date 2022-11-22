@@ -22,12 +22,12 @@ spring:
       datasource:
         master:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://10.20.82.12:43306/store
+          url: jdbc:mysql://localhost:43306/usercenter
           username: root
           password: root
         docker1:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://10.20.82.12:43306/store
+          url: jdbc:mysql://localhost:43306/usercenter
           username: root
           password: root
   # email 配置
@@ -36,6 +36,20 @@ spring:
     username: 1647010108@qq.com
     password: xvntllobycoiejba
     default-encoding: UTF-8
+  thymeleaf:
+    encoding: UTF-8
+    #启用识图解析
+    enabled: true
+    # 禁用缓存
+    cache: false
+    # 视图路径
+    prefix: classpath:/templates/
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+
 
 mybatis-plus:
   mapper-locations: classpath:mappers/*Mapper.xml, classpath:mappers/adminMapper/*Mapper.xml
@@ -49,3 +63,6 @@ mybatis-plus:
       id-type: auto
 server:
   port: 9090
+  servlet:
+    context-path: /
+
