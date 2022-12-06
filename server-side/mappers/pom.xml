@@ -79,6 +79,13 @@
             <version>3.5.2</version>
         </dependency>
 
+        <!-- jackson默认不支持java8的时间类型，需要添加一个时间模块 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.0</version>
+        </dependency>
+
     </dependencies>
 
 

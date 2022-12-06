@@ -4,7 +4,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
+import org.vwvm.store.beans.adminBean.Member;
 import org.vwvm.store.services.adminService.IMemberService;
 
 import javax.annotation.Resource;
@@ -21,6 +26,7 @@ import javax.annotation.Resource;
 @CrossOrigin
 @RequestMapping("/member")
 @Api(value = "提供用户相关接口", tags = "用户")
+@CacheConfig(cacheNames = "member")
 public class MemberController1 {
 
     @Resource
@@ -40,9 +46,36 @@ public class MemberController1 {
 
     @GetMapping("/member_load/{id}") // /member_load/1
     @ApiOperation("以id查询用户")
-    public Object member_load(@PathVariable("id") Long id) {
+//    @Cacheable("id")
+    @Cacheable(cacheNames = "member")
+    public Member member_load(@PathVariable("id") Long id) {
         return memberService.getById(id);
     }
+
+    @CacheEvict(allEntries = true)
+    @GetMapping("/member_delete")
+    public void redis_delete() {
+        System.out.println("清空缓存");
+    }
+
+
+    public void redis_1(){
+
+        System.out.println("修改名字之后123");
+//        System.out.println(member_load(1L));
+    }
+
+//    @CachePut(key = "#p0.userId") ;
+    @GetMapping("/member_update/{id}")
+    @CachePut(key = "1")
+    public Member redis_update(Member member1){
+        System.out.println("修改之前");
+        Member member =member_load(1L);
+        System.out.println(member);
+        member.setUserName("我修改名字啦1");
+        return member;
+    }
+
 
     @GetMapping("/member_loadByName/{name}") // /member_loadByName/admin
     @ApiOperation("以用户名查询用户")

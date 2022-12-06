@@ -14,4 +14,7 @@ public class UsingStaticController extends WebMvcConfigurationSupport {
       registry.addResourceHandler("/static/**").addResourceLocations("classpath:/templates/static/");
       registry.addResourceHandler("/lib/**").addResourceLocations("classpath:/templates/lib/");
     }
+
+
+
 }

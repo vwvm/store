@@ -23,6 +23,7 @@
         <module>services</module>
         <module>mappers</module>
         <module>adminApi</module>
+        <module>test</module>
     </modules>
 
     <properties>

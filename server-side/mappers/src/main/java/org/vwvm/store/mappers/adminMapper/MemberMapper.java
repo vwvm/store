@@ -3,7 +3,9 @@ package org.vwvm.store.mappers.adminMapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.vwvm.store.beans.adminBean.Member;
+import springfox.documentation.annotations.Cacheable;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,11 +17,14 @@ import java.util.List;
  * @since 2022-09-07
  */
 @Mapper
-public interface MemberMapper extends BaseMapper<Member> {
+public interface MemberMapper extends BaseMapper<Member>{
 
 
     Member loadByName(String name);
 
+//    @Override
+//    @Cacheable("by_id")
+//    Member selectById(Serializable id);
 
     Object countByName(String name);
 

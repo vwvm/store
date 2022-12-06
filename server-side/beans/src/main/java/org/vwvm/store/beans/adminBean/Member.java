@@ -4,10 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
+
 
 /**
  * <p>
@@ -16,8 +17,10 @@ import java.util.Date;
  *
  * @author vwvm
  * @since 2022-09-07
+ * implements Serializable
  */
 @TableName("Member")
+@Data
 public class Member implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,7 +83,7 @@ public class Member implements Serializable {
      * 注册时间
      */
     @TableField("RegDate")
-    private LocalDateTime regDate;
+    private Date regDate;
 
     /**
      * 最后登录IP
@@ -92,7 +95,7 @@ public class Member implements Serializable {
      * 最后登录时间
      */
     @TableField("LastLoginTime")
-    private LocalDateTime lastLoginTime;
+    private Data lastLoginTime;
 
     /**
      * salt
@@ -146,7 +149,7 @@ public class Member implements Serializable {
      * 创建时间
      */
     @TableField("CreateOn")
-    private LocalDateTime createOn;
+    private Date createOn;
 
     /**
      * 更新时间
@@ -226,13 +229,6 @@ public class Member implements Serializable {
         this.regIp = regIp;
     }
 
-    public LocalDateTime getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(LocalDateTime regDate) {
-        this.regDate = regDate;
-    }
 
     public String getLastLoginIp() {
         return lastLoginIp;
@@ -240,14 +236,6 @@ public class Member implements Serializable {
 
     public void setLastLoginIp(String lastLoginIp) {
         this.lastLoginIp = lastLoginIp;
-    }
-
-    public LocalDateTime getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(LocalDateTime lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
     }
 
     public String getSalt() {
@@ -314,13 +302,6 @@ public class Member implements Serializable {
         this.updateBy = updateBy;
     }
 
-    public LocalDateTime getCreateOn() {
-        return createOn;
-    }
-
-    public void setCreateOn(LocalDateTime createOn) {
-        this.createOn = createOn;
-    }
 
     public Date getUpdateOn() {
         return updateOn;

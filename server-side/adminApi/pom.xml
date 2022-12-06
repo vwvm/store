@@ -69,6 +69,13 @@
             <artifactId>liuvei-common</artifactId>
             <version>1.2.0</version>
         </dependency>
+        <!-- ampq协议 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 

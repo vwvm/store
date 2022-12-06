@@ -30,6 +30,7 @@ spring:
           url: jdbc:mysql://localhost:43306/usercenter
           username: root
           password: root
+
   # email 配置
   mail:
     host: smtp.qq.com
@@ -48,6 +49,19 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 50MB
+  #rabbitmq 配置
+  rabbitmq:
+    host: localhost
+    port: 45672
+    username: admin
+    password: admin
+    virtual-host: /
+  #redis配置
+  redis:
+    host: localhost
+    port: 46379
+    password: root
+
 
 
 
