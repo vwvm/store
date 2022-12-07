@@ -44,7 +44,8 @@ spring:
     # 禁用缓存
     cache: false
     # 视图路径
-    prefix: classpath:/templates/
+    prefix:
+      classpath:/templates/
   servlet:
     multipart:
       max-file-size: 10MB

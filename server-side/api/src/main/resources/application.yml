@@ -22,12 +22,12 @@ spring:
       datasource:
         master:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://10.20.82.12:43306/store
+          url: jdbc:mysql://localhost:43306/store
           username: root
           password: root
         docker1:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://10.20.82.12:43306/store
+          url: jdbc:mysql://localhost:43306/store
           username: root
           password: root
 
