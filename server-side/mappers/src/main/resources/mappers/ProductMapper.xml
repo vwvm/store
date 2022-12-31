@@ -12,8 +12,10 @@
         <result column="content" jdbcType="TIMESTAMP" property="content"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
-        <collection property="imgs" select="org.vwvm.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
-                    column="product_id"/>
+        <collection property="imgs" ofType="org.vwvm.store.beans.entity.ProductImg"
+                    select="org.vwvm.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
+                    column="productId"
+        />
     </resultMap>
 
     <resultMap id="selectCategoryProductsMap" type="org.vwvm.store.beans.bean.ProductBean">
@@ -26,7 +28,7 @@
         <result column="content" jdbcType="TIMESTAMP" property="content"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
-        <collection property="imgs" select="org.vwvm.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
+        <collection property="imgs"  select="org.vwvm.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
                     column="product_id"/>
     </resultMap>
     <!-- 查询前3 -->
@@ -58,7 +60,7 @@
                update_time
         from product
         where root_category_id = #{id}
-        order by sold_num desc
+        order by create_time desc
         limit 0,6
     </select>
 </mapper>

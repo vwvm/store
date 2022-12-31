@@ -56,4 +56,14 @@ public class ProductController {
     public ResultVO productComments(@PathVariable String pid){
         return productCommentsService.productCommentsList(pid);
     }
+
+    @ApiOperation("商品前六的接口接口")
+    @GetMapping("/top6/{pid}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(dataType = "string", name = "pid", value = "商品主类别id", required = true),
+    })
+    public ResultVO productTop6(@PathVariable Integer pid){
+        return productService.selectCategoryProducts(pid);
+    }
+
 }

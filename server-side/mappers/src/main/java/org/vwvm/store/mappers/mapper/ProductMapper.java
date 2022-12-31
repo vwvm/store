@@ -15,7 +15,7 @@ import java.util.List;
  * @author BlackBox
  * @since 2022-09-18
  */
-public interface ProductMapper extends BaseMapper<Product> {
+public interface ProductMapper extends BaseMapper<ProductBean> {
 
     /**
      * @return 商品列表

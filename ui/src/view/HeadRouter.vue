@@ -16,6 +16,7 @@
               <li><router-link to="/register">register</router-link></li>
               <li><router-link to="/exampleBlock">exampleBlock</router-link></li>
               <li><router-link to="/introduction">introduction</router-link></li>
+              <li><router-link to="/loginTemplate">loginTemplate</router-link></li>
             </ul>
             <button type="button" @click="test">打开关于</button>
           </td>

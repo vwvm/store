@@ -1,6 +1,7 @@
 package org.vwvm.store.services.service.impl;
 
 import org.vwvm.ApiApplication;
+import org.vwvm.store.beans.bean.ProductBean;
 import org.vwvm.store.beans.entity.Product;
 import org.vwvm.store.beans.entity.ProductImg;
 import org.vwvm.store.beans.entity.ProductSku;
@@ -39,7 +40,7 @@ class ProductServiceImplTest {
     void ProductBasicInfo() {
         String productId = "1";
         //1.商品基本信息,product_status = 1表示上架商品
-        List<Product> products = productMapper.selectByMap(Map.of("product_id", productId, "product_status", 1));
+        List<ProductBean> products = productMapper.selectByMap(Map.of("product_id", productId, "product_status", 1));
         if (products.size() > 0) {
             //商品图片
             List<ProductImg> productImgs = productImgMapper.selectByMap(Map.of("item_id", productId));

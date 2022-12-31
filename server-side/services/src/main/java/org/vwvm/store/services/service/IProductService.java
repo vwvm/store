@@ -1,5 +1,6 @@
 package org.vwvm.store.services.service;
 
+import org.vwvm.store.beans.bean.ProductBean;
 import org.vwvm.store.beans.entity.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.vwvm.store.commons.vo.ResultVO;
@@ -12,7 +13,7 @@ import org.vwvm.store.commons.vo.ResultVO;
  * @author BlackBox
  * @since 2022-09-18
  */
-public interface IProductService extends IService<Product> {
+public interface IProductService extends IService<ProductBean> {
 
     ResultVO recommendProductsList();
 
@@ -20,4 +21,7 @@ public interface IProductService extends IService<Product> {
 
     ResultVO getProductParamsById(String productId);
 
+    ResultVO productTop6(String pid);
+
+    ResultVO selectCategoryProducts(Integer id);
 }

@@ -1,6 +1,6 @@
 <template>
   <body>
-  这是router3
+  这是router31
   嵌套路由
   <div>
     <br>

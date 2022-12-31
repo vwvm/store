@@ -29,7 +29,11 @@ class ProductMapperTest {
     @Test
     void testSelectBy(){
         productMapper.selectByMap(Map.of("product_id","1","product_status",1));
+    }
 
+    @Test
+    void  selectCategoryProducts(){
+        System.out.println(productMapper.selectCategoryProducts(1));
     }
 
 }

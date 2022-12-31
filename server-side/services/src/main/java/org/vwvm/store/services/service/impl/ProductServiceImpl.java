@@ -1,5 +1,6 @@
 package org.vwvm.store.services.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.vwvm.store.beans.bean.ProductBean;
 import org.vwvm.store.beans.entity.Product;
@@ -30,7 +31,7 @@ import java.util.Map;
  * @since 2022-09-18
  */
 @Service
-public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
+public class ProductServiceImpl extends ServiceImpl<ProductMapper, ProductBean> implements IProductService {
 
     @Resource
     private ProductMapper productMapper;
@@ -58,7 +59,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public ResultVO getProductBasicInfo(String productId) {
         //1.商品基本信息,product_status = 1表示上架商品
-        List<Product> products = productMapper.selectByMap(Map.of("product_id", productId, "product_status", 1));
+        List<ProductBean> products = productMapper.selectByMap(Map.of("product_id", productId, "product_status", 1));
         if (products.size() > 0) {
             //商品图片
             List<ProductImg> productImgs = productImgMapper.selectByMap(Map.of("item_id", productId));
@@ -78,5 +79,17 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             return new ResultVO(ResStatus.OK, "success", productParams.get(0));
         }
         return new ResultVO(ResStatus.NO, "商品三无", null);
+    }
+
+    @Override
+    public ResultVO productTop6(String pid) {
+
+        QueryWrapper<Object> queryWrapper = new QueryWrapper<>();
+        return new ResultVO(ResStatus.NO, "查询成功", productMapper);
+    }
+
+    @Override
+    public ResultVO selectCategoryProducts(Integer id) {
+        return new ResultVO(ResStatus.NO, "查询成功", productMapper.selectCategoryProducts(id));
     }
 }

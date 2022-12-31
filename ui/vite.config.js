@@ -16,11 +16,13 @@ export default defineConfig({
         }),
     ],
     resolve: {
+        // 起个别名，在引用资源时，可以用‘@/资源路径’直接访问
         alias: {
-            'vue': 'vue/dist/vue.esm-bundler.js'
+            'vue': 'vue/dist/vue.esm-bundler.js',
         }
     },
     server: {
+        host: '0.0.0.0',
         port: 9091,
         open: false,
         proxy: {
@@ -36,4 +38,5 @@ export default defineConfig({
         minify: false,
     },
     base:'./'
+
 })
