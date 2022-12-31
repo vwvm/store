@@ -12,7 +12,7 @@
       </el-col>
     </el-row>
     <br>
-    <el-table stripe :data="RoleList" border style="width: 100%">
+    <el-table stripe :data="categoriesList" border style="width: 100%">
       <!-- 下拉表格框 -->
       <el-table-column type="expand" v-slot:default="scope">
         <el-row v-for="item1 in scope.row.children" :key="item1.id">
@@ -43,10 +43,11 @@
         </el-row>
 
       </el-table-column>
-      <el-table-column prop="roleName" label="角色名称"/>
-      <el-table-column prop="roleDesc" label="角色描述"/>
+      <el-table-column prop="cat_name" label="分类名称"/>
+      <el-table-column prop="cat_deleted" label="是否有效"/>
+      <el-table-column prop="cat_level" label="分类级别"/>
       <el-table-column prop="操作" label="操作" v-slot:default="scope">
-        <el-button type="primary" :icon="Edit" circle @click="editUser(scope.row);editDialogVisible = true;"/>
+        <el-button type="primary" :icon="Edit" circle @click="editUser(scope.row);"/>
         <el-popconfirm
             confirm-button-text="Yes"
             cancel-button-text="No"
@@ -59,7 +60,6 @@
             <el-button type="danger" :icon="Delete" circle/>
           </template>
         </el-popconfirm>
-        <el-button type="warning" @click="permission(scope.row)">分配权限</el-button>
       </el-table-column>
     </el-table>
   </el-card>
@@ -164,10 +164,69 @@
     </template>
   </el-dialog>
 </template>
+<script setup>
+import {Delete, Edit, InfoFilled} from "@element-plus/icons-vue";
 
+</script>
 <script>
+import api from "@/api/index.js";
+import {ElMessage} from "element-plus";
+
 export default {
-  name: "categories"
+  name: "categories",
+
+  data(){
+    return{
+      categoriesList: [
+        {
+          "cat_id": 1,
+          "cat_name": "大家电",
+          "cat_pid": 0,
+          "cat_level": 0,
+          "cat_deleted": false,
+          "children": [
+            {
+              "cat_id": 3,
+              "cat_name": "电视",
+              "cat_pid": 1,
+              "cat_level": 1,
+              "cat_deleted": false,
+              "children": [
+                {
+                  "cat_id": 6,
+                  "cat_name": "曲面电视",
+                  "cat_pid": 3,
+                  "cat_level": 2,
+                  "cat_deleted": false
+                },
+                {
+                  "cat_id": 7,
+                  "cat_name": "海信",
+                  "cat_pid": 3,
+                  "cat_level": 2,
+                  "cat_deleted": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+    }
+  },
+
+  methods: {
+    async getCategories() {
+      const {data: res} = await api.goods.getCategories()
+      if (res.meta.status !== 200) {
+        return ElMessage.error("获取商品分类列表失败！")
+      }
+      this.categoriesList = res.data;
+    },
+  },
+
+  mounted() {
+    this.getCategories();
+  }
 }
 </script>
 

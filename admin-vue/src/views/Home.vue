@@ -87,16 +87,19 @@ export default {
   },
   methods: {
     async getMenuList() {
-      const res = await api.right.getMenus()
-      if (res.data.meta.status === 200) {
-        this.menuList = res.data.data;
+      const {data: res} = await api.right.getMenus()
+      console.log(res)
+      if (res.meta.status === 200) {
+        this.menuList = res.data;
       } else {
+        const msg = res.meta.msg
         ElMessage({
-          message: '请求菜单失败',
+          message: '请求菜单失败:' + msg,
           type: 'error',
         })
+        await router.push("/login")
       }
-      console.log("menuList", this.menuList)
+
     },
 
     saveActivePath(path) {
