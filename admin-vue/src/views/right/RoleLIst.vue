@@ -212,7 +212,7 @@ async function addUsers() {
 </script>
 <script>
 import api from "@/api/index.js";
-import {ElMessage, ElMessageBox, ElTree} from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 import {reactive, ref} from "vue";
 import {getUsers} from "@/api/user.js"
 export default {
@@ -300,7 +300,7 @@ export default {
       if (res.data.meta.status !== 200) {
         ElMessage.error("编辑用户失败！")
       }
-      await this.getUsers()
+      await this.getOrders()
       ElMessage.success("编辑用户成功！")
     },
 
@@ -317,7 +317,7 @@ export default {
         return ElMessage.error("删除用户失败！")
       }
       this.queryInfo.pagenum = 1;
-      await this.getUsers()
+      await this.getOrders()
       ElMessage.success("删除用户成功！")
     },
 

@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 
 const routes = [
     {
@@ -25,6 +25,18 @@ const routes = [
             {
                 path: "goods/categories",
                 component: () => import("@/views/goods/Categories.vue")
+            },
+            {
+                path: "reports/reportList",
+                component: () => import("@/views/reports/ReportList.vue")
+            },
+            {
+                path: "goods/goodList",
+                component: () => import("@/views/goods/GoodList.vue")
+            },
+            {
+                path: "orders/orderList",
+                component: () => import("@/views/orders/OrderList.vue")
             }
         ]
     },

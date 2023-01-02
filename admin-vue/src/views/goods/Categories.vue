@@ -18,17 +18,11 @@
         <el-row v-for="item1 in scope.row.children" :key="item1.id">
           <el-col :span="5">
             <el-tag size="large" @close="deleteRoleRight(scope.row, item1)" closable>{{ item1.authName }}</el-tag>
-            <el-icon>
-              <CaretRight/>
-            </el-icon>
           </el-col>
           <el-col :span="19">
             <el-row v-for="(item2, index) in item1.children" :key="item2.id">
               <el-col :span="6">
                 <el-tag type="success" closable @close="deleteRoleRight(scope.row, item2)">{{ item2.authName }}</el-tag>
-                <el-icon>
-                  <CaretRight/>
-                </el-icon>
               </el-col>
               <el-col :span="18">
                 <el-tag closable v-for="item3 in item2.children" :key="item3.id" type="info"
@@ -44,8 +38,20 @@
 
       </el-table-column>
       <el-table-column prop="cat_name" label="分类名称"/>
-      <el-table-column prop="cat_deleted" label="是否有效"/>
-      <el-table-column prop="cat_level" label="分类级别"/>
+      <el-table-column prop="cat_deleted" label="是否有效" v-slot:default="scope">
+          <el-switch
+              v-model=scope.row.cat_deleted
+              class="mt-2"
+              style="margin-left: 24px"
+              inline-prompt
+              @change="change(scope.row)"
+          />
+      </el-table-column>
+      <el-table-column prop="cat_level" label="分类级别" v-slot:default="scope">
+        <el-tag v-if="scope.row.cat_level === 0">级别一</el-tag>
+        <el-tag class="ml-2" type="success" v-if="scope.row.cat_level === 1">级别二</el-tag>
+        <el-tag class="ml-2" type="info" v-if="scope.row.cat_level === 2">级别三</el-tag>
+      </el-table-column>
       <el-table-column prop="操作" label="操作" v-slot:default="scope">
         <el-button type="primary" :icon="Edit" circle @click="editUser(scope.row);"/>
         <el-popconfirm

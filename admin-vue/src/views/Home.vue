@@ -14,7 +14,7 @@
           <el-menu-item index="0">vwvm-store</el-menu-item>
           <div class="flex-grow"/>
           <el-sub-menu index="2">
-            <template #title><img src="@/assets/images/logo1.png" class="user-img"></template>
+            <template #title><img src="@/assets/images/logo1.png" class="user-img" alt=""></template>
             <el-menu-item index="2-1">设置</el-menu-item>
             <el-menu-item index="2-2">个人中心</el-menu-item>
             <el-menu-item index="2-3" @click="logoOut">退出</el-menu-item>
@@ -88,7 +88,6 @@ export default {
   methods: {
     async getMenuList() {
       const {data: res} = await api.right.getMenus()
-      console.log(res)
       if (res.meta.status === 200) {
         this.menuList = res.data;
       } else {

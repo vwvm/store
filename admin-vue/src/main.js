@@ -10,7 +10,6 @@ import api from "@/api";
 
 const app = createApp(App)
 
-
 app.config.globalProperties.$api = api;
 app.use(router)
 app.use(ElementPlus)
