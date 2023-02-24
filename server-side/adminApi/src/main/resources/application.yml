@@ -35,7 +35,7 @@ spring:
   mail:
     host: smtp.qq.com
     username: 1647010108@qq.com
-    password: xvntllobycoiejba
+    password:
     default-encoding: UTF-8
   thymeleaf:
     encoding: UTF-8
