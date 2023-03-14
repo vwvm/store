@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  #  mysql1:
+  #    image: mysql
+  #    ports:
+  #      - "33306:3306"
+  #    environment:
+  #      - MYSQL_ROOT_PASSWORD=root1235
+  #
+  #  redis1:
+  #    image: redis
+  #    ports:
+  #      - "36379:6379"
+  #
+  #  # 使用 Dockerfile 构建容器
+  #  centos1:
+  #    build:
+  #      context: .
+  #      dockerfile: Dockerfile
+  minio1:
+    image: quay.io/minio/minio
+    ports:
+      - "49000:9000"
+      - "49090:9090"
+    env_file:
+      - minio/config.env
+    volumes:
+      - minio1:/root/data
+    command: server --console-address ":9090"
+    privileged: true
+  nacos1:
+    image: nacos/nacos-server
+    privileged: true
+    ports:
+      - "48848:8848"
+    volumes:
+      - ./nacos1/conf:/home/nacos/conf
+      - ./nacos1/logs:/home/nacos/logs
+    env_file:
+      - nacos1/config.env
+
+
+volumes:
+  minio1:

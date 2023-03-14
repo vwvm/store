@@ -16,19 +16,25 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <spring.boot.starter.parent.version>3.0.2</spring.boot.starter.parent.version>
+        <spring.cloud.alibaba.version>2022.0.0.0-RC1</spring.cloud.alibaba.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- springboot版本管理器 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>3.0.2</version>
+                <version>${spring.boot.starter.parent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
+            <!-- spring cloud alibaba 版本管理器 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2022.0.0.0-RC1</version>
+                <version>${spring.cloud.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -23,7 +23,7 @@ public class MybatisGenerator {
 
         // 配置数据库
         DataSourceConfig.Builder builder1 = new DataSourceConfig
-                .Builder("jdbc:mysql://localhost:43306/areaManagementFunction", "root", "root");
+                .Builder("jdbc:mysql://localhost:43306/shopStore", "root", "root");
         generatorB(builder1);
 
     }
@@ -42,7 +42,7 @@ public class MybatisGenerator {
                 //包配置
                 .packageConfig(builder -> {
                     builder.controller("api")
-                            .parent("com.example.areamanagementfunction"); // 设置父包名
+                            .parent("org.shopStore"); // 设置父包名
                 })
                 //策略配置
                 .strategyConfig((scanner, builder) -> builder.addInclude(scanner.apply("请输入表名")))

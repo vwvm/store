@@ -234,7 +234,7 @@ b.line{display: block;width:100%;height:2px ;border-bottom:2px solid #d2364c;}
 
    {
 /*分类*/
-.nav-table,.footer{max-width:1200px;}
+.nav-table,.top-1{max-width:1200px;}
 .long-title {width:180px;}
 .nav-cont {padding-left: 180px;}
 /*固定框架*/
