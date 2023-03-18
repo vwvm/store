@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+create database if not exists nacos;
+use nacos;
 /******************************************/
 /*   数据库全名 = nacos_config   */
 /*   表名称 = config_info   */

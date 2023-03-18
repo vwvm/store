@@ -1,0 +1,4 @@
+2023-03-18 21:03:16,066 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='shopStore', ephemeral=true, revision=1}
+
+2023-03-18 21:03:16,559 INFO [PUSH-SUCC] 25ms, all delay time 539ms, SLA 493ms, Service{namespace='public', group='DEFAULT_GROUP', name='shopStore', ephemeral=true, revision=1}, originalSize=1, DataSize=1, target=192.168.31.123
+

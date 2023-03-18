@@ -1,15 +1,8 @@
-FROM quay.io/minio/minio:latest
-# 设置环境变量
-ENV BASE_PATH "/root"
-# 指定工作路径 
-WORKDIR $BASE_PATH
-# 声明端口
-EXPOSE 49000
-# 声明工作目录
-VOLUME $BASE_PATH
-# 添加文件到工作目录
-ADD "vwvm.png" "./"
-# 容器启动后执行
-ENTRYPOINT ["ls"]
-# 容器启动后执行 仅最后一条生效
-CMD ["/root"]
+#设置基准镜像
+FROM mysql:latest
+
+#设置工作目录
+WORKDIR  '/docker-entrypoint-initdb.d'
+ENV MYSQL_RANDOM_ROOT_PASSWORD=root
+#将当前目录的init.sql文件复制到容器中的以上目录中。
+ADD db.sql .

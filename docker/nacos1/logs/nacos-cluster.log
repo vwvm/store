@@ -1,16 +1,28 @@
-2023-03-14 22:32:23,648 INFO Current addressing mode selection : AddressServerMemberLookup
+2023-03-18 16:09:14,127 INFO Current addressing mode selection : StandaloneMemberLookup
 
-2023-03-14 22:32:23,675 ERROR [serverlist] exception, error : caused: jmenv.tbsite.net;
+2023-03-18 16:21:50,174 INFO Current addressing mode selection : StandaloneMemberLookup
 
-2023-03-14 22:32:23,675 ERROR [serverlist] exception, error : caused: jmenv.tbsite.net;
+2023-03-18 16:22:30,970 INFO Current addressing mode selection : StandaloneMemberLookup
 
-2023-03-14 22:32:23,676 ERROR [serverlist] exception, error : caused: jmenv.tbsite.net;
+2023-03-18 16:25:59,268 INFO Current addressing mode selection : StandaloneMemberLookup
 
-2023-03-14 22:32:23,676 ERROR [serverlist] exception, error : caused: jmenv.tbsite.net;
+2023-03-18 20:43:07,882 INFO Current addressing mode selection : StandaloneMemberLookup
 
-2023-03-14 22:32:23,676 ERROR [serverlist] exception, error : caused: jmenv.tbsite.net;
+2023-03-18 20:45:52,621 INFO Current addressing mode selection : StandaloneMemberLookup
 
-2023-03-14 22:32:47,862 INFO Current addressing mode selection : StandaloneMemberLookup
+2023-03-18 20:47:42,281 INFO Current addressing mode selection : StandaloneMemberLookup
 
-2023-03-14 22:32:49,972 WARN [ClusterRpcClientProxy] success to refresh cluster rpc client on start up,members =[] 
+2023-03-18 20:54:57,795 INFO Current addressing mode selection : StandaloneMemberLookup
+
+2023-03-18 20:57:16,444 INFO Current addressing mode selection : StandaloneMemberLookup
+
+2023-03-18 20:58:38,111 INFO Current addressing mode selection : StandaloneMemberLookup
+
+2023-03-18 20:59:14,911 INFO Current addressing mode selection : StandaloneMemberLookup
+
+2023-03-18 21:00:43,579 INFO Current addressing mode selection : StandaloneMemberLookup
+
+2023-03-18 21:00:45,077 INFO [ClusterRpcClientProxy] success to refresh cluster rpc client on start up,members =[] 
+
+2023-03-18 21:00:49,766 INFO This node is ready to provide external services
 

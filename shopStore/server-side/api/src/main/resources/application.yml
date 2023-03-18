@@ -1,9 +1,18 @@
 spring:
+  application:
+    name: shopStore
   autoconfigure:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   mvc:
     path match:
       matching-strategy: ant_path_matcher
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        namespace: public
+        username: nacos
+        password: nacos
   datasource:
     dynamic:
       # 设置默认的数据源
