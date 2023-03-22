@@ -1,0 +1,24 @@
+server:
+  port: 8802
+
+spring:
+  application:
+    name: demo2
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        namespace: public
+        username: nacos
+        password: nacos
+
+logging:
+  level:
+    com.example.demo.com.example.demo.feign: debug
+
+# feign 日志
+feign:
+  client:
+    config:
+      demo2:
+        loggerLevel: BASIC

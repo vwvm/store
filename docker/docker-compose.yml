@@ -26,6 +26,25 @@ services:
     image: redis
     ports:
       - "46379:6379"
+
+  # nginx
+  nginx1:
+    image: nginx
+    ports:
+      - "40080:80"
+      - "40443:443"
+      - "8848:8848"
+      - "9849:9849"
+      - "9848:9848"
+    container_name: nginx
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf/conf.d:/etc/nginx/conf.d
+      - ./nginx/conf/html:/usr/share/nginx/html/
+      - ./nginx/log:/var/log/nginx/
+    privileged: true
+
+
   minio1:
     image: quay.io/minio/minio
     ports:
@@ -37,22 +56,50 @@ services:
       - minio1:/root/data
     command: server --console-address ":9090"
     privileged: true
+
   nacos1:
     image: nacos/nacos-server:v2.2.1
     privileged: true
     ports:
-      - "8848:8848"
-      - "9848:9848"
-      - "9849:9849"
+      - "18848:8848"
+      - "19848:9848"
+      - "19849:9849"
     volumes:
-      - ./nacos1/conf:/home/nacos/conf
-      - ./nacos1/logs:/home/nacos/logs
+      - ./nacos/nacos1/conf:/home/nacos/conf
+      - ./nacos/nacos1/logs:/home/nacos/logs
     env_file:
-      - nacos1/config.env
+      - nacos/config.env
+    links:
+      - mysql1
+  nacos2:
+    image: nacos/nacos-server:v2.2.1
+    privileged: true
+    ports:
+      - "28848:8848"
+      - "29848:9848"
+      - "29849:9849"
+    volumes:
+      - ./nacos/nacos2/conf:/home/nacos/conf
+      - ./nacos/nacos2/logs:/home/nacos/logs
+    env_file:
+      - nacos/config.env
+    links:
+      - mysql1
+  nacos3:
+    image: nacos/nacos-server:v2.2.1
+    privileged: true
+    ports:
+      - "38848:8848"
+      - "39848:9848"
+      - "39849:9849"
+    volumes:
+      - ./nacos/nacos3/conf:/home/nacos/conf
+      - ./nacos/nacos3/logs:/home/nacos/logs
+    env_file:
+      - nacos/config.env
     links:
       - mysql1
 
 
 volumes:
   minio1:
-

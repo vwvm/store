@@ -24,6 +24,7 @@
         <module>mappers</module>
         <module>adminApi</module>
         <module>test</module>
+        <module>demo</module>
     </modules>
 
     <properties>
@@ -39,8 +40,22 @@
                 <version>2021.0.4.0</version>
                 <type>pom</type>
                 <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.alibaba.cloud</groupId>
+                        <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2021.0.4</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
+
     </dependencyManagement>
 
 </project>

@@ -1,0 +1,13 @@
+server:
+  port: 8803
+
+spring:
+  application:
+    name: demo2
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        namespace: public
+        username: nacos
+        password: nacos
