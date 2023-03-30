@@ -1,6 +1,8 @@
 package org.vwvm.store.adminApi.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -8,8 +10,6 @@ import org.vwvm.store.commons.utils.JwtUtils;
 import org.vwvm.store.commons.vo.ResStatus;
 import org.vwvm.store.commons.vo.ResultVO;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 

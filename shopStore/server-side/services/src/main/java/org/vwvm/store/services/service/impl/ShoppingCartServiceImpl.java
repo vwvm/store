@@ -1,6 +1,7 @@
 package org.vwvm.store.services.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
 import org.vwvm.store.beans.entity.ShoppingCart;
 import org.vwvm.store.commons.vo.ResStatus;
 import org.vwvm.store.commons.vo.ResultVO;
@@ -8,7 +9,6 @@ import org.vwvm.store.mappers.mapper.ShoppingCartMapper;
 import org.vwvm.store.services.service.IShoppingCartService;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

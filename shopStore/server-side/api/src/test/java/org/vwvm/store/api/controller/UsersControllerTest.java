@@ -1,12 +1,11 @@
 package org.vwvm.store.api.controller;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Controller;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.bind.annotation.*;
 import org.vwvm.ApiApplication;
@@ -14,7 +13,6 @@ import org.vwvm.store.beans.entity.Users;
 import org.vwvm.store.commons.vo.ResultVO;
 import org.vwvm.store.services.service.UsersService;
 
-import javax.annotation.Resource;
 
 @SpringBootTest(classes = ApiApplication.class)
 @ExtendWith(SpringExtension.class)

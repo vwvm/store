@@ -2,14 +2,15 @@ package org.vwvm.store.adminApi.controller;
 
 import com.liuvei.common.RandFun;
 import com.liuvei.common.ValidateCodeFun;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.vwvm.store.commons.vo.UIConst;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * 验证码处理
@@ -39,7 +40,7 @@ public class ValidateCodeController2 extends BaseController {
         response.setDateHeader("Expires", 0);
         response.setContentType("image/jpeg");
         //将图像输出到Servlet输出流中。
-        javax.servlet.ServletOutputStream outStream = response.getOutputStream();
+        ServletOutputStream outStream = response.getOutputStream();
         javax.imageio.ImageIO.write(image, "jpeg", outStream);
 
         //由于直接使用response来产生相应流，所以不需要通过视图解析器来处理

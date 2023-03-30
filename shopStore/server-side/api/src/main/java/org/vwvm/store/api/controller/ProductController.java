@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import jakarta.annotation.Resource;
 import org.vwvm.store.beans.bean.ProductCategoryBean;
 import org.vwvm.store.beans.entity.Product;
 import org.vwvm.store.beans.entity.ProductSpecification;
@@ -16,7 +17,6 @@ import org.vwvm.store.services.service.impl.ProductCategoryServiceImpl;
 import org.vwvm.store.services.service.impl.ProductServiceImpl;
 import org.vwvm.store.services.service.impl.ProductSpecificationServiceImpl;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

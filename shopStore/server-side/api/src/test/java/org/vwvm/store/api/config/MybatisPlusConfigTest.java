@@ -1,6 +1,7 @@
 package org.vwvm.store.api.config;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import jakarta.annotation.Resource;
 import org.vwvm.ApiApplication;
 import org.vwvm.store.beans.entity.User;
 import org.vwvm.store.mappers.mapper.UserMapper;
@@ -9,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.annotation.Resource;
 import java.util.ArrayDeque;
 
 @SpringBootTest(classes = ApiApplication.class)

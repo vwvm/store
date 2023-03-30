@@ -1,17 +1,8 @@
-server:
-  port: 8801
-
+# 原本配置
 spring:
   application:
-    name: demo1
-  cloud:
-    nacos:
-      server-addr: localhost:8848
-      discovery:
-        namespace: public
-        username: nacos
-        password: nacos
-
-stock-service:
-  ribbon:
-    NFLoadBalancerRuleclassName: com.tulingxueyuan.ribbon.rule.CustomRule
+    name: root
+  profiles:
+    active: dev
+server:
+  port: 8081

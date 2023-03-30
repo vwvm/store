@@ -1,16 +1,15 @@
 package org.vwvm.store.adminApi.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.vwvm.store.commons.vo.UIConst;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public abstract class BaseController {
 
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see
      */
     public BaseController() {
         super();

@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import jakarta.annotation.Resource;
 import org.vwvm.store.beans.entity.ShoppingCart;
 import org.vwvm.store.commons.utils.JwtUtils;
 import org.vwvm.store.commons.vo.ResStatus;
@@ -13,7 +14,6 @@ import org.vwvm.store.services.service.IShoppingCartService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
-import javax.annotation.Resource;
 
 /**
  * <p>

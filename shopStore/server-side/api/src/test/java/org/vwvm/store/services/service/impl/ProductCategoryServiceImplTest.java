@@ -1,5 +1,6 @@
 package org.vwvm.store.services.service.impl;
 
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,11 +9,9 @@ import org.vwvm.ApiApplication;
 import org.vwvm.store.beans.bean.ProductCategoryBean;
 import org.vwvm.store.mappers.mapper.ProductCategoryMapper;
 
-import javax.annotation.Resource;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = ApiApplication.class)
 @ExtendWith(SpringExtension.class)

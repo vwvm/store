@@ -1,0 +1,18 @@
+server:
+  port: 8801
+
+spring:
+  application:
+    name: demo1
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        namespace: public
+        username: nacos
+        password: nacos
+
+
+stock-service:
+  ribbon:
+    NFLoadBalancerRuleclassName: com.tulingxueyuan.ribbon.rule.CustomRule

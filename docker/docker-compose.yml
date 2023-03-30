@@ -15,13 +15,16 @@ services:
       - "43306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root1235
+#  mysql2:
+#    image: mysql2
+#    ports:
+#      - "43303:3306"
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=root1235
+#    depends_on:
+#      - mysql1
+#    command:
 
-  #  mysql1:
-  #    image: mysql
-  #    ports:
-  #      - "43306:3306"
-  #    environment:
-  #      - MYSQL_ROOT_PASSWORD=root1235
   redis1:
     image: redis
     ports:
@@ -43,7 +46,8 @@ services:
       - ./nginx/conf/html:/usr/share/nginx/html/
       - ./nginx/log:/var/log/nginx/
     privileged: true
-
+    depends_on:
+      - nacos3
 
   minio1:
     image: quay.io/minio/minio
@@ -56,6 +60,7 @@ services:
       - minio1:/root/data
     command: server --console-address ":9090"
     privileged: true
+
 
   nacos1:
     image: nacos/nacos-server:v2.2.1
@@ -100,6 +105,57 @@ services:
     links:
       - mysql1
 
+#  sentinel1:
+#    image: bitnami/redis-sentinel
+#    privileged: true
+#    ports:
+#      - "8858:8858"
+#      - "26379:6379"
+#    container_name: sentinel1
+#    environment:
+#      - REDIS_MASTER_HOST=redis1
+#    depends_on:
+#      - redis1
+
+  seata-server45:
+    image: "seataio/seata-server:1.6.1"
+
+
+  seata-server-1:
+    image: seataio/seata-server:${seata-version}
+    container_name: seata-server-1
+    ports:
+      - "17091:7091"
+      - "18091:8091"
+    environment:
+      - STORE_MODE=db
+      # 以SEATA_IP作为host注册seata server
+      - SEATA_IP=seata_ip
+      - SEATA_PORT=8091
+    volumes:
+      - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime"        #设置系统时区
+      - "/usr/share/zoneinfo/Asia/Shanghai:/etc/timezone"  #设置时区
+      # 假设我们通过docker cp命令把资源文件拷贝到相对路径`./seata-server/resources`中
+      # 如有问题，请阅读上面的[注意事项]以及[使用自定义配置文件]
+      - "./seata-server/resources:/seata-server/resources"
+
+  seata-server-2:
+    image: seataio/seata-server:${latest-release-version}
+    container_name: seata-server-2
+    ports:
+      - "27092:7091"
+      - "28092:8091"
+    environment:
+      - STORE_MODE=db
+      # 以SEATA_IP作为host注册seata server
+      - SEATA_IP=seata_ip
+      - SEATA_PORT=8092
+    volumes:
+      - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime"        #设置系统时区
+      - "/usr/share/zoneinfo/Asia/Shanghai:/etc/timezone"  #设置时区
+      # 假设我们通过docker cp命令把资源文件拷贝到相对路径`./seata-server/resources`中
+      # 如有问题，请阅读上面的[注意事项]以及[使用自定义配置文件]
+      - "./seata-server/resources:/seata-server/resources"
 
 volumes:
   minio1:

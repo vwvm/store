@@ -4,6 +4,10 @@ import com.liuvei.common.PagerItem;
 import com.liuvei.common.SysFun;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.vwvm.store.beans.adminBean.Member;
 import org.vwvm.store.commons.vo.UIConst;
 import org.vwvm.store.services.adminService.IMemberService;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -110,8 +112,8 @@ public class MemberController extends CrudController {
         ModelAndView mView = getMView("Member_update.html");
         // Servlet的doxxx方法中的6个标准对象(含request和response)
         //从request里获取session对象和application对象
-        javax.servlet.http.HttpSession session = request.getSession();
-        javax.servlet.ServletContext application = request.getServletContext();
+        HttpSession session = request.getSession();
+        ServletContext application = request.getServletContext();
         //取得主键，再根据主键，获取记录
         String vId = request.getParameter("id");
 
@@ -151,8 +153,8 @@ public class MemberController extends CrudController {
         // *****Servlet的doxxx方法中的6个标准对象(含request和response1
         //从xequest塑获取session对象和application对象
 
-        javax.servlet.http.HttpSession session = request.getSession();
-        javax.servlet.ServletContext application = request.getServletContext();
+        HttpSession session = request.getSession();
+        ServletContext application = request.getServletContext();
 
         // 获放请求数据
         String userId = request.getParameter("userId");

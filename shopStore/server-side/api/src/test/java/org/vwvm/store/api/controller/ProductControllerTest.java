@@ -3,6 +3,7 @@ package org.vwvm.store.api.controller;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +22,6 @@ import org.vwvm.store.services.service.IProductSpecificationService;
 import org.vwvm.store.services.service.impl.ProductCategoryServiceImpl;
 import org.vwvm.store.services.service.impl.ProductServiceImpl;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

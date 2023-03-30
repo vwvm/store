@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import jakarta.annotation.Resource;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.vwvm.store.beans.adminBean.Member;
 import org.vwvm.store.services.adminService.IMemberService;
 
-import javax.annotation.Resource;
 
 /**
  * <p>

@@ -1,6 +1,7 @@
 package org.vwvm.store.services.service.impl;
 
 
+import jakarta.annotation.Resource;
 import org.vwvm.store.beans.entity.Users;
 import org.vwvm.store.commons.utils.JwtUtils;
 import org.vwvm.store.commons.utils.MD5Utils;
@@ -11,7 +12,6 @@ import org.vwvm.store.services.service.UsersService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 

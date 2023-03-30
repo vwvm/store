@@ -1,14 +1,13 @@
 package org.vwvm.store.mappers.mapper;
 
+import jakarta.annotation.Resource;
 import org.vwvm.ApiApplication;
-import org.vwvm.store.beans.bean.ProductBean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.vwvm.store.beans.entity.Product;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 

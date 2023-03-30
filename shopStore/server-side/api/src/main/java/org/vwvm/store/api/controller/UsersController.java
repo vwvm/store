@@ -1,16 +1,14 @@
 package org.vwvm.store.api.controller;
 
 import io.swagger.annotations.*;
+import jakarta.annotation.Resource;
 import org.vwvm.store.beans.bean.UserBean;
-import org.vwvm.store.beans.entity.User;
-import org.vwvm.store.beans.entity.Users;
+
 import org.vwvm.store.commons.vo.ResultVO;
 import org.vwvm.store.services.service.UsersService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import java.util.Map;
 
 @Controller
 @ResponseBody
