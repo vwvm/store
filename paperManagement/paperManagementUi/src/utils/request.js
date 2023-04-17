@@ -1,15 +1,40 @@
 import axios from "axios";
+import {serverBaseUrl} from "@/config/index.js";
 
 const request = axios.create({
-    baseURL: "http://127.0.0.1:8888/",
-    timeout: 3000
+    baseURL : serverBaseUrl,
+    timeout: 5000
 })
+
+export const $get = async (url, params) => {
+    let {data} = await request.get(url, {params})
+    console.log(data)
+    return data;
+}
+export const $post = async (url, params) => {
+    let {data} = await request.post(url, params)
+    console.log(data)
+    return data;
+}
+export const $put = async (url, params) => {
+    let {data} = await request.put(url, params)
+    console.log(data)
+    return data;
+}
+export const $delete = async (url, params) => {
+    let {data} = await request.delete(url, {params})
+    console.log(data)
+    return data;
+}
+
 
 // 添加请求拦截器
 request.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-    config.headers.Authorization = window.sessionStorage.getItem("token");
-    return config;
+    if(!config.headers['token']){
+        config.headers['token'] =  localStorage.getItem("token");
+    }
+    return config
 }, function (error) {
     // 对请求错误做些什么
     return Promise.reject(error);

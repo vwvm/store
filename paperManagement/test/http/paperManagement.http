@@ -1,0 +1,80 @@
+### Send POST /login with json body header token
+POST http://{{host}}/user/login
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "root"
+}
+
+### Send POST /user/test with header token
+POST http://{{host}}/user/getUserList
+token: root
+emailVerification: 280ca19f-3821-45d1-ad25-7d7bf724d53f
+
+###
+GET http://{{host}}/user/getUserList
+token: root
+
+### Send POST request with body as parameters
+POST http://{{host}}/user/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=admin
+
+### Send POST /user/login2 with json bodygou'ton
+POST http://{{host}}/user/loginSecurity
+Content-Type: application/json;charset=UTF-8
+
+{
+  "username": "admin",
+  "password": "admin"
+
+}
+
+### Send GET /user/login2 with json body
+# @no-redirect
+GET http://{{host}}/user/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=admin
+
+### Send POST /login with json body
+# @no-redirect
+POST http://{{host}}/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=admin
+
+
+
+### Send POST /user/login2 with json body
+# @no-redirect
+POST http://{{host}}/sys/user/login
+
+{
+  "username": "root",
+  "password": "root",
+  "verity": "blackbox_admin",
+  "rememberMe": "0"
+}
+
+### Authorization by token, part 1. Retrieve and save token.
+POST https://httpbin.org/post
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjgwNzg1MTE3LCJleHAiOjE2ODA4NzE1MTd9.Gt03TWvsmDbzTBmlj6EcHFLqkE1XMAWeTPShDkeBC5I
+
+{
+  "token": "my-secret-token"
+}
+
+> {% client.global.set("auth_token", response.body.json.token); %}
+
+### Send POST /project/postProject with json body header token
+POST http://{{host}}/project/postProject
+Content-Type: application/json
+
+{
+  "projectName": "admin",
+  "projectDescribe": "admin"
+}

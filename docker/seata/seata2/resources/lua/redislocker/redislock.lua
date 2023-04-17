@@ -3,20 +3,20 @@
 -- Date: 2021/1/19
 --
 -- init data
-local array = {}; local result; local keySize = ARGV[1]; local argSize = ARGV[2];
+local array = {}; local resultsVO; local keySize = ARGV[1]; local argSize = ARGV[2];
 -- Loop through all keys to see if they can be used , when a key is not available, exit
 for i= 1, keySize do
     -- search lock xid
-    result = redis.call('HGET',KEYS[i],'xid');
+    resultsVO = redis.call('HGET',KEYS[i],'xid');
     -- if lock xid is nil
-    if (not result)
+    if (not resultsVO)
         -- set 'no' mean There is need to store lock information
         then array[i]='no'
         else
-           if (result ~= ARGV[3])
+           if (resultsVO ~= ARGV[3])
            then
                -- return fail
-               return result
+               return resultsVO
            else
                -- set 'yes' mean  There is not need to store lock information
                array[i]= 'yes'

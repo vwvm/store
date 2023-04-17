@@ -1,19 +1,19 @@
 import {createApp} from 'vue'
-import './style.css'
 import App from './App.vue'
-import router from './router/index'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import locale from 'element-plus/lib/locale/lang/zh-cn' //中文
-// import './assets/main.css'
-import api from "@/api";
+import router from "./router/index.js";
+import { createPinia } from 'pinia'
+// 全局注册组件
+import MyHeader from "@/components/Header.vue";
+import MyFooter from "@/components/MyFooter.vue";
+// 全局注册css
+import 'element-plus/theme-chalk/el-loading.css';
+import 'element-plus/theme-chalk/el-message.css';
 
+window.router=router
 
-const app = createApp(App)
-
-
-app.config.globalProperties.$api = api;
-app.use(ElementPlus,{locale})
+let app = createApp(App)
 app.use(router)
-// app.use(ElementPlus)
+app.use(createPinia())
+app.component('MyHeader', MyHeader)
+app.component("MyFooter", MyFooter)
 app.mount('#app')

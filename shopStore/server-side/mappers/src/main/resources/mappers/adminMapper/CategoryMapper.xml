@@ -4,47 +4,47 @@
 
     <resultMap id="categoryBeanMap" type="org.vwvm.store.beans.bean.CategoryBean">
         <id column="category_id1" jdbcType="INTEGER" property="categoryId"/>
-        <result column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
-        <result column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
-        <result column="parent_id1" jdbcType="INTEGER" property="parentId"/>
-        <result column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
-        <result column="category_icon1" jdbcType="VARCHAR" property="categoryIcon"/>
-        <result column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
-        <result column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
+        <resultsVO column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
+        <resultsVO column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
+        <resultsVO column="parent_id1" jdbcType="INTEGER" property="parentId"/>
+        <resultsVO column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
+        <resultsVO column="category_icon1" jdbcType="VARCHAR" property="categoryIcon"/>
+        <resultsVO column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
+        <resultsVO column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
         <collection property="categoryBeanList" ofType="org.vwvm.store.beans.bean.CategoryBean">
             <id column="category_id2" jdbcType="INTEGER" property="categoryId"/>
-            <result column="category_name2" jdbcType="VARCHAR" property="categoryName"/>
-            <result column="category_level2" jdbcType="INTEGER" property="categoryLevel"/>
-            <result column="parent_id2" jdbcType="INTEGER" property="parentId"/>
+            <resultsVO column="category_name2" jdbcType="VARCHAR" property="categoryName"/>
+            <resultsVO column="category_level2" jdbcType="INTEGER" property="categoryLevel"/>
+            <resultsVO column="parent_id2" jdbcType="INTEGER" property="parentId"/>
             <collection property="categoryBeanList" ofType="org.vwvm.store.beans.bean.CategoryBean">
                 <id column="category_id3" jdbcType="INTEGER" property="categoryId"/>
-                <result column="category_name3" jdbcType="VARCHAR" property="categoryName"/>
-                <result column="category_level3" jdbcType="INTEGER" property="categoryLevel"/>
-                <result column="parent_id3" jdbcType="INTEGER" property="parentId"/>
+                <resultsVO column="category_name3" jdbcType="VARCHAR" property="categoryName"/>
+                <resultsVO column="category_level3" jdbcType="INTEGER" property="categoryLevel"/>
+                <resultsVO column="parent_id3" jdbcType="INTEGER" property="parentId"/>
             </collection>
         </collection>
     </resultMap>
 
     <resultMap id="categoryBeanMapB" type="org.vwvm.store.beans.bean.CategoryBean">
         <id column="category_id1" jdbcType="INTEGER" property="categoryId"/>
-        <result column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
-        <result column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
-        <result column="parent_id1" jdbcType="INTEGER" property="parentId"/>
-        <result column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
-        <result column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
-        <result column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
+        <resultsVO column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
+        <resultsVO column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
+        <resultsVO column="parent_id1" jdbcType="INTEGER" property="parentId"/>
+        <resultsVO column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
+        <resultsVO column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
+        <resultsVO column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
         <collection property="categoryBeanList" column="category_id" select="selectAllCategoryB"/>
     </resultMap>
 
     <!--  查询一级分类子查询1级类别下的前6  -->
     <resultMap id="selectFirstLevelCategoryMap" type="org.vwvm.store.beans.bean.CategoryBean">
         <id column="category_id" jdbcType="INTEGER" property="categoryId"/>
-        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
-        <result column="category_level" jdbcType="INTEGER" property="categoryLevel"/>
-        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
-        <result column="category_slogan" jdbcType="VARCHAR" property="categorySlogan"/>
-        <result column="category_pic" jdbcType="VARCHAR" property="categoryPic"/>
-        <result column="category_bg_color" jdbcType="VARCHAR" property="categoryBgColor"/>
+        <resultsVO column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <resultsVO column="category_level" jdbcType="INTEGER" property="categoryLevel"/>
+        <resultsVO column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <resultsVO column="category_slogan" jdbcType="VARCHAR" property="categorySlogan"/>
+        <resultsVO column="category_pic" jdbcType="VARCHAR" property="categoryPic"/>
+        <resultsVO column="category_bg_color" jdbcType="VARCHAR" property="categoryBgColor"/>
         <collection property="productBeanList" column="category_id" select="org.vwvm.store.mappers.mapper.ProductMapper.selectCategoryProducts"/>
     </resultMap>
 

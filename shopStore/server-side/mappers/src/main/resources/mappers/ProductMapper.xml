@@ -4,14 +4,14 @@
 
     <resultMap id="ProductBeanMap" type="org.vwvm.store.beans.bean.ProductBean">
         <id column="product_id" jdbcType="INTEGER" property="productId"/>
-        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
-        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
-        <result column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>
-        <result column="sold_num" jdbcType="INTEGER" property="soldNum"/>
-        <result column="product_status" jdbcType="INTEGER" property="productStatus"/>
-        <result column="content" jdbcType="TIMESTAMP" property="content"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
+        <resultsVO column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <resultsVO column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <resultsVO column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>
+        <resultsVO column="sold_num" jdbcType="INTEGER" property="soldNum"/>
+        <resultsVO column="product_status" jdbcType="INTEGER" property="productStatus"/>
+        <resultsVO column="content" jdbcType="TIMESTAMP" property="content"/>
+        <resultsVO column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <resultsVO column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
         <collection property="imgs" ofType="org.vwvm.store.beans.entity.ProductImg"
                     select="org.vwvm.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
                     column="productId"
@@ -20,14 +20,14 @@
 
     <resultMap id="selectCategoryProductsMap" type="org.vwvm.store.beans.bean.ProductBean">
         <id column="product_id" jdbcType="INTEGER" property="productId"/>
-        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
-        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
-        <result column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>
-        <result column="sold_num" jdbcType="INTEGER" property="soldNum"/>
-        <result column="product_status" jdbcType="INTEGER" property="productStatus"/>
-        <result column="content" jdbcType="TIMESTAMP" property="content"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
+        <resultsVO column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <resultsVO column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <resultsVO column="root_category_id" jdbcType="INTEGER" property="rootCategoryId"/>
+        <resultsVO column="sold_num" jdbcType="INTEGER" property="soldNum"/>
+        <resultsVO column="product_status" jdbcType="INTEGER" property="productStatus"/>
+        <resultsVO column="content" jdbcType="TIMESTAMP" property="content"/>
+        <resultsVO column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <resultsVO column="update_time" jdbcType="LONGVARCHAR" property="updateTime"/>
         <collection property="imgs"  select="org.vwvm.store.mappers.mapper.ProductImgMapper.selectAllProductImg"
                     column="product_id"/>
     </resultMap>

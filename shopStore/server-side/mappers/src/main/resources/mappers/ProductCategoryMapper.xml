@@ -3,24 +3,24 @@
 <mapper namespace="org.vwvm.store.mappers.listMapper.ProductCategoryBeanMapper">
 
     <resultMap id="ProductCategoryBean" type="org.vwvm.store.beans.bean.ProductCategoryBean">
-        <result column="category_id1" jdbcType="INTEGER" property="categoryId"/>
-        <result column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
-        <result column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
-        <result column="parent_id1" jdbcType="INTEGER" property="parentId"/>
-        <result column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
-        <result column="category_icon1" jdbcType="VARCHAR" property="categoryIcon"/>
-        <result column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
-        <result column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
+        <resultsVO column="category_id1" jdbcType="INTEGER" property="categoryId"/>
+        <resultsVO column="category_name1" jdbcType="VARCHAR" property="categoryName"/>
+        <resultsVO column="category_level1" jdbcType="INTEGER" property="categoryLevel"/>
+        <resultsVO column="parent_id1" jdbcType="INTEGER" property="parentId"/>
+        <resultsVO column="category_slogan1" jdbcType="VARCHAR" property="categorySlogan"/>
+        <resultsVO column="category_icon1" jdbcType="VARCHAR" property="categoryIcon"/>
+        <resultsVO column="category_pic1" jdbcType="VARCHAR" property="categoryPic"/>
+        <resultsVO column="category_bg_color1" jdbcType="VARCHAR" property="categoryBgColor"/>
         <collection property="productCategoryBeans" javaType="java.util.List" ofType="org.vwvm.store.beans.bean.ProductCategoryBean">
             <id column="category_id2" jdbcType="INTEGER" property="categoryId"/>
-            <result column="category_name2" jdbcType="VARCHAR" property="categoryName"/>
-            <result column="category_level2" jdbcType="INTEGER" property="categoryLevel"/>
-            <result column="parent_id2" jdbcType="INTEGER" property="parentId"/>
+            <resultsVO column="category_name2" jdbcType="VARCHAR" property="categoryName"/>
+            <resultsVO column="category_level2" jdbcType="INTEGER" property="categoryLevel"/>
+            <resultsVO column="parent_id2" jdbcType="INTEGER" property="parentId"/>
             <collection property="productCategoryBeans" javaType="java.util.List" ofType="org.vwvm.store.beans.bean.ProductCategoryBean">
                 <id column="category_id3" jdbcType="INTEGER" property="categoryId"/>
-                <result column="category_name3" jdbcType="VARCHAR" property="categoryName"/>
-                <result column="category_level3" jdbcType="INTEGER" property="categoryLevel"/>
-                <result column="parent_id3" jdbcType="INTEGER" property="parentId"/>
+                <resultsVO column="category_name3" jdbcType="VARCHAR" property="categoryName"/>
+                <resultsVO column="category_level3" jdbcType="INTEGER" property="categoryLevel"/>
+                <resultsVO column="parent_id3" jdbcType="INTEGER" property="parentId"/>
             </collection>
         </collection>
     </resultMap>

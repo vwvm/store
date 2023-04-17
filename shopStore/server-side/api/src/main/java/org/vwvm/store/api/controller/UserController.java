@@ -16,8 +16,8 @@ import java.util.Map;
 @Controller
 @ResponseBody
 @CrossOrigin
-@RequestMapping("/user")
 @Api(value = "提供用户的登录和管理功能", tags = "用户管理")
+@RequestMapping("/user")
 public class UserController {
 
 

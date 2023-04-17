@@ -5,17 +5,17 @@
 
     <resultMap id="UsersMap" type="org.vwvm.store.beans.entity.Users">
         <id column="user_id" property="userId"/>
-        <result column="username" property="username"/>
-        <result column="password" property="password"/>
-        <result column="nickname" property="nickname"/>
-        <result column="user_img" property="userImg"/>
-        <result column="user_mobile" property="userMobile"/>
-        <result column="user_email" property="userEmail"/>
-        <result column="realname" property="realName"/>
-        <result column="user_sex" property="userSex"/>
-        <result column="user_birth" property="userBirth"/>
-        <result column="user_regtime" property="userRegtime"/>
-        <result column="user_modtime" property="userModtime"/>
+        <resultsVO column="username" property="username"/>
+        <resultsVO column="password" property="password"/>
+        <resultsVO column="nickname" property="nickname"/>
+        <resultsVO column="user_img" property="userImg"/>
+        <resultsVO column="user_mobile" property="userMobile"/>
+        <resultsVO column="user_email" property="userEmail"/>
+        <resultsVO column="realname" property="realName"/>
+        <resultsVO column="user_sex" property="userSex"/>
+        <resultsVO column="user_birth" property="userBirth"/>
+        <resultsVO column="user_regtime" property="userRegtime"/>
+        <resultsVO column="user_modtime" property="userModtime"/>
     </resultMap>
 
     <select id="queryUserByName" resultMap="UsersMap">

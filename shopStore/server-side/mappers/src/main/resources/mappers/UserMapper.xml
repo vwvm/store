@@ -5,9 +5,9 @@
 
     <resultMap id="UserMap" type="org.vwvm.store.beans.entity.User">
         <id column="id" property="id"/>
-        <result column="username" property="userName"/>
-        <result column="password" property="password"/>
-        <result column="img" property="img"/>
+        <resultsVO column="username" property="userName"/>
+        <resultsVO column="password" property="password"/>
+        <resultsVO column="img" property="img"/>
     </resultMap>
 
     <select id="queryUserByName" resultMap="UserMap">

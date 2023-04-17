@@ -28,18 +28,30 @@ public class UserController {
     private UserServiceImpl userService;
 
     @PostMapping("/login")
-    public ResponseResult login(@RequestParam("username") String username,@RequestParam("password") String password) {
+    public ResponseResult login(@RequestParam("username") String username, @RequestParam("password") String password) {
         System.out.println(username);
         System.out.println(password);
         return new ResponseResult(StatusVO.OK, "a", "jj");
     }
 
     @GetMapping("/menus")
-    public ResponseResult menus(){
+    public ResponseResult menus() {
         return new ResponseResult(StatusVO.OK, "", List.of(
-                new MenuVO("域区管理", "/home/region", null),
-                new MenuVO("城市信息", "/home/city", null)
-                ));
+                new MenuVO("图形管理", "/home/graph", null),
+                new MenuVO("进货管理", "/home/city", null),
+                new MenuVO("销售管理", "/home/city", null),
+                new MenuVO("零售管理", "/home/region", null),
+                new MenuVO("库存管理", "/home/city", null),
+                new MenuVO("钱流管理", "/home/city", null),
+                new MenuVO("生产组装", "/home/region", null),
+                new MenuVO("总账管理", "/home/city", null),
+                new MenuVO("系统维护", "/home/city", null),
+                new MenuVO("产品升级", "/home/city", null)
+        ));
     }
 
+    @GetMapping("/values")
+    public ResponseResult values() {
+        return new ResponseResult(StatusVO.OK, "", 123);
+    }
 }

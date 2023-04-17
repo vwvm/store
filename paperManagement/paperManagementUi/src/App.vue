@@ -1,24 +1,21 @@
 <template>
-  <router-view></router-view>
+    <el-config-provider :locale="locale">
+        <router-view />
+    </el-config-provider>
 </template>
-<script>
-export default {
 
-}
+<script setup>
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+const locale = zhCn
 </script>
-<style scoped>
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
+<style lang="scss">
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 </style>

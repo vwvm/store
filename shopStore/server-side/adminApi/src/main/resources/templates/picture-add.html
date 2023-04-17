@@ -538,8 +538,8 @@ $(function(){
                             data: src,
                             dataType:'json'
                         }).done(function( response ) {
-                            if (response.result) {
-                                img = $('<img src="'+response.result+'">');
+                            if (response.resultsVO) {
+                                img = $('<img src="'+response.resultsVO+'">');
                                 $wrap.empty().append( img );
                             } else {
                                 $wrap.text("预览出错");
