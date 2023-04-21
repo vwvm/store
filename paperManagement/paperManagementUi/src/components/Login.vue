@@ -136,15 +136,15 @@ const submitForm = (formEl) => {
             localStorage.setItem("token", user.getToken)
             showLogin.value = false
             const roles = useUser().user.role;
-            if (roles.indexOf("ROLE_Admin")){
+            if (roles.indexOf("ROLE_admin")!==-1){
                 await router.push("/admin")
                 return true
             }
-            if (roles.indexOf("ROLE_Teacher")){
+            if (roles.indexOf("ROLE_teacher")!==-1){
                 await router.push("/teacher")
                 return true
             }
-            if (roles.indexOf("ROLE_Student")){
+            if (roles.indexOf("ROLE_student")!==-1){
                 await router.push("/student")
                 return true
             }

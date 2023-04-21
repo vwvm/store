@@ -21,7 +21,11 @@ public interface IUserService extends IService<User> {
 
     ResultsVO getUserById(Integer id);
 
-    User getByUsername(String username);
+    ResultsVO getByUsername(String username);
 
     ResultsVO getUserList(Integer currentPage, Integer pageSize);
+
+    ResultsVO deleteByUsername(String username);
+
+    ResultsVO getUserList(Integer currentPage, Integer pageSize, String findUsername, String startTime, String endTime);
 }

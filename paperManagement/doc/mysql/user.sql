@@ -37,3 +37,24 @@ insert user(id, user_username, user_password, user_telephone, user_email, user_r
 values (4, 'student', '21232f297a57a5a743894a0e4a801fc3', 15695912345, '15695912348@qq.com', '[
   "ROLE_student"
 ]');
+insert user(id, user_username, user_password, user_telephone, user_email, user_roles)
+values (111, 'teacher111', 'teacher111', 15695911111, '15695911111@qq.com', '[
+  "ROLE_teacher"
+]');
+insert user(id, user_username, user_password, user_telephone, user_email, user_roles)
+values (112, 'teacher112', 'teacher112', 15695911112, '15695911112@qq.com', '[
+  "ROLE_teacher"
+]');
+insert user(id, user_username, user_password, user_telephone, user_email, user_roles)
+values (113, 'teacher113', 'teacher113', 15695911113, '15695911113@qq.com', '[
+  "ROLE_teacher"
+]');
+insert user(id, user_username, user_password, user_telephone, user_email, user_roles)
+values (114, 'teacher114', 'teacher114', 15695911114, '15695911114@qq.com', '[
+  "ROLE_teacher"
+]');
+insert user(id, user_username, user_password, user_telephone, user_email, user_roles)
+values (115, 'teacher115', 'teacher115', 15695911115, '15695911115@qq.com', '[
+  "ROLE_teacher"
+]');
+

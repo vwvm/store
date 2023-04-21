@@ -9,12 +9,12 @@ Content-Type: application/json
 
 ### Send POST /user/test with header token
 POST http://{{host}}/user/getUserList
-token: root
+token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6NywiaWF0IjoxNjgxNzM5NTc3LCJleHAiOjE2ODIxNzE1Nzd9.aN6trMhkxZFK2uEHndKEPCAg831CpGgMwFsHcZMACDM
 emailVerification: 280ca19f-3821-45d1-ad25-7d7bf724d53f
 
 ###
-GET http://{{host}}/user/getUserList
-token: root
+GET http://{{host}}/user/getUserList?currentPage=1&pageSize=2
+token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6NywiaWF0IjoxNjgxNzM5NTc3LCJleHAiOjE2ODIxNzE1Nzd9.aN6trMhkxZFK2uEHndKEPCAg831CpGgMwFsHcZMACDM
 
 ### Send POST request with body as parameters
 POST http://{{host}}/user/login

@@ -5,10 +5,13 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.vwvm.paperManagement.commons.vo.ResultsVO;
+import org.vwvm.paperManagement.entity.User;
+import org.vwvm.paperManagement.entity.requsetEntity.ReUser;
 import org.vwvm.paperManagement.service.impl.UserServiceImpl;
 
 /**
@@ -51,23 +54,77 @@ public class UserController {
         return usersService.getUserById(id);
     }
 
+    @Operation(summary = "获取用户信息")
+    @Parameters({
+            @Parameter(name = "id", description = "用户名id", required = false),
+    })
+    @ResponseBody
+    @RequestMapping(value = "/userByUsername", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public ResultsVO userByUsername(@RequestParam(value = "username") String username,
+                                    HttpServletRequest httpServletRequest
+    ) {
+        String method = httpServletRequest.getMethod();
+        switch (method) {
+            case "GET" -> {
+                return usersService.getByUsername(username);
+            }
+            case "DELETE" -> {
+                return usersService.deleteByUsername(username);
+            }
+        }
+        return ResultsVO.fail("不存在指定用户");
+    }
+
     @Operation(summary = "获取用户列表")
     @Parameters({
             @Parameter(name = "currentPage", description = "当前页码", required = false),
             @Parameter(name = "pageSize", description = "页码大小", required = false),
     })
+    @ResponseBody
     @RequestMapping(value = "/getUserList", method = RequestMethod.GET)
     public ResultsVO getUserList(
-            @RequestParam(name = "currentPage", required = false) Integer currentPage,
-            @RequestParam(name = "pageSize", required = false) Integer pageSize
+            @RequestParam(value = "currentPage", required = false) Integer currentPage,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "findUsername", required = false) String findUsername,
+            @RequestParam(value = "startTime", required = false) String startTime,
+            @RequestParam(value = "endTime", required = false) String endTime
+
     ) {
-        return usersService.getUserList(currentPage, pageSize);
+
+        return usersService.getUserList(currentPage, pageSize, findUsername, startTime, endTime);
+    }
+
+    @Operation(summary = "提交的用户", description = "用于编辑")
+    @Parameters({
+    })
+    @ResponseBody
+    @RequestMapping(value = "/user", method = {RequestMethod.PUT, RequestMethod.POST})
+    public ResultsVO postUser(
+            @RequestBody ReUser user,
+            HttpServletRequest httpServletRequest
+    ) {
+        User user1 = new User();
+        boolean b = false;
+        user1.setUserPassword(user.getUserPassword());
+        user1.setUserEmail(user.getUserEmail());
+        user1.setUserTelephone(user.getUserTelephone());
+        user1.setId(user.getId());
+        user1.setUser_roles(user.getUser_roles());
+        user1.setUserUsername(user.getUserUsername());
+        String method = httpServletRequest.getMethod();
+
+        switch (method) {
+            case "POST" -> b = usersService.save(user1);
+            case "PUT" -> b = usersService.updateById(user1);
+        }
+        return b ? ResultsVO.succeed(user1) : ResultsVO.fail("操纵失败");
+
     }
 
     @GetMapping("/no")
     @ResponseBody
-    public String test() {
-        return "请先登录";
+    public ResultsVO test() {
+        return ResultsVO.fail("请先登录");
     }
 
     @PostMapping("/userRule")

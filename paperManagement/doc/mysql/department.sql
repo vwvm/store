@@ -13,11 +13,15 @@ create table if not exists department
     update_user_id      VARCHAR(128)                       null comment '更新人id',
     delete_flag         boolean  default false             null comment '删除标记',
     constraint department_pk
-        primary key (id),
-    constraint department_school_id_fk
-        foreign key (school_id) references school (id)
+        primary key (id)
 )
     comment '部门表';
 
 insert department(id, school_id, department_name, department_describe)
-values ()
+values (1, 1, '数学与信息工程学院', '待定');
+insert department(id, school_id, department_name, department_describe)
+values (2, 1, '外国语学院', '待定');
+insert department(id, school_id, department_name, department_describe)
+values (3, 1, '经济与管理学院', '待定');
+insert department(id, school_id, department_name, department_describe)
+values (4, 1, '生命科学学院', '待定');

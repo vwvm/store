@@ -86,14 +86,9 @@ const menuList = reactive([
         ]
     },
     {
-        id: 4,
-        path: "/TLibrary",
-        authName: "历史文库",
-    },
-    {
         id: 5,
-        path: "/TDownload",
-        authName: "文件资料下载",
+        path: "/download",
+        authName: "系统管理",
     }
 ])
 

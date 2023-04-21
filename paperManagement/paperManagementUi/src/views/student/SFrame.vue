@@ -49,13 +49,13 @@ import {ref, reactive} from "vue";
 const menuList = reactive([
     {
         id: 1,
-        path: "/TUser",
+        path: "/sUser",
         authName: "用户首页",
     },
     {
         id: 2,
-        path: "tProject",
-        authName: "课题申报",
+        path: "sProject",
+        authName: "选题管理",
     },
     {
         id: 3,
@@ -65,28 +65,40 @@ const menuList = reactive([
             {
                 id: 3 - 1,
                 path: "/TVerifyProject",
-                authName: "确认选题",
+                authName: "提交开题报告",
             },
             {
                 id: 3 - 2,
                 path: "/TProcessManager",
-                authName: "流程管理",
+                authName: "提交稿件",
             },
             {
                 id: 3 - 3,
                 path: "/TScore",
-                authName: "成绩评定",
+                authName: "提交最终搞",
             }
         ]
     },
     {
         id: 4,
-        path: "/TLibrary",
-        authName: "历史文库",
+        path: "/sDefenseManagement",
+        authName: "答辩管理",
+        children: [
+            {
+                id: 4 - 1,
+                path: "/sDefenseManagement/showDefense",
+                authName: "查看答辩安排",
+            },
+            {
+                id: 4 - 2,
+                path: "/sDefenseManagement/submitDefense",
+                authName: "提交答辩记录",
+            },
+        ]
     },
     {
         id: 5,
-        path: "/TDownload",
+        path: "/sDownload",
         authName: "文件资料下载",
     }
 ])

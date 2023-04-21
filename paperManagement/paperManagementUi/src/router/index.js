@@ -53,7 +53,12 @@ const routes = [
                         meta: {title: "用户管理"},
                         component:()=>import("@/views/admin/userControl/UserControl.vue"),
                     },
-
+                    {
+                        path: "/download",
+                        name: "UserControl1",
+                        meta: {title: "用户管理"},
+                        component:()=>import("@/views/admin/downloadControl/DownloadControl.vue"),
+                    },
                 ]
             },
             {
@@ -74,6 +79,57 @@ const routes = [
                         name: "TProject",
                         meta: {title: "课题申报"},
                         component:()=>import("@/views/teacher/tProject/TProject.vue"),
+                    },
+                    {
+                        path: "/tVerifyProject",
+                        name: "TVerifyProject",
+                        meta: {title: "确认选题"},
+                        component:()=>import("@/views/teacher/tVerifyProject/TVerifyProject.vue"),
+                    },
+                    {
+                        path: "/TProcessManager",
+                        name: "TProcessManager",
+                        meta: {title: "教师"},
+                        component:()=>import("@/views/teacher/tProcessManager/TProcessManager.vue"),
+                    },
+                    {
+                        path: "/TScore",
+                        name: "TScore",
+                        meta: {title: "教师"},
+                        component:()=>import("@/views/teacher/tScore/TScore.vue"),
+                    },
+                    {
+                        path: "/TLibrary",
+                        name: "TLibrary",
+                        meta: {title: "教师"},
+                        component:()=>import("@/views/teacher/tLibrary/TLibrary.vue"),
+                    },
+                    {
+                        path: "/TDownload",
+                        name: "TDownload",
+                        meta: {title: "教师"},
+                        component:()=>import("@/views/teacher/tDownload/TDownload.vue"),
+                    },
+                ]
+            },
+            {
+                path: "/student",
+                name: "Student",
+                meta: {title: "学生"},
+                component:()=>import("@/views/student/SFrame.vue"),
+                redirect: "/sUser",
+                children: [
+                    {
+                        path: "/sUser",
+                        name: "SUser",
+                        meta: {title: "教师"},
+                        component:()=>import("@/views/student/sUser/SUser.vue"),
+                    },
+                    {
+                        path: "/sProject",
+                        name: "SProject",
+                        meta: {title: "课题申报"},
+                        component:()=>import("@/views/student/sProject/SProject.vue"),
                     },
                     {
                         path: "/tVerifyProject",

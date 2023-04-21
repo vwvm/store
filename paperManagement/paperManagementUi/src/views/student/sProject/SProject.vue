@@ -1,7 +1,7 @@
 <template>
     <el-card title="选题列表">
         <el-button @click="resetForm(); visible = true">
-            新增选题
+            选题申报
         </el-button>
 
         <el-divider/>
@@ -53,8 +53,8 @@
                 @current-change="getProjectList()"
         />
 
-        <!-- 弹出添加窗口 -->
-        <el-dialog v-model="visible" :show-close="false">
+        <!-- 弹出选题添加窗口 -->
+        <el-dialog title="选题添加" v-model="visible" :show-close="false">
             <template #header="{ close, titleId, titleClass }">
                 <div class="my-header">
                     <h4 :id="titleId" :class="titleClass">选题</h4>
@@ -81,8 +81,10 @@
                 </el-form-item>
                 <el-form-item label="课题描述" prop="checkPass">
                     <el-input v-model="formRef.projectDescribe"
-                              type="textarea" :autosize="autosize"
-                    />
+                              type="textarea" :autosize="autosize"/>
+                </el-form-item>
+                <el-form-item>
+                    <el-cascader v-model="formRef.teacherId" :props="props" placeholder="请选择教师"/>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm()">提交</el-button>
@@ -136,6 +138,8 @@ import {CircleCloseFilled, CloseBold, Operation, Check, Sunny, List} from '@elem
 import api from "@/api/api.js";
 // 展示提交表单
 const visible = ref(false)
+const visibleSelectTeacherWindow = ref(false)
+
 const currentPage = ref(1)
 // 页码大小
 const pageSize = ref(5)
@@ -161,12 +165,13 @@ const tableData = ref([{
     "deleteFlag": false
 }])
 
-// 提交的内容
+// 提交的选题内容
 const formRef = reactive({
     // id: 0,
     projectName: '',
     projectDescribe: '',
     projectFrom: '',
+    teacherId: 0,
 })
 const editRef = reactive({
     id: 0,
@@ -195,12 +200,36 @@ const editClick = (slotProps) => {
     isEdit.value = true;
 }
 
+// 动态加载教师
+let id = 0
+const props = reactive({
+    lazy: true,
+    lazyLoad
+})
+function lazyLoad(node, resolve) {
+    const { level } = node
+    setTimeout(() => {
+        const nodes = Array.from({ length: level + 2 }).map((item) => ({
+            value: ++id,
+            label: `Option - ${id}`,
+            leaf: level >= 3,
+        }))
+        // Invoke `resolve` callback to return the child nodes data and indicate the loading is finished.
+        resolve(nodes)
+    }, 1000)
+}
+
+
 // 提交选题
 const submitForm = () => {
     const {data} = api.__project.postProject(formRef);
     isEdit.value = false;
     currentPage.value = 1
     getProjectList()
+}
+// 获取学院部门列表
+const getDepartmentList = () => {
+
 }
 // 提交编辑选题
 const editForm = (value) => {
@@ -226,6 +255,6 @@ onMounted(() => {
 
 </script>
 
-<style scoped lang="scss" src="./TProject.scss">
+<style scoped lang="scss" src="./SProject.scss">
 
 </style>

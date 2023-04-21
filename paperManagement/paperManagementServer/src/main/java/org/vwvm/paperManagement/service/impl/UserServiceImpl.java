@@ -74,16 +74,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @return
      */
     @Override
-    public User getByUsername(String username) {
+    public ResultsVO getByUsername(String username) {
 
-        if (Strings.isBlank(username)){
+        if (Strings.isBlank(username)) {
             return null;
         }
-        QueryWrapper<User> queryWrapper = new QueryWrapper();
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_username", username);
-
         User user = userMapper.selectOne(queryWrapper);
-        return user;
+        if (Objects.isNull(user)){
+            return ResultsVO.fail("用户不存在");
+        }
+        return ResultsVO.succeed(user);
     }
 
     /**
@@ -93,8 +95,47 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public ResultsVO getUserList(Integer currentPage, Integer pageSize) {
+        return getUserList(currentPage, pageSize, "", "", "");
+    }
+
+    /**
+     * @param username
+     * @return
+     */
+    @Override
+    public ResultsVO deleteByUsername(String username) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<User>();
+        userQueryWrapper.eq("user_username", username);
+        int delete = userMapper.delete(userQueryWrapper);
+        if (delete > 0){
+            return ResultsVO.succeed("操作成功", delete);
+        }
+        return ResultsVO.fail("未找到用户");
+    }
+
+    /**
+     * @param currentPage
+     * @param pageSize
+     * @param findUsername
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @Override
+    public ResultsVO getUserList(Integer currentPage, Integer pageSize, String findUsername, String startTime, String endTime) {
+
         Page<User> page = new Page<>(currentPage, pageSize);
-        userMapper.selectPage(page, new QueryWrapper<User>());
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        if (!findUsername.isBlank()){
+            userQueryWrapper.like("user_username", findUsername);
+        }
+        if (!startTime.isBlank()){
+            userQueryWrapper.ge("update_time", startTime);
+        }
+        if (!endTime.isBlank()){
+            userQueryWrapper.le("update_time", endTime);
+        }
+        userMapper.selectPage(page, userQueryWrapper);
         return ResultsVO.succeed(String.valueOf(page.getTotal()), page.getRecords());
     }
 

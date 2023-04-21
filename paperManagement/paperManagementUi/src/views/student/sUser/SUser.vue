@@ -23,6 +23,6 @@ const teacherData = reactive({deptId: '', teacherDescribe: '', zhicheng: ''})
 
 </script>
 
-<style scoped lang="scss" src="./TUser.scss">
+<style scoped lang="scss" src="./SUser.scss">
 
 </style>
