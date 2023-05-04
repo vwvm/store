@@ -14,8 +14,8 @@
         <el-steps :active="type1" align-center>
             <el-step title="选题" :description="student.getStudentState > 0 ? '已完成':'进行中'"/>
             <el-step title="提交稿件" :description="student.getStudentState > 1 ? '已完成':'进行中'" @click=""/>
-            <el-step title="Step 3" :description="student.getStudentState > 2 ? '已完成':'进行中'"/>
-            <el-step title="Step 4" :description="student.getStudentState > 3 ? '已完成':'进行中'"/>
+            <el-step title="Step 3" :description="student.getStudentState > 6 ? '已完成':'进行中'"/>
+            <el-step title="Step 4" :description="student.getStudentState > 8 ? '已完成':'进行中'"/>
         </el-steps>
         <br/>
         <br/>
@@ -24,14 +24,14 @@
                 <el-step title="选题情况" :description="stepDescription1"/>
             </el-steps>
         </div>
-        <div style="height: 300px" v-if="student.getStudentState >= 1 && student.getStudentState <= 3">
+        <div style="height: 300px" v-if="student.getStudentState >= 1 && student.getStudentState <= 4">
             <el-steps direction="vertical" :active="student.getStudentState">
                 <el-step title="提交开题开题报告" :description="stepDescription21"/>
                 <el-step title="提交过程稿件" :description="stepDescription22"/>
                 <el-step title="提交的最终稿件" :description="stepDescription23"/>
             </el-steps>
         </div>
-        <div style="height: 300px" v-if="student.getStudentState >= 4 && student.getStudentState <= 7">
+        <div style="height: 300px" v-if="student.getStudentState >= 5 && student.getStudentState <= 7">
             <el-steps direction="vertical" :active="student.getStudentState - 4">
                 <el-step title="提交开题开题报告" :description="stepDescription21"/>
                 <el-step title="提交过程稿件" :description="stepDescription22"/>
@@ -84,7 +84,7 @@ const state = async () => {
         stepDescription23.value += data
     }
     if (student.getStudentState >= 3) {
-        type1.value = 2;
+        // type1.value = 2;
         stateName.value = "已提交最终稿"
         const {data} = await downloadApi.getDownloadFileName({userId: user.getId, dataIndex1: 2, dataIndex2: 1});
         stepDescription24.value += data
