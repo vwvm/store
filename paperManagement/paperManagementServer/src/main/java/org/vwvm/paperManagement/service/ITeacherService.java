@@ -14,5 +14,9 @@ import org.vwvm.paperManagement.entity.Teacher;
  */
 public interface ITeacherService extends IService<Teacher> {
 
-    ResultsVO getTeacher(Integer id);
+    ResultsVO getTeacherByUserId(Integer id);
+
+    ResultsVO getTeacherByUserId(Integer id, Integer schoolId);
+
+    ResultsVO getTeacherList(Integer schoolId);
 }

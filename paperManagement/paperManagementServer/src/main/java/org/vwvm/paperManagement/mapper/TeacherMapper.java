@@ -1,6 +1,7 @@
 package org.vwvm.paperManagement.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.vwvm.paperManagement.entity.Teacher;
 
 /**
@@ -11,6 +12,7 @@ import org.vwvm.paperManagement.entity.Teacher;
  * @author BlackBox
  * @since 2023-02-26
  */
+@Mapper
 public interface TeacherMapper extends BaseMapper<Teacher> {
 
 }

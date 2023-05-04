@@ -50,13 +50,13 @@ import {ref, reactive} from "vue";
 const menuList = reactive([
     {
         id: 1,
-        path: "/TUser",
+        path: "/123",
         authName: "用户首页",
     },
     {
         id: 2,
-        path: "tProject",
-        authName: "系统信息",
+        path: "/downloadControl",
+        authName: "文件管理",
     },
     {
         id: 3,

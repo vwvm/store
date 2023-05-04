@@ -49,12 +49,7 @@ public class DepartmentController {
 
         List<Department> list = departmentService.list();
         List<PoDepartment> departmentList = new ArrayList<>();
-        // BeanUtils.copyProperties(list, departmentList);
-        list.forEach(department -> {
-
-        });
-
-        BeanUtils.copyProperties(departmentList, list);
+        list.forEach(department -> departmentList.add(new PoDepartment(department.getId(), department.getDepartmentName())));
         return ResultsVO.succeed(departmentList);
     }
 }

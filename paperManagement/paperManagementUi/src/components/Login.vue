@@ -40,10 +40,10 @@
 <script setup>
 import {ref, reactive, onMounted} from "vue";
 import {User, View, CaretTop} from "@element-plus/icons-vue";
-import api from "@/api/api.js";
+import api, {studentApi, teacherApi} from "@/api/api.js";
 import md5 from 'md5'
 import {ElMessage} from "element-plus";
-import {useUser} from "@/store/index.js";
+import {useUser, useStudent, useTeacher} from "@/store/index.js";
 import router from "@/router/index.js";
 
 
@@ -54,13 +54,15 @@ const captcha = ref({
 
 // 获取全局对象useUser
 const user = useUser()
+const student = useStudent()
+const teacher = useTeacher()
 const showLogin = ref(false)
 const ruleFormRef = ref()
 // 定义表单数据
 const ruleForm = reactive({
     username: '',
     password: '',
-    token:  '',
+    token: '',
     captcha: '',
 })
 // 获取验证码
@@ -116,7 +118,7 @@ let rules = reactive({
 const fromMessage = {
     username: '',
     password: '',
-    token:  '',
+    token: '',
     captcha: '',
 }
 
@@ -125,6 +127,7 @@ const submitForm = (formEl) => {
     if (!formEl) return
     formEl.validate(async () => {
         fromMessage.password = md5(ruleForm.password)
+        console.log(fromMessage.password)
         fromMessage.username = ruleForm.username
         fromMessage.token = ruleForm.token
         fromMessage.captcha = ruleForm.captcha
@@ -136,19 +139,24 @@ const submitForm = (formEl) => {
             localStorage.setItem("token", user.getToken)
             showLogin.value = false
             const roles = useUser().user.role;
-            if (roles.indexOf("ROLE_admin")!==-1){
-                await router.push("/admin")
+            if (roles.indexOf("ROLE_admin") !== -1) {
+                await router.push({path: "/admin"})
                 return true
             }
-            if (roles.indexOf("ROLE_teacher")!==-1){
-                await router.push("/teacher")
+            if (roles.indexOf("ROLE_teacher") !== -1) {
+                const tea = await teacherApi.getTeacher({id: user.getId});
+                console.log("tea", tea)
+                teacher.setTeacher(tea)
+                await router.push({path: "/teacher"})
                 return true
             }
-            if (roles.indexOf("ROLE_student")!==-1){
-                await router.push("/student")
+            if (roles.indexOf("ROLE_student") !== -1) {
+                const stu = await studentApi.getStudent({id: user.getId}) //设置学生用户
+                student.setStudent(stu)
+                await router.push({path: "/student"})
                 return true
             }
-            await router.push("/home")
+            await router.push({path: "/home"})
             return true
         } else {
             ElMessage.error("登录失败")

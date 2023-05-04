@@ -21,6 +21,8 @@ create table if not exists teacher
     comment '用于记录教师的详细信息';
 
 insert teacher(id, user_id, department_id, teacher_name, teacher_describe, teacher_project_num, teacher_rank)
+values (0, 111, 1, '未知', '用来测试使用的', 1, '未知');
+insert teacher(id, user_id, department_id, teacher_name, teacher_describe, teacher_project_num, teacher_rank)
 values (1, 111, 1, '小明', '用来测试使用的', 1, '未知');
 insert teacher(id, user_id, department_id, teacher_name, teacher_describe, teacher_project_num, teacher_rank)
 values (2, 112, 1, '小红', '用来测试使用的', 2, '未知');

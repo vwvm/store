@@ -28,18 +28,30 @@ public class TeacherController {
     @Resource
     TeacherServiceImpl teacherService;
 
+
     @GetMapping("/getUser")
-    public ResultsVO getUser(){
+    public ResultsVO getUser() {
         return null;
     }
 
-    @Operation(summary = "获取教师幸喜")
+    @Operation(summary = "获取教师")
     @Parameters({
             @Parameter(name = "id", description = "用户名id", required = false),
     })
-    @RequestMapping(value = "/getTeacher", method = RequestMethod.GET)
-    public ResultsVO getTeacher(@RequestParam(value = "id") Integer id){
-        return teacherService.getTeacher(id);
+    @RequestMapping(value = "/getTeacherByUserId", method = RequestMethod.GET)
+    public ResultsVO getTeacherByUserId(@RequestParam(value = "id") Integer id) {
+        return teacherService.getTeacherByUserId(id);
     }
 
+    @Operation(summary = "获取教师列表")
+    @Parameters({
+            @Parameter(name = "departmentId", description = "部门id", required = false),
+    })
+    @RequestMapping(value = "/getTeacherList", method = RequestMethod.GET)
+    public ResultsVO getTeacherList(
+            @RequestParam(value = "departmentId", required = false) Integer departmentId
+    ) {
+
+        return teacherService.getTeacherList(departmentId);
+    }
 }

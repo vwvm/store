@@ -11,7 +11,7 @@
             >
 
                 <template v-for="menu in menuList">
-                    <el-menu-item :index="menu.path" :key="menu.id" v-if="!menu.children"
+                    <el-menu-item :index="menu.path" :disabled="menu.disabled" :key="menu.id" v-if="!menu.children"
                                   >
                         <el-icon><House /></el-icon>
                         {{ menu.authName }}
@@ -22,6 +22,7 @@
                             <span>{{ menu.authName }}</span>
                         </template>
                         <el-menu-item :index="menu2.path" :key="menu2.id" v-for="menu2 in menu.children"
+                                      :disabled="menu2.disabled"
                                      >
                             {{ menu2.authName }}
                         </el-menu-item>
@@ -45,17 +46,20 @@ import {ElMessage, ElMessageBox} from "element-plus";
 import router from "@/router";
 import {Plus, House, DArrowRight} from "@element-plus/icons-vue"
 import {ref, reactive} from "vue";
+import {useUser, useStudent} from "@/store/index.js";
 
 const menuList = reactive([
     {
         id: 1,
         path: "/sUser",
         authName: "用户首页",
+        disabled: false,
     },
     {
         id: 2,
-        path: "sProject",
+        path: "/sProject",
         authName: "选题管理",
+        disabled: useStudent().getStudentState >= 1,
     },
     {
         id: 3,
@@ -64,17 +68,19 @@ const menuList = reactive([
         children: [
             {
                 id: 3 - 1,
-                path: "/TVerifyProject",
+                path: "/sOpeningReport",
                 authName: "提交开题报告",
+                disabled: useStudent().getStudentState >= 2,
             },
             {
                 id: 3 - 2,
-                path: "/TProcessManager",
+                path: "/sSubmitManuscript",
                 authName: "提交稿件",
+                disabled: useStudent().getStudentState >= 3,
             },
             {
                 id: 3 - 3,
-                path: "/TScore",
+                path: "/sCommitTermination",
                 authName: "提交最终搞",
             }
         ]
@@ -83,6 +89,7 @@ const menuList = reactive([
         id: 4,
         path: "/sDefenseManagement",
         authName: "答辩管理",
+        disabled: useStudent().getStudentState >= 1,
         children: [
             {
                 id: 4 - 1,
@@ -100,6 +107,7 @@ const menuList = reactive([
         id: 5,
         path: "/sDownload",
         authName: "文件资料下载",
+        disabled: useStudent().getStudentState >= 1,
     }
 ])
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.vwvm.paperManagement.commons.vo.ResultsVO;
 import org.vwvm.paperManagement.entity.User;
-import org.vwvm.paperManagement.entity.requsetEntity.ReUser;
+import org.vwvm.paperManagement.entity.requsetEntity.RqUser;
 import org.vwvm.paperManagement.service.impl.UserServiceImpl;
 
 /**
@@ -100,7 +100,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/user", method = {RequestMethod.PUT, RequestMethod.POST})
     public ResultsVO postUser(
-            @RequestBody ReUser user,
+            @RequestBody RqUser user,
             HttpServletRequest httpServletRequest
     ) {
         User user1 = new User();

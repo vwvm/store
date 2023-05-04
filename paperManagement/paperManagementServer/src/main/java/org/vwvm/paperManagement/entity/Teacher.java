@@ -2,10 +2,17 @@ package org.vwvm.paperManagement.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -15,9 +22,14 @@ import io.swagger.annotations.ApiModelProperty;
  * @author BlackBox
  * @since 2023-02-26
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @ApiModel(value = "Teacher对象", description = "用于记录教师的详细信息")
 public class Teacher implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("序号")
@@ -142,20 +154,4 @@ public class Teacher implements Serializable {
         this.deleteFlag = deleteFlag;
     }
 
-    @Override
-    public String toString() {
-        return "Teacher{" +
-            "id = " + id +
-            ", userId = " + userId +
-            ", departmentId = " + departmentId +
-            ", teacherName = " + teacherName +
-            ", teacherDescribe = " + teacherDescribe +
-            ", teacherProjectNum = " + teacherProjectNum +
-            ", teacherRank = " + teacherRank +
-            ", creationTime = " + creationTime +
-            ", updateTime = " + updateTime +
-            ", updateUserId = " + updateUserId +
-            ", deleteFlag = " + deleteFlag +
-        "}";
-    }
 }

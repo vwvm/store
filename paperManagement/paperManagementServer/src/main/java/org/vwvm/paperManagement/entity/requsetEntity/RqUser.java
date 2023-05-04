@@ -21,7 +21,7 @@ import java.util.List;
  **/
 @Data
 @AllArgsConstructor
-public class ReUser {
+public class RqUser {
 
     @ApiModelProperty("序号")
     @TableId(value = "id", type = IdType.AUTO)

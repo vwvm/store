@@ -67,8 +67,8 @@ public class SpringSecurityConfig {
         http.formLogin(form -> form
                 .loginPage("/user/no")
                 .permitAll()
-        )
-        ;
+        );
+
         http.cors().and().csrf().disable()          // 跨域，//禁用csrf(防止跨站请求伪造攻击)
         ;
         // 路径配置
@@ -77,10 +77,11 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/user/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/user/view").permitAll()
                 .requestMatchers(HttpMethod.GET, "/user/no").permitAll()
-                .requestMatchers("/doc.html").permitAll()
+                .requestMatchers("/doc.html", "/v3/**", "/favicon.ico").permitAll()
+                .requestMatchers("/student/student",
+                        "/minio/download/**",
+                        "/teacher/getTeacherByUserId").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
-                .requestMatchers("/v3/**").permitAll()
-                .requestMatchers("/favicon.ico").permitAll()
                 .requestMatchers("/captcha").permitAll()
                 // .requestMatchers("/**").hasAuthority("root")
                 .anyRequest().authenticated()

@@ -31,12 +31,15 @@
             />
         </el-menu>
     </el-card>
+
 </template>
 
 <script setup>
 import {onMounted, ref} from "vue";
 import api from "@/api/api.js";
 import {Edit, Download} from "@element-plus/icons-vue";
+import {minioBaseUrl} from "@/config/index.js"
+import DownloadComponent from "@/components/load/DownloadComponent.vue";
 
 // 当前页
 const currentPage = ref(1)
@@ -48,6 +51,8 @@ const total = ref(1)
 const small = ref(false)
 const background = ref(false)
 const disabled = ref(false)
+// 传递给下载组件
+const fileName = ref("0123456+郑锦鸿-基于SpringBoot + Vue的毕业论文管理系统的设计与实现-第一稿(1)+127233081.docx")
 
 const downData = ref([{
     "id": 5,
@@ -62,7 +67,7 @@ const downData = ref([{
 
 const downloadFile = (slotProps) => {
     console.log(slotProps.dataUrl)
-    window.open("http://localhost:49090/browser/paper/" + slotProps.dataUrl)
+    window.open(minioBaseUrl + slotProps.dataUrl)
 }
 
 

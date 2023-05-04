@@ -1,11 +1,19 @@
 package org.vwvm.paperManagement.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -15,9 +23,14 @@ import io.swagger.annotations.ApiModelProperty;
  * @author BlackBox
  * @since 2023-02-26
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @ApiModel(value = "Student对象", description = "用于记录教师的详细信息")
 public class Student implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("序号")
@@ -30,8 +43,11 @@ public class Student implements Serializable {
     @ApiModelProperty("外键，学科专业表，id")
     private Integer majorId;
 
-    @ApiModelProperty("外键，教师表，id, 导师名字")
-    private Integer teacherId;
+    @Schema(description = "外键，教师表，id")
+    private String teacherId;
+
+    @Schema(description = "状态")
+    private Integer studentState;
 
     @ApiModelProperty("学生名字")
     private String studentName;
@@ -57,117 +73,7 @@ public class Student implements Serializable {
     @ApiModelProperty("删除标记")
     private Boolean deleteFlag;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getMajorId() {
-        return majorId;
-    }
-
-    public void setMajorId(Integer majorId) {
-        this.majorId = majorId;
-    }
-
-    public Integer getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Integer teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public String getStudentDescribe() {
-        return studentDescribe;
-    }
-
-    public void setStudentDescribe(String studentDescribe) {
-        this.studentDescribe = studentDescribe;
-    }
-
-    public String getStudentClass() {
-        return studentClass;
-    }
-
-    public void setStudentClass(String studentClass) {
-        this.studentClass = studentClass;
-    }
-
-    public Integer getStudentScore() {
-        return studentScore;
-    }
-
-    public void setStudentScore(Integer studentScore) {
-        this.studentScore = studentScore;
-    }
-
-    public LocalDateTime getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(LocalDateTime creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateUserId() {
-        return updateUserId;
-    }
-
-    public void setUpdateUserId(String updateUserId) {
-        this.updateUserId = updateUserId;
-    }
-
-    public Boolean getDeleteFlag() {
-        return deleteFlag;
-    }
-
-    public void setDeleteFlag(Boolean deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-            "id = " + id +
-            ", userId = " + userId +
-            ", majorId = " + majorId +
-            ", teacherId = " + teacherId +
-            ", studentName = " + studentName +
-            ", studentDescribe = " + studentDescribe +
-            ", studentClass = " + studentClass +
-            ", studentScore = " + studentScore +
-            ", creationTime = " + creationTime +
-            ", updateTime = " + updateTime +
-            ", updateUserId = " + updateUserId +
-            ", deleteFlag = " + deleteFlag +
-        "}";
-    }
+    @Schema(description = "学科专业名称")
+    @TableField(exist = false)
+    private String majorName;
 }

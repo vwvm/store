@@ -218,9 +218,24 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>io.minio</groupId>
+			<artifactId>minio</artifactId>
+			<version>8.5.2</version>
+		</dependency>
+
+		<!--onenai接口整合-->
+		<dependency>
+			<groupId>com.theokanning.openai-gpt3-java</groupId>
+			<artifactId>client</artifactId>
+			<version>0.12.0</version>
+		</dependency>
+
+	</dependencies>
 
 
-    </dependencies>
+
+
 	<build>
 		<plugins>
 			<plugin>

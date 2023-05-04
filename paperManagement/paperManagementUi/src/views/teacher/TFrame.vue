@@ -32,7 +32,7 @@
         </el-aside>
         <el-container>
             <el-main>
-                <router-view :key="activePath"></router-view>
+                <router-view></router-view>
             </el-main>
             <el-footer>
             </el-footer>
@@ -50,44 +50,49 @@ import {ref, reactive} from "vue";
 const menuList = reactive([
     {
         id: 1,
-        path: "/TUser",
+        path: "/tUser",
         authName: "用户首页",
     },
     {
         id: 2,
-        path: "tProject",
-        authName: "课题申报",
+        path: "/tProject",
+        authName: "课题管理",
     },
     {
         id: 3,
-        path: "/subProcess",
+        path: "/teacher",
         authName: "流程管理",
         children: [
             {
                 id: 3 - 1,
-                path: "/TVerifyProject",
-                authName: "确认选题",
+                path: "/tVerifyProject",
+                authName: "审核开题报告",
             },
             {
                 id: 3 - 2,
-                path: "/TProcessManager",
-                authName: "流程管理",
+                path: "/tSubmitManuscript",
+                authName: "审核过程文档",
             },
             {
                 id: 3 - 3,
-                path: "/TScore",
-                authName: "成绩评定",
+                path: "/tCommitTermination",
+                authName: "审核最终稿",
             }
         ]
     },
     {
         id: 4,
-        path: "/TLibrary",
-        authName: "历史文库",
+        path: "/tStudentManage",
+        authName: "学生管理",
     },
     {
         id: 5,
-        path: "/TDownload",
+        path: "/tLibrary",
+        authName: "历史文库",
+    },
+    {
+        id: 6,
+        path: "/tDownload",
         authName: "文件资料下载",
     }
 ])

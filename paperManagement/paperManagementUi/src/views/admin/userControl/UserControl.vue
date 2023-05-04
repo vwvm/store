@@ -98,9 +98,9 @@
                 <el-input placeholder="自动添加" v-model="ruleForm.user_roles">
                     <template #append>
                         <el-select v-model="ruleForm.user_roles" multiple placeholder="Select" style="width: 115px">
-                            <el-option label="ROLE_Admin" value="ROLE_Admin" />
-                            <el-option label="ROLE_Teacher" value="ROLE_Teacher" />
-                            <el-option label="ROLE_Student" value="ROLE_Student" />
+                            <el-option label="ROLE_admin" value="ROLE_admin" />
+                            <el-option label="ROLE_teacher" value="ROLE_teacher" />
+                            <el-option label="ROLE_student" value="ROLE_student" />
                         </el-select>
                     </template>
                 </el-input>
@@ -138,21 +138,6 @@ const value1 = ref([
     ""
 ])
 const value = ref([])
-const options = [
-    {
-        value: 'HTML',
-        label: 'HTML',
-    },
-    {
-        value: 'CSS',
-        label: 'CSS',
-    },
-    {
-        value: 'JavaScript',
-        label: 'JavaScript',
-    },
-]
-
 const validateUsername = (rule, value, callback) => {
     if (!value) {
         return callback(new Error('请输入用户名'));
@@ -284,7 +269,6 @@ const getUserList = async () => {
         page.endTime = ""
     }
 
-    console.log(page)
 
     const data = await userApi.getUserList(page)
     showData.value = data.data

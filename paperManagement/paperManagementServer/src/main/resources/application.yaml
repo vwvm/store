@@ -79,6 +79,11 @@ spring:
             required: false
           #开启debug模式，这样邮件发送过程的日志会在控制台打印出来，方便排查错误
         debug: true
+  servlet:
+    multipart:
+      maxFileSize: 100MB
+      maxRequestSize: 100MB
+      location: /data/upload_tmp
 
 
 
@@ -91,6 +96,12 @@ mybatis-plus:
   type-handlers-package:
     - org.vwvm.paperManagement.mapper
 
+# minio配置文件
+minio:
+  endpoint: http://localhost:49000
+  accessKey: root1235
+  secretKey: root1235
+  bucketName: paper
 
 vwvm:
   jwt:

@@ -38,7 +38,7 @@ values (4, 'student', '21232f297a57a5a743894a0e4a801fc3', 15695912345, '15695912
   "ROLE_student"
 ]');
 insert user(id, user_username, user_password, user_telephone, user_email, user_roles)
-values (111, 'teacher111', 'teacher111', 15695911111, '15695911111@qq.com', '[
+values (111, 'teacher111', '457247f635153814af4de2bd5e0fd1dd', 15695911111, '15695911111@qq.com', '[
   "ROLE_teacher"
 ]');
 insert user(id, user_username, user_password, user_telephone, user_email, user_roles)
