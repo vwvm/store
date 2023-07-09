@@ -150,6 +150,7 @@ import {ElButton, ElDialog} from 'element-plus'
 import {CircleCloseFilled, CloseBold, Operation, Check, Sunny, List, Search, Download} from '@element-plus/icons-vue'
 import api, {teacherApi, departmentApi, studentApi, projectApi, downloadApi} from "@/api/api.js";
 import {useUser, useStudent, useTeacher} from "@/store/index.js";
+import {get_file} from "@/utils/minioRequest.js";
 
 
 const user = useUser();
@@ -215,8 +216,8 @@ const rules = reactive({
 })
 // 下载文件
 const downloadFile = (slotProps) => {
-    console.log(slotProps.dataUrl)
-    window.open("http://localhost:49090/browser/paper/" + slotProps.dataUrl)
+    get_file("/minio/download", {fileName: slotProps.dataUrl})
+
 }
 
 

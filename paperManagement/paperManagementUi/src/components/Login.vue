@@ -67,6 +67,7 @@ const ruleForm = reactive({
 })
 // 获取验证码
 const getCaptcha = async () => {
+    console.log("ddd")
     captcha.value = await api.__captcha.getCaptcha();
     ruleForm.token = captcha.value.token;
     console.log(captcha)

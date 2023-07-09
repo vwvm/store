@@ -22,7 +22,7 @@
                             加载更多
                         </el-button>
                     </el-card>
-                    <div style="width: 100%; height: 100%; border: red 1px solid"/>
+                    <!--<div style="width: 100%; height: 100%; border: red 1px solid"/>-->
                 </el-col>
                 <el-col :span="10">
                     <el-card class="box-card">

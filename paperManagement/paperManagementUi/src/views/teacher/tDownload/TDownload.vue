@@ -40,6 +40,7 @@ import api from "@/api/api.js";
 import {Edit, Download} from "@element-plus/icons-vue";
 import {minioBaseUrl} from "@/config/index.js"
 import DownloadComponent from "@/components/load/DownloadComponent.vue";
+import {get_file} from "@/utils/minioRequest.js";
 
 // 当前页
 const currentPage = ref(1)
@@ -66,8 +67,7 @@ const downData = ref([{
 }])
 
 const downloadFile = (slotProps) => {
-    console.log(slotProps.dataUrl)
-    window.open(minioBaseUrl + slotProps.dataUrl)
+    get_file("/minio/download", {fileName: slotProps.dataUrl})
 }
 
 

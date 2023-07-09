@@ -80,6 +80,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/doc.html", "/v3/**", "/favicon.ico").permitAll()
                 .requestMatchers("/student/student",
                         "/minio/download/**",
+                        "/test/**",
                         "/teacher/getTeacherByUserId").permitAll()
                 .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers("/captcha").permitAll()

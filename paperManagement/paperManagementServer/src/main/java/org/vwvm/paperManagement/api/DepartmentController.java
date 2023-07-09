@@ -38,7 +38,7 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @Operation(summary = "获取用户列表")
+    @Operation(summary = "获取学院列表")
     @Parameters({
             @Parameter(name = "currentPage", description = "当前页码", required = false),
             @Parameter(name = "pageSize", description = "页码大小", required = false),

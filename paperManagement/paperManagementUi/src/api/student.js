@@ -14,3 +14,16 @@ export const getStudentListByTeacher = async (param) => {
     const {data} = await $get("/student/getStudentListByTeacher", param)
     return data
 }
+
+export const getStudentList = async (param) => {
+
+    const data = await $get("/student/getStudentList", param)
+    return data
+}
+
+export const getNotStudentList = async (param) => {
+
+    const data = await $get("/student/getNotStudentList", param)
+    return data
+}
+

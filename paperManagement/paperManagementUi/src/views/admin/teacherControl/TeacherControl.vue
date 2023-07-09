@@ -2,7 +2,7 @@
     <el-card>
         <el-menu bordered :data-source="showData" class="a-list">
             <div slot="header">
-                <h3>用户管理</h3>
+                <h3>教师管理</h3>
             </div>
             <el-divider/>
             <el-row :gutter="20">
@@ -28,9 +28,16 @@
             <br/>
             <el-table :data="showData" border style="width: 100%">
                 <el-table-column type="index" width="80" label="序号"/>
-                <el-table-column prop="userUsername" label="用户名"/>
-                <el-table-column prop="userTelephone" label="用户电话"/>
-                <el-table-column prop="userEmail" label="用户邮箱"/>
+                <el-table-column prop="studentName" label="学生名字"/>
+                <el-table-column prop="studentName" label="学生所在学院" v-slot="slotProps">
+                    <span v-for="item in departmentList">
+                        <span v-if="item.id === slotProps.row.majorId">
+                               {{ item.departmentName }}
+                        </span>
+                    </span>
+                </el-table-column>
+                <el-table-column prop="studentClass" label="学生班级"/>
+                <el-table-column prop="studentDescribe" label="学生描述"/>
                 <el-table-column prop="dataDescribe" label="操作" width="200" v-slot="slotProps">
                     <el-button type="primary" @click="showInformation(slotProps.row)">
                         <el-icon>
@@ -82,13 +89,13 @@
             <el-form-item label="id" prop="id">
                 <el-input placeholder="自动添加" v-model="ruleForm.id" disabled/>
             </el-form-item>
-            <el-form-item label="用户名" prop="userUsername">
+            <el-form-item label="学生名字" prop="userUsername">
                 <el-input placeholder="请输入用户名" v-model="ruleForm.userUsername"/>
             </el-form-item>
-            <el-form-item label="密码" prop="userPassword">
+            <el-form-item label="学生班级" prop="userPassword">
                 <el-input placeholder="请输入密码" v-model="ruleForm.userPassword"/>
             </el-form-item>
-            <el-form-item label="电话" prop="userTelephone">
+            <el-form-item label="学生描述" prop="userTelephone">
                 <el-input placeholder="请输入电话" v-model="ruleForm.userTelephone"/>
             </el-form-item>
             <el-form-item label="邮箱" prop="userEmail">
@@ -111,9 +118,9 @@
 
 <script setup>
 import {onMounted, reactive, ref} from "vue";
-import * as userApi from "@/api/user.js";
 import {Edit, Close, View, Search} from "@element-plus/icons-vue"
 import {ElMessage} from "element-plus";
+import {departmentApi, studentApi, userApi} from "@/api/api.js";
 
 
 const small = ref(false)
@@ -237,19 +244,26 @@ const editInformation = (value) => {
 
 }
 
+const departmentList = ref({});
+const getDepartment = async () => {
+    const {data} = await departmentApi.getDepartmentList()
+    departmentList.value = data
+    console.log(" departmentList.value", departmentList.value)
+}
+
 // 获取列表
 const getUserList = async () => {
-    if (value1.value != null){
+    if (value1.value != null) {
         page.startTime = value1.value[0]
         page.endTime = value1.value[1]
-    }else {
+    } else {
         page.startTime = ""
         page.endTime = ""
     }
 
     console.log(page)
 
-    const data = await userApi.getUserList(page)
+    const data = await studentApi.getStudentList(page)
     showData.value = data.data
     page.total = Number(data.msg)
 }
@@ -259,6 +273,7 @@ const getUserList = async () => {
 
 onMounted(() => {
     getUserList()
+    getDepartment()
 })
 
 </script>

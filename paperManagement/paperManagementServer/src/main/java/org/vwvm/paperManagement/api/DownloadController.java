@@ -143,7 +143,6 @@ public class DownloadController {
         if (limitB > total) {
             limitB = total;
         }
-
         ArrayList<DataDownloadServiceImpl.RpDownloadListByTeacher> test_list_2 = new ArrayList<>(downloadListByTeacher.subList(limitA, limitB));
         String s = String.valueOf(downloadListByTeacher.size());
         return ResultsVO.succeed(s, test_list_2);

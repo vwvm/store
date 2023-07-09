@@ -47,6 +47,7 @@ public class MyTokenFilter extends BasicAuthenticationFilter {
             }
             // 通过公钥进行解密：验证token是否正确
             int jwtState = JwtUtils2.parseJwt(token);
+            /**
             if (jwtState != 0) {
                 if (jwtState == 1) {
                     Map<String, Object> payLoad = JwtUtils2.getPayLoad(token);
@@ -73,6 +74,8 @@ public class MyTokenFilter extends BasicAuthenticationFilter {
                 chain.doFilter(request, response);
                 return;
             }
+             */
+
             Map<String, Object> payLoad = JwtUtils2.getPayLoad(token);
             if (Objects.isNull(payLoad)) {
                 chain.doFilter(request, response);

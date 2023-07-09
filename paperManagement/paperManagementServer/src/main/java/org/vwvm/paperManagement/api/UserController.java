@@ -114,7 +114,9 @@ public class UserController {
         String method = httpServletRequest.getMethod();
 
         switch (method) {
-            case "POST" -> b = usersService.save(user1);
+            case "POST" -> {
+
+                b = usersService.save(user1);}
             case "PUT" -> b = usersService.updateById(user1);
         }
         return b ? ResultsVO.succeed(user1) : ResultsVO.fail("操纵失败");

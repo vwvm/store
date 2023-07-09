@@ -95,4 +95,40 @@ public class StudentController {
 
     }
 
+    @Operation(summary = "获取用户列表")
+    @Parameters({
+            @Parameter(name = "currentPage", description = "当前页码", required = false),
+            @Parameter(name = "pageSize", description = "页码大小", required = false),
+    })
+    @ResponseBody
+    @RequestMapping(value = "/getStudentList", method = RequestMethod.GET)
+    public ResultsVO getUserList(
+            @RequestParam(value = "currentPage", required = false) Integer currentPage,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "findUsername", required = false) String findUsername,
+            @RequestParam(value = "startTime", required = false) String startTime,
+            @RequestParam(value = "endTime", required = false) String endTime
+
+    ) {
+
+        return studentService.getStudentList(currentPage, pageSize, findUsername, startTime, endTime);
+    }
+
+    @Operation(summary = "获取未添加学生列表")
+    @Parameters({
+    })
+    @ResponseBody
+    @RequestMapping(value = "/getNotStudentList", method = RequestMethod.GET)
+    public ResultsVO getNotAddList(
+            @RequestParam(value = "currentPage", required = false) Integer currentPage,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "findUsername", required = false) String findUsername,
+            @RequestParam(value = "startTime", required = false) String startTime,
+            @RequestParam(value = "endTime", required = false) String endTime
+
+    ) {
+        return studentService.getNotAddList(currentPage, pageSize, findUsername, startTime, endTime);
+    }
+
+
 }

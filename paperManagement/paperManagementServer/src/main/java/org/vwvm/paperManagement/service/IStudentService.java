@@ -22,4 +22,8 @@ public interface IStudentService extends IService<Student> {
     List<Student> getStudentListByTeacher(Integer teacherId);
 
     List<Student> getStudentListByTeacher(Integer id, String findStr);
+
+    ResultsVO getStudentList(Integer currentPage, Integer pageSize, String findUsername, String startTime, String endTime);
+
+    ResultsVO getNotAddList(Integer currentPage, Integer pageSize, String findUsername, String startTime, String endTime);
 }

@@ -80,16 +80,16 @@ const menuList = reactive([
             }
         ]
     },
-    {
-        id: 4,
-        path: "/tStudentManage",
-        authName: "学生管理",
-    },
-    {
-        id: 5,
-        path: "/tLibrary",
-        authName: "历史文库",
-    },
+    // {
+    //     id: 4,
+    //     path: "/tStudentManage",
+    //     authName: "学生管理",
+    // },
+    // {
+    //     id: 5,
+    //     path: "/tLibrary",
+    //     authName: "历史文库",
+    // },
     {
         id: 6,
         path: "/tDownload",

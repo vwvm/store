@@ -1,6 +1,7 @@
 package org.vwvm.paperManagement.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,11 @@ import org.vwvm.paperManagement.commons.vo.ResultsVO;
 import org.vwvm.paperManagement.entity.Major;
 import org.vwvm.paperManagement.entity.Student;
 import org.vwvm.paperManagement.entity.Teacher;
+import org.vwvm.paperManagement.entity.User;
 import org.vwvm.paperManagement.mapper.MajorMapper;
 import org.vwvm.paperManagement.mapper.StudentMapper;
 import org.vwvm.paperManagement.mapper.TeacherMapper;
+import org.vwvm.paperManagement.mapper.UserMapper;
 import org.vwvm.paperManagement.service.IStudentService;
 
 import java.util.List;
@@ -29,12 +32,14 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     private final StudentMapper studentMapper;
     private final MajorMapper majorMapper;
     private final TeacherMapper teacherMapper;
+    private final UserMapper userMapper;
 
     @Autowired
-    public StudentServiceImpl(StudentMapper studentMapper, MajorMapper majorMapper, TeacherMapper teacherMapper) {
+    public StudentServiceImpl(StudentMapper studentMapper, MajorMapper majorMapper, TeacherMapper teacherMapper, UserMapper userMapper) {
         this.studentMapper = studentMapper;
         this.majorMapper = majorMapper;
         this.teacherMapper = teacherMapper;
+        this.userMapper = userMapper;
     }
 
     /**
@@ -82,5 +87,46 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
         }
         return studentMapper.selectList(studentQueryWrapper);
 
+    }
+
+    /**
+     * @param currentPage
+     * @param pageSize
+     * @param findUsername
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @Override
+    public ResultsVO getStudentList(Integer currentPage, Integer pageSize, String findUsername, String startTime, String endTime) {
+        Page<Student> page = new Page<>(currentPage, pageSize);
+        QueryWrapper<Student> userQueryWrapper = new QueryWrapper<>();
+        if (!findUsername.isBlank()){
+            userQueryWrapper.like("user_username", findUsername);
+        }
+        if (!startTime.isBlank()){
+            userQueryWrapper.ge("update_time", startTime);
+        }
+        if (!endTime.isBlank()){
+            userQueryWrapper.le("update_time", endTime);
+        }
+        studentMapper.selectPage(page, userQueryWrapper);
+        return ResultsVO.succeed(String.valueOf(page.getTotal()), page.getRecords());
+    }
+
+    /**
+     * @param currentPage
+     * @param pageSize
+     * @param findUsername
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @Override
+    public ResultsVO getNotAddList(Integer currentPage, Integer pageSize, String findUsername, String startTime, String endTime) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.last("where JSON_EXTRACT(user_roles,'$[0]') = 'ROLE_student' and id not in (select user_id from student)");
+        List<User> users = userMapper.selectList(queryWrapper);
+        return ResultsVO.succeed(users);
     }
 }

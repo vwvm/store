@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./dist/xlsx.core.min.js"></script>
+    <title>js读取本地Excel内容</title>
+    <style>
+        table {border:1px solid #ccc; border-collapse: collapse;width:100%;}
+        table td {border:1px solid #ccc;text-align:center;height:30px;}
+        table tr:first-child {background:#ccc;}
+    </style>
+</head>
+<body>
+<h2>js读取本地Excel内容</h2>
+<input type="file" id="excel" />
+<h3>Excel文件内容</h3>
+<div class="table">
+</div>
+</body>
+</html>
+<script>
+    document.querySelector('#excel').onchange = function (e) {
+        let file = e.target.files[0];
+        readWorkbookFromLocalFile(file, function(workbook) {
+            readWorkbook(workbook);
+        });
+    }
+
+    // 读取本地excel文件，读取Excel文件对象
+    function readWorkbookFromLocalFile(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type: 'binary'});
+            console.log(workbook);
+            if(callback) callback(workbook);
+        };
+        reader.readAsBinaryString(file);
+    }
+    // 转成cvs 要注意Execel表格内容不能包含英文的,不然解析出来的数据格式会有问题
+    function readWorkbook(workbook) {
+        var sheetNames = workbook.SheetNames; // 工作表名称集合
+        var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第一张sheet
+        var csv = XLSX.utils.sheet_to_csv(worksheet);
+        console.log(csv);
+        var rows = csv.split('\n'); // 转化为数组
+        rows.pop(); // 最后一行没用的
+        console.log(rows);  // 打印输出的数组
+        let table = ``;
+        rows.forEach(v => {
+            let tr = ``;
+            let td = ``;
+            v.split(',').forEach(item => {
+                td += `<td>${item}</td>`
+            });
+            tr = `<tr>${td}</tr>`;
+            table += tr;
+        });
+        table = `<table>${table}</table>`;
+        document.querySelector('.table').innerHTML = table; // 显示table表格
+    }
+</script>

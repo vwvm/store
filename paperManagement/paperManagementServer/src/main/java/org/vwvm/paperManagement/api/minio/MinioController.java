@@ -77,6 +77,12 @@ public class MinioController {
         return minioUtil.download(fileName);
     }
 
+    @Operation(summary = "minio删除文件")
+    @GetMapping("/delete")
+    public ResultsVO delete(@RequestParam String fileName) {
+        return ResultsVO.succeed(minioUtil.removeObject(fileName));
+    }
+
     @Operation(summary = "minio创建桶")
     @PostMapping("/existBucket")
     public void existBucket(@RequestParam String bucketName) {

@@ -1,6 +1,5 @@
 package org.vwvm.paperManagement.commons.utils;
 
-import com.baomidou.mybatisplus.core.toolkit.Constants;
 import io.minio.*;
 import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,8 +31,13 @@ public class MinioUtil {
     @Value("${minio.bucketName}")
     private String bucketName;
 
+
+    private final MinioClient minioClient;
+
     @Autowired
-    private MinioClient minioClient;
+    public MinioUtil(MinioClient minioClient) {
+        this.minioClient = minioClient;
+    }
 
     /**
      * description: 判断bucket是否存在，不存在则创建
@@ -104,6 +106,21 @@ public class MinioUtil {
             }
         }
         return fileName;
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param objectName
+     * @throws Exception
+     */
+    public String removeObject(String objectName) {
+        try {
+            minioClient.removeObject(RemoveObjectArgs.builder().bucket(bucketName).object(objectName).build());
+        } catch (Exception e) {
+            return "文件删除失败" + e.getMessage();
+        }
+        return objectName;
     }
 
 

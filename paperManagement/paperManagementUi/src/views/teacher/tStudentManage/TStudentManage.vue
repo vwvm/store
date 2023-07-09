@@ -2,7 +2,7 @@
     <el-card title="学生列表">
         <el-row :gutter="20">
             <el-col :span="2">
-                <el-button type="primary" @click="resetForm(); visible = true">选题添加</el-button>
+                <el-button type="primary" @click="resetForm(); visible = true">添加学生</el-button>
             </el-col>
             <el-col :span="4">
                 <el-input v-model="page.findUsername" placeholder="请输入要查找的内容"></el-input>
