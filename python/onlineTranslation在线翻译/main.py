@@ -20,6 +20,7 @@ class MyWindow(QWidget, Ui_Form):
         self.radioButton_ch.clicked.connect(lambda: self.set_from_language(1))
         self.radioButton_en.clicked.connect(lambda: self.set_from_language(2))
         pass
+    
 
     def set_from_language(self, language: int):
         self.fromLanguage = language
