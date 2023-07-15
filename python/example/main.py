@@ -5,6 +5,7 @@ import sys
 class MyWindow(QWidget):
     def __init__(self):
         super().__init__()
+        self.resize(800, 600)
 
         self.mainLayout = QVBoxLayout()
         self.setLayout(self.mainLayout)

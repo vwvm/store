@@ -12,14 +12,18 @@ class MyWindow(QWidget):
         self.listWidget = QListWidget()
         self.listWidget.addItems([self.fake.name() for _ in range(20)])
 
-        self.listWidget.insertItems(2, ['120', '110', '333'])
+        self.listWidget.insertItems(0, ['120', '110', '333'])
 
         self.listWidget.setContextMenuPolicy(Qt.ContextMenuPolicy.ActionsContextMenu)
         self.outputCurrentValue = QAction("输出当前值")
         self.outputCurrentValue.triggered.connect(self.outputCurrent)
         self.deleteCurrentValue = QAction("删除当前值")
         self.deleteCurrentValue.triggered.connect(self.deleteCurrent)
+        self.callThePolice = QAction("报警")
+        self.callThePolice.triggered.connect(lambda: print("报警"))
         self.listWidget.addActions([self.outputCurrentValue, self.deleteCurrentValue])
+        self.listWidget.item(0).setCheckState(Qt.CheckState.Unchecked)
+
 
         self.mainLayout = QVBoxLayout()
         self.mainLayout.addWidget(self.listWidget)
