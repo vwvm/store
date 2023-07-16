@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
 from PySide6.QtCore import Qt, QThread
 import sys
 from WorkThread import WorkThread
+from Spider import Spider
 
 
 class MyWindow(QWidget):
@@ -13,12 +14,10 @@ class MyWindow(QWidget):
         self.lb = QLabel("当前值为：0")
         self.lb.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.workThread = WorkThread()
-        self.threadList = QThread()
-        self.workThread.moveToThread(self.threadList)
-        self.threadList.started.connect(self.workThread.work)
-        self.threadList.finished.connect(lambda: print("finish"))
-        self.threadList.start()
+        self.workThread = Spider("https://cn.bing.com")
+        self.workThread.webCode.connect(lambda x: self.lb.setText(f"当前值为{x}"))
+        self.workThread.start()
+        self.workThread.wait()
 
         self.mainLayout = QVBoxLayout()
         self.mainLayout.addWidget(self.lb)
