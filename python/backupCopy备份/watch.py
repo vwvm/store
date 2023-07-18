@@ -1,4 +1,3 @@
-import os
 import sys
 import logging
 import time
@@ -7,6 +6,8 @@ from watchdog.observers import Observer
 from watchdog.observers.read_directory_changes import WindowsApiObserver
 from watchdog.observers import api
 from watchdog.events import FileSystemEventHandler
+
+import FilePathUtil
 
 
 class WatchHandler(FileSystemEventHandler):
@@ -51,9 +52,8 @@ class WatchHandler(FileSystemEventHandler):
         print(event.is_synthetic)
 
     def copy_program(self, file_name_to_copy: str):
-
+        print(FilePathUtil.get_file_name())
         shutil.copy(file_name_to_copy, self.target_path)
-
 
 
 
