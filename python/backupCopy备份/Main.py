@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
-    QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, QHBoxLayout
+    QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, \
+    QHBoxLayout, QLineEdit
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QGuiApplication, QPixmap, QAction, QColor, QPalette
 from qt_material import apply_stylesheet
@@ -8,7 +9,7 @@ import os
 import pathlib
 
 from NewSelectFolderWindow import NewSelectFolderWindow
-from Window2 import  Window2
+from Window2 import Window2
 
 
 class MyWindow(QMainWindow):
@@ -27,7 +28,10 @@ class MyWindow(QMainWindow):
         push_button = QPushButton("添加项目")
         push_button.clicked.connect(self.open_the_new_folder_selection_window)
 
+        self.qLineEdit = QLineEdit()
+
         layout_h.addWidget(push_button)
+        layout_h.addWidget(self.qLineEdit)
 
         widget = QWidget()
         widget.setLayout(layout_h)

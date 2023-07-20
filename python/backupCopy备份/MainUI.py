@@ -61,10 +61,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.listWidget = QListWidget(self.frame)
-        QListWidgetItem(self.listWidget)
-        QListWidgetItem(self.listWidget)
-        QListWidgetItem(self.listWidget)
-        QListWidgetItem(self.listWidget)
         self.listWidget.setObjectName(u"listWidget")
         self.listWidget.setMouseTracking(False)
         self.listWidget.setAutoFillBackground(False)
@@ -107,10 +103,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)
 
         self.listWidget_2 = QListWidget(self.frame_2)
-        QListWidgetItem(self.listWidget_2)
-        QListWidgetItem(self.listWidget_2)
-        QListWidgetItem(self.listWidget_2)
-        QListWidgetItem(self.listWidget_2)
+
         self.listWidget_2.setObjectName(u"listWidget_2")
 
         self.verticalLayout_2.addWidget(self.listWidget_2)
@@ -128,17 +121,17 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        ok_button = QPushButton("确认")
+        self.ok_button = QPushButton("确认")
+
         qv_layout = QVBoxLayout(self.centralwidget)
         qv_layout.addLayout(self.main_horizontal_layout)
-        qv_layout.addWidget(ok_button)
+        qv_layout.addWidget(self.ok_button)
 
         self.centralwidget.setLayout(qv_layout)
 
         QMetaObject.connectSlotsByName(MainWindow)
 
     # setupUi
-
     def retranslateUi(self, MainWindow):
         self.left_hand_count = 0
         self.right_hand_count = 0
@@ -166,13 +159,9 @@ class Ui_MainWindow(object):
         print(folder_name)
 
         if select_type == 1:
-            list_item = self.listWidget.item(self.left_hand_count)
-            self.left_hand_count += 1
-            list_item.setText(folder_name)
-        if select_type == 2:
-            list_item = self.listWidget_2.item(self.right_hand_count)
-            self.right_hand_count += 1
-            list_item.setText(folder_name)
+            list_item = self.listWidget.addItem(folder_name)
 
-        self.listWidget.items()
+        if select_type == 2:
+            list_item = self.listWidget_2.addItem(folder_name)
+
         return folder_name
