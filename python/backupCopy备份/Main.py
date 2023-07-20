@@ -8,6 +8,7 @@ import os
 import pathlib
 
 from NewSelectFolderWindow import NewSelectFolderWindow
+from Window2 import  Window2
 
 
 class MyWindow(QMainWindow):
@@ -22,27 +23,10 @@ class MyWindow(QMainWindow):
 
     def bind(self):
         layout_h = QVBoxLayout()
-        layout1 = QHBoxLayout()
-        layout2 = QVBoxLayout()
-        layout3 = QVBoxLayout()
-
-        layout2.addWidget(Color('red'))
-        layout2.addWidget(Color('yellow'))
-        layout2.addWidget(Color('purple'))
-
-        layout1.addLayout(layout2)
-
-        layout1.addWidget(Color('green'))
-
-        layout3.addWidget(Color('red'))
-        layout3.addWidget(Color('purple'))
-
-        layout1.addLayout(layout3)
 
         push_button = QPushButton("添加项目")
         push_button.clicked.connect(self.open_the_new_folder_selection_window)
 
-        layout_h.addLayout(layout1)
         layout_h.addWidget(push_button)
 
         widget = QWidget()
@@ -82,8 +66,8 @@ class MyWindow(QMainWindow):
 
     def open_the_new_folder_selection_window(self):
         print("open")
-        self.newSelectFolderWindow = NewSelectFolderWindow()
-        self.newSelectFolderWindow.show()
+        window2 = Window2()
+        window2.show()
 
 
 class Color(QWidget):

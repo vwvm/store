@@ -174,4 +174,5 @@ class Ui_MainWindow(object):
             self.right_hand_count += 1
             list_item.setText(folder_name)
 
+        self.listWidget.items()
         return folder_name

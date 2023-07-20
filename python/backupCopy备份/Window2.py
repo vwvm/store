@@ -9,7 +9,7 @@ import sys
 from MainUI import Ui_MainWindow
 
 
-class MyWindow(QMainWindow, Ui_MainWindow):
+class Window2(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -18,6 +18,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     # apply_stylesheet(app, theme="dark_teal.xml")
-    window = MyWindow()
+    window = Window2()
     window.show()
     app.exec()
