@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
     QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, \
     QHBoxLayout, QLineEdit
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Slot
 from PySide6.QtGui import QGuiApplication, QPixmap, QAction, QColor, QPalette
 from qt_material import apply_stylesheet
 import sys
@@ -71,7 +71,13 @@ class MyWindow(QMainWindow):
     def open_the_new_folder_selection_window(self):
         print("open")
         window2 = Window2()
+        window2.list_signal.connect(self.path_list_slot)
         window2.show()
+
+    @Slot(list, list)
+    def path_list_slot(self, origin_path_list: list, target_path_list: list):
+        print(origin_path_list, target_path_list)
+        pass
 
 
 class Color(QWidget):

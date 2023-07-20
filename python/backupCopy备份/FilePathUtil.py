@@ -3,30 +3,6 @@ import platform
 import shutil
 
 
-def get_dir_path(path: str) -> str:
-    """
-    输入一个字符串形式的完整路径，获取目录名，如：path=D:/Python/密码生成工具_V1.3.2_20210526.exe,dir_path=D:/Python
-
-    :param path:如：path=D:/Python/密码生成工具_V1.3.2_20210526.exe
-    :return: D:/Python
-    """
-    dir_path = os.path.dirname(path)
-    print('path={},dir_path={}'.format(path, dir_path))
-    return dir_path
-
-
-def get_file_name(path: str) -> str:
-    """
-    输入一个字符串形式的完整路径，获取文件名，如：path=D:/Python/密码生成工具_V1.3.2_20210526.exe,file_path=密码生成工具_V1.3.2_20210526.exe
-
-    :param path:如：path=D:/Python/密码生成工具_V1.3.2_20210526.exe
-    :return: 密码生成工具_V1.3.2_20210526.exe
-    """
-    file_path = os.path.basename(path)
-    print('path={},file_path={}'.format(path, file_path))
-    return file_path
-
-
 def path_join(dir_path: str, file_name: str, *path_tuple, **path_dict) -> str:
     """
     拼接路径
