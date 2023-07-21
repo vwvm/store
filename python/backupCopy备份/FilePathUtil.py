@@ -14,6 +14,13 @@ def path_join(dir_path: str, file_name: str, *path_tuple, **path_dict) -> str:
 
 
 def path_splitting(path: str) -> list:
+    """
+    TODO: 当文件属性有来自其他计算机的文件
+    TODO: 可能会被阻止
+    返回路径拆分列表
+    :param path:
+    :return:
+    """
     path_list = []
     while True:
         (path, temp) = os.path.split(path)

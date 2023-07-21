@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
     QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, \
     QHBoxLayout, QLineEdit, QTableWidget, QHeaderView, QTableWidgetItem, QScrollArea, QLabel
@@ -11,6 +12,8 @@ import pathlib
 
 from NewSelectFolderWindow import NewSelectFolderWindow
 from Window2 import Window2
+import logging
+from Watch import StartWatch
 
 
 class MyWindow(QMainWindow):
@@ -20,11 +23,15 @@ class MyWindow(QMainWindow):
         self.setWindowTitle("文件自动备份")
         self.setWindowIcon(QPixmap("vwvmn.png"))
         self.setupMenuBar()
-        self.bind_ui()
+        self.main_ui()
+        self.main_data()
         # 获取用户目录
         self.folderName: str = str(pathlib.Path.home())
 
-    def bind_ui(self):
+    def main_data(self):
+        self.sequence_number = 0
+
+    def main_ui(self):
         self.main_layout = QVBoxLayout()
         # 设置表
         self.table_widget = QTableWidget()
@@ -47,12 +54,10 @@ class MyWindow(QMainWindow):
         self.add_watch_main_widget.setLayout(self.add_watch_main_layout)
         self.scroll_area.setWidget(self.add_watch_main_widget)
 
-        self.add_watch_main_widget.setStyleSheet("border: 1px solid green;")
+        self.add_watch_main_widget.setStyleSheet("border: 1px solid black;")
         self.scroll_area.setWidgetResizable(True)  # 这条不加无法显示里面的控件
         # 更改布局为从上而下
         self.add_watch_main_layout.setAlignment(Qt.AlignTop)
-
-
 
         self.main_layout.addWidget(self.scroll_area)
         self.main_layout.addWidget(push_button)
@@ -116,15 +121,39 @@ class MyWindow(QMainWindow):
         window2.show()
 
     @Slot(list, list)
-    def path_list_slot(self, origin_path_list: list, target_path_list: list):
+    def path_list_slot(self, origin_path_list: list[str], target_path_list: list[str]):
         """
         槽函数，接收子窗口的列表
         :param origin_path_list:
         :param target_path_list:
         """
-        self.table_widget.setItem(0, 0, QTableWidgetItem(origin_path_list[0]))
+        # 绘制到主屏幕
+        new_widget = QWidget()
+        new_widget.setStyleSheet("border: 1px solid green;")
+        new_main_layout = QHBoxLayout()
+        self.sequence_number += 1
+        # 设置序号
+        new_seq_num = QLabel(str(self.sequence_number))
+        new_seq_num.resize(20, 0)
+        new_seq_num.setMaximumWidth(50)
+        new_origin_path = QLabel(origin_path_list[0])
+        new_target_path_layout = QVBoxLayout()
+        for i in target_path_list:
+            temp_label = QLabel(i)
+            new_target_path_layout.addWidget(temp_label)
+
+        new_widget.setLayout(new_main_layout)
+        new_main_layout.addWidget(new_seq_num)
+        new_main_layout.addWidget(new_origin_path)
+        new_main_layout.addLayout(new_target_path_layout)
+
+        self.add_watch_main_layout.addWidget(new_widget)
+        # 启动监视
+        StartWatch(origin_path_list[0], target_path_list[0])
+
         # 获取数据
         print(origin_path_list, target_path_list)
+
         # 添加到table
         pass
 
@@ -143,7 +172,22 @@ class Color(QWidget):
         self.setPalette(palette)
 
 
+def logging_config():
+    # 设置打印日志的级别，level级别以上的日志会打印出
+    # level=logging.DEBUG 、INFO 、WARNING、ERROR、CRITICAL
+    # 此处进行Logging.basicConfig() 设置，后面设置无效
+    logging.basicConfig(filename='log.txt',
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s-%(funcName)s',
+                        level=logging.INFO)
+    logging.debug('debug，用来打印一些调试信息，级别最低')
+    logging.info('info，用来打印一些正常的操作信息')
+    logging.warning('waring，用来用来打印警告信息')
+    logging.error('error，一般用来打印一些错误信息')
+    logging.critical('critical，用来打印一些致命的错误信息，等级最高')
+
+
 if __name__ == '__main__':
+    logging_config()
     app = QApplication(sys.argv)
     # apply_stylesheet(app, theme="dark_teal.xml")
     window = MyWindow()
