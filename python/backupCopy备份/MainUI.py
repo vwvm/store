@@ -123,12 +123,15 @@ class Ui_MainWindow(object):
 
         self.ok_button = QPushButton("确认")
 
-        qv_layout = QVBoxLayout(self.centralwidget)
-        qv_layout.addLayout(self.main_horizontal_layout)
-        qv_layout.addWidget(self.ok_button)
+        main_layout = QVBoxLayout(self.centralwidget)
 
-        self.centralwidget.setLayout(qv_layout)
 
+        main_layout.addLayout(self.main_horizontal_layout)
+        main_layout.addWidget(self.ok_button)
+
+
+
+        self.centralwidget.setLayout(main_layout)
         QMetaObject.connectSlotsByName(MainWindow)
 
     # setupUi
@@ -152,7 +155,6 @@ class Ui_MainWindow(object):
         self.listWidget_2.setSortingEnabled(__sortingEnabled1)
 
     # retranslateUi
-
     def select_folder(self, select_type: int) -> str:
         folder_name: str = str(pathlib.Path.home())
         folder_name = QFileDialog.getExistingDirectory(None, "选择文件夹", folder_name)
