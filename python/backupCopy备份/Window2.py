@@ -30,9 +30,11 @@ class Window2(QMainWindow, Ui_MainWindow):
 
         for i in range(self.listWidget_2.count()):
             right_list.append(self.listWidget_2.item(i).text())
-
-        self.list_signal.emit(left_list, right_list)
         # 写入到消息
+        self.list_signal.emit(left_list, right_list)
+
+        # 关闭窗口
+        self.window().close()
         pass
 
 

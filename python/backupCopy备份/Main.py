@@ -173,17 +173,28 @@ class Color(QWidget):
 
 
 def logging_config():
-    # 设置打印日志的级别，level级别以上的日志会打印出
-    # level=logging.DEBUG 、INFO 、WARNING、ERROR、CRITICAL
-    # 此处进行Logging.basicConfig() 设置，后面设置无效
+    """
+    设置打印日志的级别，level级别以上的日志会打印出
+    level=logging.DEBUG 、INFO 、WARNING、ERROR、CRITICAL
+    此处进行Logging.basicConfig() 设置，后面设置无效
+    format 设置输出格式，具体如下
+        %(levelno)s 日志级别
+        %(levelname)s 日志级别名称
+        %(pathname)s 当前程序的路径
+        %(filename)s 当前程序名称
+        %(funcName)s 日志所属的当前函数
+        %(lineno)d 日志的当前行号
+        %(asctime)s 日志的时间
+        %(thread)d 线程的ID
+        %(threadName)s 线程的名称
+        %(process)d 进程的ID
+        %(message)s 日志的信息
+    :return:
+    """
     logging.basicConfig(filename='log.txt',
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s-%(funcName)s',
                         level=logging.INFO)
-    logging.debug('debug，用来打印一些调试信息，级别最低')
-    logging.info('info，用来打印一些正常的操作信息')
-    logging.warning('waring，用来用来打印警告信息')
-    logging.error('error，一般用来打印一些错误信息')
-    logging.critical('critical，用来打印一些致命的错误信息，等级最高')
+
 
 
 if __name__ == '__main__':

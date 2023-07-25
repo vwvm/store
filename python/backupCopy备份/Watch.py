@@ -19,6 +19,8 @@ class WatchHandler(FileSystemEventHandler):
         self.file_name = ""
         self.target_path = target_path
         self.origin_path = origin_path
+        self.origin_path_sign = ""
+        self.target_path_sign = ""
 
     def on_any_event(self, event):
         """
@@ -59,6 +61,14 @@ class WatchHandler(FileSystemEventHandler):
         :param event:
         """
         logging.info(event.src_path)
+
+        if self.origin_path_sign == "":
+            self.origin_path_sign = event.src_path
+            return
+        if self.origin_path_sign != event.src_path:
+            self.origin_path_sign = event.src_path
+            self.copy_program(event.src_path)
+
         self.copy_program(event.src_path)
         if self.file_name != "" and self.file_name != event.src_path:
             # 启动复制程序
@@ -92,6 +102,8 @@ class WatchHandler(FileSystemEventHandler):
         old_path = os.path.join(*origin_path_list)
         new_path = os.path.join(*target_path_list)
 
+        logging.info(old_path)
+        logging.info(new_path)
         shutil.copy(old_path, new_path)
 
 

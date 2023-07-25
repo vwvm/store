@@ -1,28 +1,88 @@
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QScrollArea, QLabel
+import logging
+import threading
+import socket
 
-app = QApplication([])
 
-# 创建一个 QWidget 作为主窗口
-window = QWidget()
-layout = QVBoxLayout(window)
+class RecvMsg(threading.Thread):
 
-# 创建一个 QScrollArea 作为滚动区域
-scroll_area = QScrollArea()
-scroll_widget = QWidget()
+    def __init__(self, udp_s: socket):
+        super().__init__()
+        self.udp_s = udp_s
 
-# 创建一个垂直布局
-scroll_layout = QVBoxLayout()
-scroll_widget.setLayout(scroll_layout)
-# 向滚动布局中添加一些内容
-for i in range(50):
-    label = QLabel(f"Label {i}")
-    scroll_layout.addWidget(label)
+    def run(self) -> None:
+        while True:
+            temp = self.udp_s.recvfrom(1024)
+            logging.info(temp)
 
-# 设置滚动区域的小部件
-scroll_area.setWidget(scroll_widget)
+    def __del__(self):
+        self.udp_s.close()
 
-# 将滚动区域添加到主布局中
-layout.addWidget(scroll_area)
 
-window.show()
-app.exec()
+class SendMsg(threading.Thread):
+
+    def __init__(self, udp_s: socket):
+        super().__init__()
+        self.udp_s = udp_s
+
+    def run(self) -> None:
+        while True:
+            dest_ip = input("请输入对方的ip：")
+            dest_port = int(input("请输入对方的port："))
+
+            while True:
+                send_content = input("请输入要发送的数据：")
+                if send_content:
+                    temp = self.udp_s.sendto(send_content.encode("utf-8"), (dest_ip, dest_port))
+                else:
+                    break
+
+    def __del__(self):
+        self.udp_s.close()
+
+class ChatHistory(threading.Thread):
+    def run(self) -> None:
+        # 从Queue中读取数据
+        pass
+
+def main():
+    udp_s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    udp_s.bind(("", 7890))
+
+    recv_msg_thread = RecvMsg(udp_s)
+    send_msg_thread = SendMsg(udp_s)
+
+    recv_msg_thread.start()
+    send_msg_thread.start()
+
+    pass
+
+
+def logging_config():
+    """
+    设置打印日志的级别，level级别以上的日志会打印出
+    level=logging.DEBUG 、INFO 、WARNING、ERROR、CRITICAL
+    此处进行Logging.basicConfig() 设置，后面设置无效
+    format 设置输出格式，具体如下
+        %(levelno)s 日志级别
+        %(levelname)s 日志级别名称
+        %(pathname)s 当前程序的路径
+        %(filename)s 当前程序名称
+        %(funcName)s 日志所属的当前函数
+        %(lineno)d 日志的当前行号
+        %(asctime)s 日志的时间
+        %(thread)d 线程的ID
+        %(threadName)s 线程的名称
+        %(process)d 进程的ID
+        %(message)s 日志的信息
+    :return:
+    """
+    logging.basicConfig(
+        format='%(asctime)s - %(name)s - %(levelname)s - %(threadName)s -%(funcName)s '
+               '\n%(message)s',
+        level=logging.INFO)
+
+
+if __name__ == '__main__':
+    logging_config()
+    logging.info("测试")
+    main()
