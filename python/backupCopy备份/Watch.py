@@ -1,87 +1,46 @@
+import asyncio
 import os
 import platform
 import sys
 import logging
+import threading
 import time
 import shutil
 from watchdog.observers import Observer
-from watchdog.observers.read_directory_changes import WindowsApiObserver
-from watchdog.observers import api
 from watchdog.events import FileSystemEventHandler
-
+from queue import Queue
+from concurrent.futures import ThreadPoolExecutor
 import FilePathUtil
 
 
-class WatchHandler(FileSystemEventHandler):
+class FilePathQueueThread(threading.Thread):
+    """
+    新建的线程
+    用于确保新文件复制完全后
+    才进行移动和复制
+    """
 
-    def __init__(self, origin_path, target_path):
+    def __init__(self, file_path_queue: Queue, target_path):
         super().__init__()
-        self.file_name = ""
         self.target_path = target_path
-        self.origin_path = origin_path
-        self.origin_path_sign = ""
-        self.target_path_sign = ""
-
-    def on_any_event(self, event):
-        """
-        捕获全部事件
-        :param event:
-        """
+        self.file_path_queue = file_path_queue
+        self.file_path_temp = None
+        # 创建线程池
+        self.file_path_pool = ThreadPoolExecutor(max_workers=5)
         pass
 
-    def on_closed(self, event):
-        """
-        当为写入而打开的文件关闭时调用。
-        :param event:
-        """
-        print("on_closed\n")
-        print(event.is_synthetic)
-
-    def on_modified(self, event):
-        """
-        在修改文件或目录时调用。
-        :param event:
-        """
+    def run(self) -> None:
+        while True:
+            file_path = self.file_path_queue.get()
+            if file_path is None:
+                continue
+            if file_path == self.file_path_temp:
+                # 如果相同则跳过
+                continue
+            # 如果不同，则开始复制
+            print(file_path)
+            self.file_path_pool.submit( self.copy_program, file_path)
         pass
-
-    def on_moved(self, event):
-        """
-        在移动或重命名文件或目录时调用。
-        :param event:
-        """
-        pass
-
-    def on_opened(self, event):
-        print("on_opened\n")
-        print(event.is_synthetic)
-
-    def on_created(self, event):
-        """
-        创建文件或目录时调用。
-        :param event:
-        """
-        logging.info(event.src_path)
-
-        if self.origin_path_sign == "":
-            self.origin_path_sign = event.src_path
-            return
-        if self.origin_path_sign != event.src_path:
-            self.origin_path_sign = event.src_path
-            self.copy_program(event.src_path)
-
-        self.copy_program(event.src_path)
-        if self.file_name != "" and self.file_name != event.src_path:
-            # 启动复制程序
-            pass
-        self.file_name = event.src_path
-
-    def on_deleted(self, event):
-        """
-        Called when a file or directory is deleted.
-        :param event:
-        """
-        logging.error("删除了")
-        print(event.is_synthetic)
 
     def copy_program(self, file_name_to_copy: str):
         """
@@ -104,10 +63,83 @@ class WatchHandler(FileSystemEventHandler):
 
         logging.info(old_path)
         logging.info(new_path)
-        shutil.copy(old_path, new_path)
+        while True:
+            try:
+                shutil.copy2(old_path, new_path)
+                break
+            except Exception as r:
+                logging.error(r)
+                time.sleep(1)
+
+
+class WatchHandler(FileSystemEventHandler):
+
+    def __init__(self, origin_path, target_path):
+        super().__init__()
+        self.file_name = ""
+        self.target_path = target_path
+        self.origin_path = origin_path
+        self.origin_path_sign = ""
+        self.target_path_sign = ""
+
+        # 创建与子线程通讯
+        self.file_path_queue = Queue()
+        file_path_queue_thread = FilePathQueueThread(self.file_path_queue, self.target_path)
+        file_path_queue_thread.start()
+
+    def on_any_event(self, event):
+        """
+        捕获全部事件
+        :param event:
+        """
+        pass
+
+    def on_closed(self, event):
+        """
+        当为写入而打开的文件关闭时调用。
+        :param event:
+        """
+        print("on_closed\n")
+
+    def on_modified(self, event):
+        """
+        在修改文件或目录时调用。
+        :param event:
+        """
+        pass
+
+    def on_moved(self, event):
+        """
+        在移动或重命名文件或目录时调用。
+        :param event:
+        """
+        pass
+
+    def on_opened(self, event):
+        print("on_opened\n")
+
+    def on_created(self, event):
+        """
+        创建文件或目录时调用。
+        :param event:
+        """
+        logging.info(event.src_path)
+        self.file_path_queue.put(event.src_path)
+
+    def on_deleted(self, event):
+        """
+        Called when a file or directory is deleted.
+        :param event:
+        """
+        logging.error("删除了")
+        print(event.is_synthetic)
 
 
 class StartWatch(object):
+    """
+    启动监视程序
+    """
+
     def __init__(self, watch_path, target_path="../target"):
         super().__init__()
         self.watch_path = watch_path

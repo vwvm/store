@@ -137,6 +137,7 @@ class MyWindow(QMainWindow):
         new_seq_num.resize(20, 0)
         new_seq_num.setMaximumWidth(50)
         new_origin_path = QLabel(origin_path_list[0])
+        new_origin_path_layout = QVBoxLayout()
         new_target_path_layout = QVBoxLayout()
         for i in target_path_list:
             temp_label = QLabel(i)
@@ -148,8 +149,10 @@ class MyWindow(QMainWindow):
         new_main_layout.addLayout(new_target_path_layout)
 
         self.add_watch_main_layout.addWidget(new_widget)
-        # 启动监视
-        StartWatch(origin_path_list[0], target_path_list[0])
+        # 启动监视,迭代
+        for origin_path in origin_path_list:
+            for target_path in target_path_list:
+                StartWatch(origin_path, target_path)
 
         # 获取数据
         print(origin_path_list, target_path_list)
