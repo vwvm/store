@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
     QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, \
-    QHBoxLayout, QLineEdit, QTableWidget, QHeaderView, QTableWidgetItem, QScrollArea, QLabel
+    QHBoxLayout, QLineEdit, QTableWidget, QHeaderView, QTableWidgetItem, \
+    QScrollArea, QLabel, QFrame
 from PySide6.QtCore import Qt, Slot, QEvent
 from PySide6.QtGui import QGuiApplication, QPixmap, QAction, QColor, \
     QPalette, QResizeEvent
@@ -41,6 +42,13 @@ class MyWindow(QMainWindow):
         self.table_widget.setHorizontalHeaderLabels(["序号", "监视路径", "输出路径", "状态"])
 
         push_button = QPushButton("添加项目")
+        push_button.setStyleSheet(
+            "QPushButton{"
+            "background-color: #00a1d6;"
+            "border-radius:4px"
+            "}"
+            "QPushButton:hover{background: #00b5e5;}"
+        )
         push_button.clicked.connect(self.open_the_new_folder_selection_window)
 
         add_button = QPushButton("添加")
@@ -54,7 +62,7 @@ class MyWindow(QMainWindow):
         self.add_watch_main_widget.setLayout(self.add_watch_main_layout)
         self.scroll_area.setWidget(self.add_watch_main_widget)
 
-        self.add_watch_main_widget.setStyleSheet("border: 1px solid black;")
+        self.add_watch_main_widget.setStyleSheet(".QWidget{border: 1px solid black;}")
         self.scroll_area.setWidgetResizable(True)  # 这条不加无法显示里面的控件
         # 更改布局为从上而下
         self.add_watch_main_layout.setAlignment(Qt.AlignTop)
@@ -64,6 +72,7 @@ class MyWindow(QMainWindow):
         self.main_layout.addWidget(add_button)
 
         widget = QWidget()
+        widget.setStyleSheet("font-size:16px")
         widget.setLayout(self.main_layout)
         self.setCentralWidget(widget)
         pass
@@ -127,25 +136,44 @@ class MyWindow(QMainWindow):
         :param origin_path_list:
         :param target_path_list:
         """
+        # 校验是否存在嵌套文件夹
+        pass
         # 绘制到主屏幕
         new_widget = QWidget()
-        new_widget.setStyleSheet("border: 1px solid green;")
+        new_widget.setStyleSheet(".QWidget{border: 2px solid green;}")
         new_main_layout = QHBoxLayout()
         self.sequence_number += 1
         # 设置序号
         new_seq_num = QLabel(str(self.sequence_number))
+        new_seq_num.setStyleSheet(".QLabel{border: 1px solid greenQLabel}")
         new_seq_num.resize(20, 0)
         new_seq_num.setMaximumWidth(50)
-        new_origin_path = QLabel(origin_path_list[0])
         new_origin_path_layout = QVBoxLayout()
         new_target_path_layout = QVBoxLayout()
+        for i in origin_path_list:
+            temp_frame = QFrame()
+            temp_frame.setStyleSheet(".QFrame{border: 1px solid green;}")
+            temp_label = QLabel(i)
+            temp_label.setMinimumHeight(30)
+            temp_button = QPushButton("×")
+            temp_button.setFixedSize(24, 24)  # 设置按钮为圆形
+            temp_button.setStyleSheet(
+                "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 20px; }"
+            )
+            temp_layout = QHBoxLayout()
+            temp_layout.addWidget(temp_label)
+            temp_layout.addWidget(temp_button)
+            temp_frame.setLayout(temp_layout)
+            new_origin_path_layout.addWidget(temp_frame)
         for i in target_path_list:
             temp_label = QLabel(i)
+            temp_label.setStyleSheet("border: 1px solid green")
+            temp_label.setMinimumHeight(30)
             new_target_path_layout.addWidget(temp_label)
 
         new_widget.setLayout(new_main_layout)
         new_main_layout.addWidget(new_seq_num)
-        new_main_layout.addWidget(new_origin_path)
+        new_main_layout.addLayout(new_origin_path_layout)
         new_main_layout.addLayout(new_target_path_layout)
 
         self.add_watch_main_layout.addWidget(new_widget)
@@ -157,7 +185,6 @@ class MyWindow(QMainWindow):
         # 获取数据
         print(origin_path_list, target_path_list)
 
-        # 添加到table
         pass
 
 
@@ -197,7 +224,6 @@ def logging_config():
     logging.basicConfig(filename='log.txt',
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s-%(funcName)s',
                         level=logging.INFO)
-
 
 
 if __name__ == '__main__':
