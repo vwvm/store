@@ -1,6 +1,5 @@
 import sys
 import random
-
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
@@ -11,6 +10,7 @@ class MathQuizApp(QMainWindow):
         super().__init__()
         self.init_ui()
 
+    mspaint
     def init_ui(self):
         self.setWindowTitle("做题软件")
         self.resize(200, 150)
@@ -30,11 +30,17 @@ class MathQuizApp(QMainWindow):
     def generate_question(self):
         a = random.randint(1, 100)
         b = random.randint(1, 100)
-        operator = random.choice(['+', '-'])
-        if operator == '+':
-            self.answer = a + b
-        else:
-            self.answer = a - b
+        operator = random.choice(['+', '-', '×', '÷'])
+        match operator:
+            case '+':
+                self.answer = a + b
+            case "-":
+                self.answer = a - b
+            case '×':
+                self.answer = a + b
+            case "÷":
+                self.answer = a - b
+
         self.question_label.setText(f"{a} {operator} {b} = ?")
         self.answer_input.clear()
 
@@ -51,7 +57,6 @@ class MathQuizApp(QMainWindow):
             self.question_label.setText("请输入一个整数作为答案！")
 
         QTimer.singleShot(1000, self.generate_question)
-
 
     def keyPressEvent(self, event: QKeyEvent) -> None:
         print(event.key())

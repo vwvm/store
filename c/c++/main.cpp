@@ -13,16 +13,48 @@ void test01() {
     std::cout << data << std::endl;
 }
 
-void test02(){
+void test02() {
     int p = 1123123;
     std::cout << p << std::endl;
 }
 
-v
+void test03() {
+    int num = 100;
+    std::cout << &num << std::endl;
+    short *p = (short *) &num;
+
+    std::cout << p << std::endl;
+    char *c = (char *) &num;
+    std::cout << c << std::endl;
+
+    std::cout << sizeof(char) << std::endl;
+    std::cout << sizeof(short) << std::endl;
+    std::cout << sizeof(int) << std::endl;
+    std::cout << sizeof(long) << std::endl;
+    std::cout << sizeof(long long) << std::endl;
+    std::cout << sizeof(double) << std::endl;
+}
+
+void test04() {
+    int arr[] = {1, 2, 3, 4, 5};\
+    int *p = arr + 3;
+    std::cout << p[1] << std::endl;
+}
+
+void test05() {
+    char *arr[] = {"123", "234", "345", "456"};
+    std::cout << sizeof(arr) / sizeof(arr[0]) << std::endl;
+    std::cout << arr[2][2] << std::endl;
+}
+
+void test06() {
+    int arr[] = {1, 2, 3, 5};
+    int (*p)[4] = &arr;
+    std::cout << (*p)[2] << std::endl;
+}
 
 int main() {
-    
-    test02();
+    test06();
     return 0;
 }
 
