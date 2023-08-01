@@ -53,8 +53,44 @@ void test06() {
     std::cout << (*p)[2] << std::endl;
 }
 
+int myAdd(int a, int b) {
+    return a + b;
+}
+
+void test07() {
+    int (*p)(int a, int b) = NULL;
+    std::cout << "sizeof = " << sizeof(p) << std::endl;
+    p = myAdd;
+
+}
+
+struct Student {
+    int age;
+    char name[32];
+};
+
+void test08() {
+    Student student = Student{1, 89};
+    printf("%s", student.name);
+}
+
+struct compress {
+    unsigned char a:2;
+    // 另起一个存储单元
+    unsigned char :0;
+    // 无意义位段
+    char :3;
+    unsigned char b:2;
+    unsigned char c:4;
+};
+using namespace std;
+
+void test09() {
+    cout << sizeof(compress) << endl;
+}
+
 int main() {
-    test06();
+    test09();
     return 0;
 }
 
