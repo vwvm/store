@@ -10,7 +10,7 @@ class MathQuizApp(QMainWindow):
         super().__init__()
         self.init_ui()
 
-    mspaint
+
     def init_ui(self):
         self.setWindowTitle("做题软件")
         self.resize(200, 150)

@@ -20,17 +20,18 @@ class FilePathQueueThread(threading.Thread):
     才进行移动和复制
     """
 
-    def __init__(self, file_path_queue: Queue, target_path):
+    def __init__(self, file_path_queue: Queue, target_path, event: threading.Event):
         super().__init__()
         self.target_path = target_path
         self.file_path_queue = file_path_queue
         self.file_path_temp = None
         # 创建线程池
         self.file_path_pool = ThreadPoolExecutor(max_workers=5)
+        self.event = event
         pass
 
     def run(self) -> None:
-        while True:
+        while not self.event.is_set():
             file_path = self.file_path_queue.get()
             if file_path is None:
                 continue
@@ -38,13 +39,13 @@ class FilePathQueueThread(threading.Thread):
                 # 如果相同则跳过
                 continue
             # 如果不同，则开始复制
-            print(file_path)
-            self.file_path_pool.submit( self.copy_program, file_path)
+            self.file_path_pool.submit(self.copy_program, file_path, self.event)
         pass
 
-    def copy_program(self, file_name_to_copy: str):
+    def copy_program(self, file_name_to_copy: str, event: threading.Event):
         """
         复制模块
+        :param event: 线程事件,用于停止线程
         :param file_name_to_copy: 等待复制的文件名称
         """
         # 判断当前运行环境
@@ -63,7 +64,7 @@ class FilePathQueueThread(threading.Thread):
 
         logging.info(old_path)
         logging.info(new_path)
-        while True:
+        while not event.is_set():
             try:
                 shutil.copy2(old_path, new_path)
                 break
@@ -74,17 +75,27 @@ class FilePathQueueThread(threading.Thread):
 
 class WatchHandler(FileSystemEventHandler):
 
-    def __init__(self, origin_path, target_path):
+    def __init__(self, origin_path, target_path, stop_event: threading.Event):
+        """
+        初始化监视器
+        :param origin_path: 源路径
+        :param target_path: 目标路径
+        :param event: 停止事件
+        """
         super().__init__()
         self.file_name = ""
         self.target_path = target_path
         self.origin_path = origin_path
         self.origin_path_sign = ""
         self.target_path_sign = ""
+        self.stop_event = stop_event
 
         # 创建与子线程通讯
         self.file_path_queue = Queue()
-        file_path_queue_thread = FilePathQueueThread(self.file_path_queue, self.target_path)
+        file_path_queue_thread = FilePathQueueThread(self.file_path_queue, self.target_path, stop_event)
+        # 设置为守护线程
+        file_path_queue_thread.daemon = True
+        # 启动线程
         file_path_queue_thread.start()
 
     def on_any_event(self, event):
@@ -144,18 +155,32 @@ class StartWatch(object):
         super().__init__()
         self.watch_path = watch_path
         self.target_path = target_path
+        self.stop_event = threading.Event()
         self.observer = Observer()
         self.thread_start(watch_path, target_path)
 
     def thread_start(self, watch_path: str, target_path: str):
-        watch_handler = WatchHandler(watch_path, target_path)
+        """
+        线程启动
+        :param watch_path: 监视路径
+        :param target_path: 目标路径
+        """
+        watch_handler = WatchHandler(watch_path, target_path, stop_event)
         self.observer.schedule(watch_handler, watch_path, recursive=False)
         self.observer.start()
         pass
 
     def thread_info(self):
+        """
+        打印线程信息
+        """
         print(self.observer.daemon)
         print("线程的活动状态:", self.observer.is_alive())
+
+    def thread_stop(self):
+        self.stop_event.set()
+        self.observer.stop()
+        self.thread_info()
 
 
 if __name__ == "__main__":
@@ -165,7 +190,6 @@ if __name__ == "__main__":
                         datefmt='%Y-%m-%d %H:%M:%S')
     # 当前路径
     path = sys.argv[1] if len(sys.argv) > 1 else '.'
-    print(path)
     app = StartWatch(path)
     app.thread_info()
     time.sleep(100000)

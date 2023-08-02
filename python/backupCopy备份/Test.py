@@ -1,23 +1,61 @@
-from concurrent.futures import ThreadPoolExecutor
+import threading
 import time
 
 
-def get_html(times, name):
-    time.sleep(times)
-    print("get page {} success".format(times))
-    return name
-
-print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
-# 表示在这个线程池中同时运行的线程有3个线程
-executor = ThreadPoolExecutor(max_workers=5)
-
-# 通过submit函数提交执行的函数到线程池中, submit 是立即返回
-task1 = executor.submit(get_html, 1, "ss")  # 第一个是回调函数，第二个是传给函数的参数
-task2 = executor.submit(get_html, 2, "ss")
-task3 = executor.submit(get_html, 3, "ss")
-task4 = executor.submit(get_html, 4, "ss")
-task5 = executor.submit(get_html, 5, "ss")
-task6 = executor.submit(get_html, 6, "ss")
+class work_a(threading.Thread):
+    def __init__(self, name: str, event: threading.Event):
+        super().__init__()
+        self.name = name
+        self.event = event
 
 
-print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
+    def run(self) -> None:
+        while not self.event.is_set():
+            print(f"子线程{threading.current_thread().name}正在执行")
+            time.sleep(1)
+
+
+
+
+class work(threading.Thread):
+
+    def __init__(self):
+        super().__init__()
+
+    def run(self) -> None:
+        event_a = threading.Event()
+        event_b = threading.Event()
+        wa = work_a("这是A", event_a)
+        wb = work_a("线程B", event_b)
+        wa.daemon = True
+        wb.daemon = True
+        wa.start()
+        wb.start()
+
+        time.sleep(2)
+        event_a.set()
+        time.sleep(2)
+        event_b.set()
+
+
+
+
+def worker():
+    while True:
+        time.sleep(1)
+
+
+if __name__ == "__main__":
+    print("主线程开始")
+    wok = work()
+
+    wok.daemon = True
+    wok.start()
+    time.sleep(2)
+    worker1 = threading.Thread(target=worker)
+    worker1.start()
+
+    # 主线程休眠5秒
+    time.sleep(5)
+
+    print("主线程结束")

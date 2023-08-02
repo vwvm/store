@@ -2,7 +2,7 @@
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
     QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, \
     QHBoxLayout, QLineEdit, QTableWidget, QHeaderView, QTableWidgetItem, \
-    QScrollArea, QLabel, QFrame
+    QScrollArea, QLabel, QFrame, QMessageBox
 from PySide6.QtCore import Qt, Slot, QEvent
 from PySide6.QtGui import QGuiApplication, QPixmap, QAction, QColor, \
     QPalette, QResizeEvent
@@ -124,6 +124,9 @@ class MyWindow(QMainWindow):
         print(self.folderName)
 
     def open_the_new_folder_selection_window(self):
+        """
+        打开新的文件夹选择窗口
+        """
         print("open")
         window2 = Window2()
         window2.list_signal.connect(self.path_list_slot)
@@ -150,21 +153,29 @@ class MyWindow(QMainWindow):
         new_seq_num.setMaximumWidth(50)
         new_origin_path_layout = QVBoxLayout()
         new_target_path_layout = QVBoxLayout()
+        origin_number = 0
+        target_number = 0
         for i in origin_path_list:
+            origin_number += 1
             temp_frame = QFrame()
             temp_frame.setStyleSheet(".QFrame{border: 1px solid green;}")
             temp_label = QLabel(i)
             temp_label.setMinimumHeight(30)
+
+            # 临时的叉按钮
             temp_button = QPushButton("×")
             temp_button.setFixedSize(24, 24)  # 设置按钮为圆形
             temp_button.setStyleSheet(
-                "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 20px; }"
+                "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 18px; }"
             )
+            temp_button.clicked.connect(lambda: self.show_warning_box(self.sequence_number, 0, -1))
+
             temp_layout = QHBoxLayout()
             temp_layout.addWidget(temp_label)
             temp_layout.addWidget(temp_button)
             temp_frame.setLayout(temp_layout)
             new_origin_path_layout.addWidget(temp_frame)
+
         for i in target_path_list:
             temp_label = QLabel(i)
             temp_label.setStyleSheet("border: 1px solid green")
@@ -186,6 +197,21 @@ class MyWindow(QMainWindow):
         print(origin_path_list, target_path_list)
 
         pass
+
+    def show_warning_box(self, serial_number: int, origin_number: int, target_number: int):
+        """
+        显示错误提示框
+        :param serial_number: 序号
+        :param origin_number: 源路径序号
+        :param target_number: 目标路径序号
+        """
+        reply = QMessageBox.warning(self, "警告", "确定要执行此操作吗？", QMessageBox.Yes | QMessageBox.No,
+                                    QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            print("用户点击了确定按钮")
+        else:
+            print("用户点击了取消按钮")
 
 
 class Color(QWidget):
