@@ -165,7 +165,7 @@ class StartWatch(object):
         :param watch_path: 监视路径
         :param target_path: 目标路径
         """
-        watch_handler = WatchHandler(watch_path, target_path, stop_event)
+        watch_handler = WatchHandler(watch_path, target_path, self.stop_event)
         self.observer.schedule(watch_handler, watch_path, recursive=False)
         self.observer.start()
         pass
@@ -181,6 +181,20 @@ class StartWatch(object):
         self.stop_event.set()
         self.observer.stop()
         self.thread_info()
+
+    def get_origin_path(self) -> str:
+        """
+        返回源路径
+        :return: 源路径字符串
+        """
+        return self.watch_path
+
+    def get_target_path(self) -> str:
+        """
+        返回目标路径
+        :return: 目标路径字符串
+        """
+        return self.target_path
 
 
 if __name__ == "__main__":

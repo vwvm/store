@@ -141,25 +141,49 @@ class MyWindow(QMainWindow):
         """
         # 校验是否存在嵌套文件夹
         pass
-        # 绘制到主屏幕
+
+        start_watch_list = []
+        # 启动监视,迭代
+        for origin_path in origin_path_list:
+            for target_path in target_path_list:
+                start_watch = StartWatch(origin_path, target_path)
+                start_watch_list.append(start_watch)
+
+        # 最大的框
         new_widget = QWidget()
         new_widget.setStyleSheet(".QWidget{border: 2px solid green;}")
         new_main_layout = QHBoxLayout()
         self.sequence_number += 1
+
         # 设置序号
+        new_seq_frame = QFrame()
+        new_seq_frame.setStyleSheet(".QFrame{border: 1px solid green;}")
+
         new_seq_num = QLabel(str(self.sequence_number))
-        new_seq_num.setStyleSheet(".QLabel{border: 1px solid greenQLabel}")
         new_seq_num.resize(20, 0)
         new_seq_num.setMaximumWidth(50)
+
+        # 序号的叉按钮
+        new_seq_fork_button = QPushButton("×")
+        new_seq_fork_button.setFixedSize(24, 24)  # 设置按钮为圆形
+        new_seq_fork_button.setStyleSheet(
+            "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 18px; }"
+        )
+        new_seq_fork_button.clicked.connect(lambda: self.show_warning_box(start_watch_list, "-1", "-1", new_widget))
+        temp_layout = QHBoxLayout()
+        temp_layout.addWidget(new_seq_num)
+        temp_layout.addWidget(new_seq_fork_button)
+        new_seq_frame.setLayout(temp_layout)
+
+        # 左右竖排
         new_origin_path_layout = QVBoxLayout()
         new_target_path_layout = QVBoxLayout()
-        origin_number = 0
-        target_number = 0
-        for i in origin_path_list:
-            origin_number += 1
+
+        for origin_path in origin_path_list:
             temp_frame = QFrame()
             temp_frame.setStyleSheet(".QFrame{border: 1px solid green;}")
-            temp_label = QLabel(i)
+
+            temp_label = QLabel(origin_path)
             temp_label.setMinimumHeight(30)
 
             # 临时的叉按钮
@@ -168,7 +192,7 @@ class MyWindow(QMainWindow):
             temp_button.setStyleSheet(
                 "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 18px; }"
             )
-            temp_button.clicked.connect(lambda: self.show_warning_box(self.sequence_number, 0, -1))
+            temp_button.clicked.connect(lambda: self.show_warning_box(start_watch_list, origin_path, "", temp_frame))
 
             temp_layout = QHBoxLayout()
             temp_layout.addWidget(temp_label)
@@ -176,40 +200,75 @@ class MyWindow(QMainWindow):
             temp_frame.setLayout(temp_layout)
             new_origin_path_layout.addWidget(temp_frame)
 
-        for i in target_path_list:
-            temp_label = QLabel(i)
-            temp_label.setStyleSheet("border: 1px solid green")
+        for target_path in target_path_list:
+            temp_frame = QFrame()
+            temp_frame.setStyleSheet(".QFrame{border: 1px solid green;}")
+
+            temp_label = QLabel(target_path)
             temp_label.setMinimumHeight(30)
-            new_target_path_layout.addWidget(temp_label)
+
+            # 临时的叉按钮
+            temp_button = QPushButton("×")
+            temp_button.setFixedSize(24, 24)  # 设置按钮为圆形
+            temp_button.setStyleSheet(
+                "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 18px; }"
+            )
+            temp_button.clicked.connect(lambda: self.show_warning_box(start_watch_list, "-1", target_path, temp_frame))
+
+            temp_layout = QHBoxLayout()
+            temp_layout.addWidget(temp_label)
+            temp_layout.addWidget(temp_button)
+            temp_frame.setLayout(temp_layout)
+            new_target_path_layout.addWidget(temp_frame)
 
         new_widget.setLayout(new_main_layout)
-        new_main_layout.addWidget(new_seq_num)
+        new_main_layout.addWidget(new_seq_frame)
         new_main_layout.addLayout(new_origin_path_layout)
         new_main_layout.addLayout(new_target_path_layout)
 
         self.add_watch_main_layout.addWidget(new_widget)
-        # 启动监视,迭代
-        for origin_path in origin_path_list:
-            for target_path in target_path_list:
-                StartWatch(origin_path, target_path)
 
         # 获取数据
         print(origin_path_list, target_path_list)
 
         pass
 
-    def show_warning_box(self, serial_number: int, origin_number: int, target_number: int):
+    def show_warning_box(self, start_watch_list: list[StartWatch], origin_path: str, target_path: str, widget: QWidget):
         """
-        显示错误提示框
-        :param serial_number: 序号
-        :param origin_number: 源路径序号
-        :param target_number: 目标路径序号
+        todo 传入列表,并不同步,可能会出现问题
+        显示警告提示框
+        :param widget:
+        :param start_watch_list: 线程列表
+        :param origin_path: 源路径
+        :param target_path: 目标路径
         """
         reply = QMessageBox.warning(self, "警告", "确定要执行此操作吗？", QMessageBox.Yes | QMessageBox.No,
                                     QMessageBox.No)
-
+        list_size = len(start_watch_list)
+        if list_size <= 0:
+            return
         if reply == QMessageBox.Yes:
-            print("用户点击了确定按钮")
+            # "用户点击了确定按钮"
+            # 删除组件
+            widget.hide()
+            # 停止监视
+            if origin_path != "-1":
+                for i in range(list_size - 1, -1, -1):
+                    if start_watch_list[i].get_origin_path() == origin_path:
+                        start_watch_list[i].thread_stop()
+                        start_watch_list.pop(i)
+                return 0
+            if target_path != "-1":
+                for i in range(list_size - 1, -1, -1):
+                    if start_watch_list[i].get_target_path() == target_path:
+                        start_watch_list[i].thread_stop()
+                        start_watch_list.pop(i)
+                return 0
+            # 停止全部
+            if target_path == origin_path:
+                for i in start_watch_list:
+                    i.thread_stop()
+
         else:
             print("用户点击了取消按钮")
 
