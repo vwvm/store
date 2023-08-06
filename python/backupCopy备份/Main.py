@@ -3,7 +3,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
     QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, \
     QHBoxLayout, QLineEdit, QTableWidget, QHeaderView, QTableWidgetItem, \
     QScrollArea, QLabel, QFrame, QMessageBox
-from PySide6.QtCore import Qt, Slot, QEvent
+from PySide6.QtCore import Qt, Slot, QEvent, QTimer
 from PySide6.QtGui import QGuiApplication, QPixmap, QAction, QColor, \
     QPalette, QResizeEvent
 from qt_material import apply_stylesheet
@@ -15,7 +15,7 @@ from NewSelectFolderWindow import NewSelectFolderWindow
 from Window2 import Window2
 import logging
 from Watch import StartWatch
-
+from ReadWriteDB import read_data, save_data, examine_data, clean_data
 
 class MyWindow(QMainWindow):
     def __init__(self):
@@ -26,6 +26,14 @@ class MyWindow(QMainWindow):
         self.setupMenuBar()
         self.main_ui()
         self.main_data()
+
+        # 配置文件列表
+        self.config_List: list[list[int, list[str], list[str]]] = []
+        # 如果没有自动创建文件数据库
+        examine_data()
+        # 读取配置
+        self.read_config()
+
         # 获取用户目录
         self.folderName: str = str(pathlib.Path.home())
 
@@ -103,8 +111,9 @@ class MyWindow(QMainWindow):
         newAct = QAction(QPixmap(":/icon/ic_start"), "新建", self)
         fileMenu.addAction(newAct)
 
-        saveAct = QAction(QPixmap(":/icon/ic_start"), "保存", self)
-        fileMenu.addAction(saveAct)
+        save_act = QAction(QPixmap(":/icon/ic_start"), "保存", self)
+        save_act.triggered.connect(self.save_config)
+        fileMenu.addAction(save_act)
 
         exitAct = QAction(QPixmap(":/icon/ic_start"), "退出", self)
         fileMenu.addAction(exitAct)
@@ -115,6 +124,28 @@ class MyWindow(QMainWindow):
         exitAct.setStatusTip('Exit application')
         # 利用信号槽机制,将退出动作和窗口的关闭函数联系起来
         exitAct.triggered.connect(self.close)
+
+    def save_config(self):
+        """
+        保存配置文件
+        """
+        # 清除原有配置
+        clean_data()
+        # 保存
+        save_data(self.config_List)
+        self.show_success_message("操作成功")
+        pass
+
+    def read_config(self):
+        """
+        读取配置文件
+        """
+        self.config_List = read_data()
+        print(len(self.config_List))
+        if len(self.config_List) == 0:
+            return
+        for i in self.config_List:
+            self.show_path_list_widgets(i[1], i[2])
 
     def open_the_folder(self):
         pass
@@ -132,13 +163,14 @@ class MyWindow(QMainWindow):
         window2.list_signal.connect(self.path_list_slot)
         window2.show()
 
-    @Slot(list, list)
-    def path_list_slot(self, origin_path_list: list[str], target_path_list: list[str]):
+    def show_path_list_widgets(self, origin_path_list: list[str], target_path_list: list[str]):
         """
-        槽函数，接收子窗口的列表
+        显示主界面列表
         :param origin_path_list:
         :param target_path_list:
         """
+        pass
+
         # 校验是否存在嵌套文件夹
         pass
 
@@ -228,10 +260,38 @@ class MyWindow(QMainWindow):
 
         self.add_watch_main_layout.addWidget(new_widget)
 
-        # 获取数据
-        print(origin_path_list, target_path_list)
+    @Slot(list, list)
+    def path_list_slot(self, origin_path_list: list[str], target_path_list: list[str]):
+        """
+        槽函数，接收子窗口的列表
+        :param origin_path_list:
+        :param target_path_list:
+        """
+        # 显示部件
+        self.show_path_list_widgets(origin_path_list, target_path_list)
 
+        # 存到配置列表中
+        self.config_List.append([self.sequence_number, origin_path_list, target_path_list])
         pass
+
+    def show_success_message(self, msg: str = "操作成功"):
+        """
+        :type msg: str
+        :param msg: 提示信息
+        """
+        message_box = QMessageBox(self)
+        message_box.setText(msg)
+        message_box.setWindowTitle('Success')
+        message_box.setIcon(QMessageBox.Information)
+        message_box.setStandardButtons(QMessageBox.Ok)
+        message_box.setDefaultButton(QMessageBox.Ok)
+
+        # 使用 QTimer 在3秒后关闭提示框
+        timer = QTimer(self)
+        timer.timeout.connect(message_box.close)
+        timer.start(3000)  # 3000 毫秒即 3 秒
+
+        message_box.exec()
 
     def show_warning_box(self, start_watch_list: list[StartWatch], origin_path: str, target_path: str, widget: QWidget):
         """
