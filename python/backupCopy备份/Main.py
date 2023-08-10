@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from functools import partial
+
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
     QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, \
     QHBoxLayout, QLineEdit, QTableWidget, QHeaderView, QTableWidgetItem, \
@@ -17,28 +19,33 @@ import logging
 from Watch import StartWatch
 from ReadWriteDB import read_data, save_data, examine_data, clean_data
 
+
 class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.resize(800, 600)
         self.setWindowTitle("文件自动备份")
         self.setWindowIcon(QPixmap("vwvmn.png"))
-        self.setupMenuBar()
-        self.main_ui()
+        self.setup_menu_bar()
+        # 读取配置
+        self.read_config()
+        # 主要数据
         self.main_data()
-
         # 配置文件列表
         self.config_List: list[list[int, list[str], list[str]]] = []
         # 如果没有自动创建文件数据库
         examine_data()
-        # 读取配置
-        self.read_config()
 
         # 获取用户目录
         self.folderName: str = str(pathlib.Path.home())
 
+        self.main_ui()
+
     def main_data(self):
         self.sequence_number = 0
+
+        # 用于存储，每一组的序号
+
 
     def main_ui(self):
         self.main_layout = QVBoxLayout()
@@ -101,7 +108,10 @@ class MyWindow(QMainWindow):
         self.table_widget.setColumnWidth(0, int(event.size().width() / 6))
         pass
 
-    def setupMenuBar(self):
+    def setup_menu_bar(self):
+        """
+        菜单项设置
+        """
         layout = QGridLayout()
         # 添加文件菜单项
         fileMenu = self.menuBar().addMenu(QPixmap(":/icon/ic_start"), "文件")
@@ -185,6 +195,7 @@ class MyWindow(QMainWindow):
         new_widget = QWidget()
         new_widget.setStyleSheet(".QWidget{border: 2px solid green;}")
         new_main_layout = QHBoxLayout()
+        # 主要的序号
         self.sequence_number += 1
 
         # 设置序号
@@ -202,6 +213,7 @@ class MyWindow(QMainWindow):
             "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 18px; }"
         )
         new_seq_fork_button.clicked.connect(lambda: self.show_warning_box(start_watch_list, "-1", "-1", new_widget))
+
         temp_layout = QHBoxLayout()
         temp_layout.addWidget(new_seq_num)
         temp_layout.addWidget(new_seq_fork_button)
@@ -224,7 +236,11 @@ class MyWindow(QMainWindow):
             temp_button.setStyleSheet(
                 "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 18px; }"
             )
-            temp_button.clicked.connect(lambda: self.show_warning_box(start_watch_list, origin_path, "", temp_frame))
+
+            ## 下面的无法固定参数，待处理
+            callback_with = partial(self.show_warning_box, start_watch_list, origin_path, "-1", temp_frame)
+            # temp_button.clicked.connect(lambda: self.show_warning_box(start_watch_list, origin_path, "-1", temp_frame))
+            temp_button.clicked.connect(callback_with)
 
             temp_layout = QHBoxLayout()
             temp_layout.addWidget(temp_label)
@@ -310,7 +326,7 @@ class MyWindow(QMainWindow):
         if reply == QMessageBox.Yes:
             # "用户点击了确定按钮"
             # 删除组件
-            widget.hide()
+            widget.deleteLater()
             # 停止监视
             if origin_path != "-1":
                 for i in range(list_size - 1, -1, -1):

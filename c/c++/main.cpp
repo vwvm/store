@@ -75,13 +75,13 @@ void test08() {
 }
 
 struct compress {
-    unsigned char a:2;
+    unsigned char a: 2;
     // 另起一个存储单元
-    unsigned char :0;
+    unsigned char : 0;
     // 无意义位段
-    char :3;
-    unsigned char b:2;
-    unsigned char c:4;
+    char : 3;
+    unsigned char b: 2;
+    unsigned char c: 4;
 };
 using namespace std;
 
@@ -89,8 +89,13 @@ void test09() {
     cout << sizeof(compress) << endl;
 }
 
+extern "C" {
+# include "c/fun.h"
+}
+
+
 int main() {
-    test09();
+    cout << func2(1, 2) << endl;
     return 0;
 }
 

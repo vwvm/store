@@ -18,6 +18,7 @@ class MyWindow(QWidget):
         self.mainLayout = QVBoxLayout()
         self.mainLayout.addWidget(self.lbWait)
         self.setLayout(self.mainLayout)
+        # 执行一次
 
         QTimer.singleShot(1000, self.openMainWindow)
 

@@ -63,7 +63,7 @@ def read_data() -> []:
     conn = sqlite3.connect('database.db')
     # 创建一个游标对象
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM group_path")
+    cursor.execute("SELECT * FROM group_path ORDER BY group_seq")
     res = cursor.fetchall()
     if len(res) < 2:
         return []
@@ -76,13 +76,17 @@ def read_data() -> []:
     target_list = []
     for i in res:
         temp_group_number = i[1]
-        # 第一个不保存
-        if temp_group_number > len(path_config_list):
-            if len(path_config_list) != 0:
-                group_list.append(origin_list)
-                group_list.append(target_list)
-                path_config_list.append(group_list)
-            group_list = [temp_group_number]
+        # 第一个保存序号
+        if len(group_list) == 0:
+            group_list.append(temp_group_number)
+        # 出现临时的数据大于时，启动接下来的函数
+        if temp_group_number > group_list[0]:
+            group_list.append(origin_list)
+            group_list.append(target_list)
+            path_config_list.append(group_list)
+            group_list = []
+            origin_list = []
+            target_list = []
         if i[2] != '-1':
             origin_list.append(i[2])
         if i[3] != "-1":
