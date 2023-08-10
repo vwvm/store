@@ -8,12 +8,9 @@ from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
 from PySide6.QtCore import Qt, Slot, QEvent, QTimer
 from PySide6.QtGui import QGuiApplication, QPixmap, QAction, QColor, \
     QPalette, QResizeEvent
-from qt_material import apply_stylesheet
 import sys
-import os
 import pathlib
 
-from NewSelectFolderWindow import NewSelectFolderWindow
 from Window2 import Window2
 import logging
 from Watch import StartWatch
@@ -23,31 +20,33 @@ from ReadWriteDB import read_data, save_data, examine_data, clean_data
 class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.resize(800, 600)
-        self.setWindowTitle("文件自动备份")
-        self.setWindowIcon(QPixmap("vwvmn.png"))
-        self.setup_menu_bar()
-        # 读取配置
-        self.read_config()
-        # 主要数据
-        self.main_data()
-        # 配置文件列表
-        self.config_List: list[list[int, list[str], list[str]]] = []
+        self.init_data()
+        self.init_ui()
+
         # 如果没有自动创建文件数据库
         examine_data()
+        # 读取配置
+        self.read_config()
+
+    def init_data(self):
+        self.sequence_number = 0
 
         # 获取用户目录
         self.folderName: str = str(pathlib.Path.home())
 
-        self.main_ui()
-
-    def main_data(self):
-        self.sequence_number = 0
-
         # 用于存储，每一组的序号
+        self.seq_frame_list = []
 
+        # 配置文件列表
+        self.config_List: list[list[int, list[str], list[str]]] = []
 
-    def main_ui(self):
+    def init_ui(self):
+
+        self.resize(800, 600)
+        self.setWindowTitle("文件自动备份")
+        self.setWindowIcon(QPixmap("vwvmn.png"))
+        self.setup_menu_bar()
+
         self.main_layout = QVBoxLayout()
         # 设置表
         self.table_widget = QTableWidget()
@@ -92,13 +91,24 @@ class MyWindow(QMainWindow):
         self.setCentralWidget(widget)
         pass
 
+    def seq_num_sort(self):
+        """
+        重新排序序号
+        """
+        children_widget: list[QLabel] = self.add_watch_main_widget.findChildren(QLabel, "seq_label")
+        # children_widget: list[QWidget] = [child for child in children_widget if type(child) is QLabel]
+        temp_number = 0
+        for i in children_widget:
+            temp_number += 1
+            i.setText(str(temp_number))
+
     def add_watch_widget(self):
-        btn = QPushButton("ti")
-        widget = QWidget()
-        widget.resize(12, 200)
-        self.add_watch_main_layout.addWidget(btn)
-        self.add_watch_main_layout.addWidget(widget)
+        """
+        重新排序序号
+        """
+        self.seq_num_sort()
         pass
+
 
     def resizeEvent(self, event: QResizeEvent) -> None:
         """
@@ -203,6 +213,7 @@ class MyWindow(QMainWindow):
         new_seq_frame.setStyleSheet(".QFrame{border: 1px solid green;}")
 
         new_seq_num = QLabel(str(self.sequence_number))
+        new_seq_num.setObjectName("seq_label")
         new_seq_num.resize(20, 0)
         new_seq_num.setMaximumWidth(50)
 
@@ -261,7 +272,8 @@ class MyWindow(QMainWindow):
             temp_button.setStyleSheet(
                 "QPushButton { border-radius: 12px; background-color: #CD5C5C; color: white; font-size: 18px; }"
             )
-            temp_button.clicked.connect(lambda: self.show_warning_box(start_watch_list, "-1", target_path, temp_frame))
+            callback_with = partial(self.show_warning_box, start_watch_list, "-1", target_path, temp_frame)
+            temp_button.clicked.connect(callback_with)
 
             temp_layout = QHBoxLayout()
             temp_layout.addWidget(temp_label)
@@ -313,6 +325,7 @@ class MyWindow(QMainWindow):
         """
         todo 传入列表,并不同步,可能会出现问题
         显示警告提示框
+        同时删除组件
         :param widget:
         :param start_watch_list: 线程列表
         :param origin_path: 源路径
@@ -340,13 +353,15 @@ class MyWindow(QMainWindow):
                         start_watch_list[i].thread_stop()
                         start_watch_list.pop(i)
                 return 0
+            QTimer.singleShot(50, self.seq_num_sort)
+
             # 停止全部
             if target_path == origin_path:
                 for i in start_watch_list:
                     i.thread_stop()
-
         else:
             print("用户点击了取消按钮")
+
 
 
 class Color(QWidget):
