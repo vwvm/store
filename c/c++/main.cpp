@@ -41,12 +41,6 @@ void test04() {
     std::cout << p[1] << std::endl;
 }
 
-void test05() {
-    char *arr[] = {"123", "234", "345", "456"};
-    std::cout << sizeof(arr) / sizeof(arr[0]) << std::endl;
-    std::cout << arr[2][2] << std::endl;
-}
-
 void test06() {
     int arr[] = {1, 2, 3, 5};
     int (*p)[4] = &arr;
@@ -93,9 +87,78 @@ extern "C" {
 # include "c/fun.h"
 }
 
+class Learn_A {
+public:
+    int ma;
+public:
+    Learn_A() {
+        cout << "A无参构造" << endl;
+    }
+
+    Learn_A(int a) {
+        ma = a;
+        cout << "A有参构造" << a << endl;
+    }
+
+    ~ Learn_A() {
+        cout << "A析构函数" << endl;
+    }
+};
+
+class Learn_B {
+
+public:
+    int mb;
+    Learn_A oa; //对象成员
+    Learn_B() {
+        cout << "B无参构造" << endl;
+    }
+
+    Learn_B &a(char *string1) {
+        cout << string1 << endl;
+        return *this;
+    }
+
+    Learn_B(int a, int b) : oa(a) {
+        mb = b;
+        cout << "B有参构造" << b << endl;
+    }
+
+    ~Learn_B() {
+        cout << "B析构函数" << endl;
+    }
+};
+
+#include "headers/Data4.hpp"
+
+void learn7() {
+    Data4<int, int> ob1(10, 29);
+    ob1.showData();
+
+}
+
+#include "template/MyArray.h"
+
+void learn8() {
+    MyArray<int> arr1;
+    arr1.pushBack(1);
+    arr1.pushBack(2);
+    arr1.pushBack(4);
+    arr1.sortArray();
+    cout << arr1 << endl;
+
+    MyArray<char> arr3;
+    arr3.pushBack('Z');
+    arr3.pushBack('D');
+    arr3.pushBack('F');
+    arr3.sortArray();
+    cout << arr3 << endl;
+}
 
 int main() {
-    cout << func2(1, 2) << endl;
+    system("chcp 65001");
+
+    learn8();
     return 0;
 }
 

@@ -1,35 +1,47 @@
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QFrame
-from PySide6.QtCore import Qt
+import sys
+from PySide6.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu
+from PySide6.QtGui import QIcon, QAction
 
-app = QApplication([])
+class MinimizeToTrayApp(QMainWindow):
+    def __init__(self):
+        super().__init__()
 
-parent_widget = QWidget()
+        self.init_ui()
 
-layout1 = QVBoxLayout()
-parent_widget2 = QWidget()
-parent_widget3 = QFrame()
+    def init_ui(self):
+        self.setWindowTitle("Minimize to Tray")
 
-layout2 = QVBoxLayout()
-parent_widget21 = QWidget()
-parent_widget22 = QWidget()
-# ... 创建子部件并添加到父部件 ...
-parent_widget2.setLayout(layout2)
+        self.tray_icon = QSystemTrayIcon(QIcon("vwvmn.png"), self)
+        self.tray_icon.activated.connect(self.toggle_window)
 
-layout1.addWidget(parent_widget2)
-layout1.addWidget(parent_widget3)
+        self.show_action = QAction("Show", self)
+        self.show_action.triggered.connect(self.show_window)
 
-parent_widget.setLayout(layout1)
+        self.quit_action = QAction("Quit", self)
+        self.quit_action.triggered.connect(self.quit_app)
 
-# 查找并打印父部件的所有子部件
-children = parent_widget.findChildren(QWidget)
-children = [child for child in children if type(child) is QWidget]
-for child in children:
-    print(f"Child Widget: {child}")
+        self.tray_menu = QMenu()
+        self.tray_menu.addAction(self.show_action)
+        self.tray_menu.addAction(self.quit_action)
+        self.tray_icon.setContextMenu(self.tray_menu)
 
-# 查找并打印父部件的所有 QPushButton 子部件，包括递归查找
-buttons = parent_widget.findChildren(QWidget, options=Qt.FindChildrenRecursively)
-for button in buttons:
-    print(f"PushButton Child: {button}")
+    def toggle_window(self, reason):
+        if reason == QSystemTrayIcon.Trigger:
+            if self.isHidden():
+                self.show_window()
+            else:
+                self.hide()
 
-parent_widget.show()
-app.exec()
+    def show_window(self):
+        self.showNormal()
+        self.activateWindow()
+
+    def quit_app(self):
+        self.tray_icon.hide()
+        self.close()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MinimizeToTrayApp()
+    window.show()
+    sys.exit(app.exec())

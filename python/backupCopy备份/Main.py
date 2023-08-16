@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
     QScrollArea, QLabel, QFrame, QMessageBox
 from PySide6.QtCore import Qt, Slot, QEvent, QTimer
 from PySide6.QtGui import QGuiApplication, QPixmap, QAction, QColor, \
-    QPalette, QResizeEvent
+    QPalette, QResizeEvent, QCloseEvent
 import sys
 import pathlib
 
@@ -27,6 +27,20 @@ class MyWindow(QMainWindow):
         examine_data()
         # 读取配置
         self.read_config()
+
+    def closeEvent(self, event: QCloseEvent) -> None:
+        """
+        退出时操作
+        :param event:
+        """
+        reply = QMessageBox.question(self, "Exit", "是否保存当前配置?",
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            self.save_config()
+        else:
+            return
+
+
 
     def init_data(self):
         self.sequence_number = 0
