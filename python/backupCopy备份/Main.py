@@ -4,10 +4,10 @@ from functools import partial
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, \
     QTextEdit, QPushButton, QFileDialog, QMainWindow, QGridLayout, \
     QHBoxLayout, QLineEdit, QTableWidget, QHeaderView, QTableWidgetItem, \
-    QScrollArea, QLabel, QFrame, QMessageBox
-from PySide6.QtCore import Qt, Slot, QEvent, QTimer
+    QScrollArea, QLabel, QFrame, QMessageBox, QSystemTrayIcon, QMenu
+from PySide6.QtCore import Qt, Slot, QEvent, QTimer, QObject
 from PySide6.QtGui import QGuiApplication, QPixmap, QAction, QColor, \
-    QPalette, QResizeEvent, QCloseEvent
+    QPalette, QResizeEvent, QCloseEvent, QShortcut, QKeySequence, QIcon
 import sys
 import pathlib
 
@@ -15,6 +15,7 @@ from Window2 import Window2
 import logging
 from Watch import StartWatch
 from ReadWriteDB import read_data, save_data, examine_data, clean_data
+import MinimizeToTrayUI
 
 
 class MyWindow(QMainWindow):
@@ -28,6 +29,70 @@ class MyWindow(QMainWindow):
         # 读取配置
         self.read_config()
 
+        # 最小化需要读取配置
+        self.minimize_to_tray()
+
+    def minimize_to_tray(self):
+        # 最小化窗口到系统托盘
+        self._restore_action = QAction()
+        self._quit_action = QAction()
+        self._tray_icon_menu = QMenu()
+
+        # 创建系统图标
+        self.tray_icon = QSystemTrayIcon(self)
+        self.tray_icon.setIcon(QIcon("vwvmn.png"))
+        self.tray_icon.setToolTip("备份")
+
+        self.create_actions()
+        self.create_tray_icon()
+        self.tray_icon.show()
+
+        # 连接系统托盘图标的激活事件
+        self.tray_icon.activated.connect(self.tray_icon_activated)
+
+        # 应用程序键盘监听
+        self.listen_keyboard()
+
+        if len(self.config_List) == 0:
+            self.show()
+
+    def restore_from_tray(self):
+        # 还原窗口
+        if self.isMinimized():
+            self.showNormal()
+        elif self.isMaximized():
+            self.showMaximized()
+        else:
+            self.show()
+
+    def tray_icon_activated(self, reason):
+        # 当系统托盘图标被点击时的处理
+        if reason == QSystemTrayIcon.ActivationReason.Trigger:
+            # 如果点击的是触发事件（比如左键单击），则还原窗口
+            self.restore_from_tray()
+
+    def create_actions(self):
+        # 创建菜单项
+        self._restore_action = QAction("显示", self)
+        self._restore_action.triggered.connect(self.restore_from_tray)  # "显示"菜单项触发还原窗口的操作
+        self._quit_action = QAction("退出", self)
+        self._quit_action.triggered.connect(QApplication.quit)  # "退出"菜单项触发退出应用程序的操作
+
+    def create_tray_icon(self):
+        # 创建系统托盘图标和上下文菜单
+        self._tray_icon_menu = QMenu(self)
+        self._tray_icon_menu.addAction(self._restore_action)
+        self._tray_icon_menu.addSeparator()
+        self._tray_icon_menu.addAction(self._quit_action)
+        self.tray_icon.setContextMenu(self._tray_icon_menu)
+        self.tray_icon.show()
+
+    def listen_keyboard(self):
+        # 键盘监听
+        shortcut = QShortcut(QKeySequence("Esc"), self)
+        # 当按下 Esc 键时隐藏窗口
+        shortcut.activated.connect(self.hide)
+
     def closeEvent(self, event: QCloseEvent) -> None:
         """
         退出时操作
@@ -40,17 +105,28 @@ class MyWindow(QMainWindow):
         else:
             return
 
+    def resizeEvent(self, event: QResizeEvent) -> None:
+        """
+        窗口调整大小事件
+        :param event:
+        """
+        self.table_widget.setColumnWidth(0, int(event.size().width() / 6))
+        pass
 
+    def changeEvent(self, event):
+        if event.type() == QEvent.WindowStateChange:
+            if self.windowState() & Qt.WindowMinimized:
+                self.hide()
+            else:
+                print("Window restored")
+        super().changeEvent(event)
 
     def init_data(self):
         self.sequence_number = 0
-
         # 获取用户目录
         self.folderName: str = str(pathlib.Path.home())
-
         # 用于存储，每一组的序号
         self.seq_frame_list = []
-
         # 配置文件列表
         self.config_List: list[list[int, list[str], list[str]]] = []
 
@@ -123,15 +199,6 @@ class MyWindow(QMainWindow):
         self.seq_num_sort()
         pass
 
-
-    def resizeEvent(self, event: QResizeEvent) -> None:
-        """
-        窗口调整大小事件
-        :param event:
-        """
-        self.table_widget.setColumnWidth(0, int(event.size().width() / 6))
-        pass
-
     def setup_menu_bar(self):
         """
         菜单项设置
@@ -180,9 +247,6 @@ class MyWindow(QMainWindow):
             return
         for i in self.config_List:
             self.show_path_list_widgets(i[1], i[2])
-
-    def open_the_folder(self):
-        pass
 
     def select_folder(self):
         self.folderName = QFileDialog.getExistingDirectory(self, "选择文件夹", self.folderName)
@@ -377,7 +441,6 @@ class MyWindow(QMainWindow):
             print("用户点击了取消按钮")
 
 
-
 class Color(QWidget):
 
     def __init__(self, color):
@@ -421,5 +484,5 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     # apply_stylesheet(app, theme="dark_teal.xml")
     window = MyWindow()
-    window.show()
+    # window.show()
     sys.exit(app.exec())
