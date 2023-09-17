@@ -13,14 +13,11 @@
     <script src="./js/http_cdn.jsdelivr.net_npm_jquery@3.5.1_dist_jquery.slim.js"></script>
     <script src="./js/http_cdn.jsdelivr.net_npm_popper.js@1.16.1_dist_umd_popper.js"></script>
     <script src="./js/http_cdn.jsdelivr.net_npm_bootstrap@4.6.2_dist_js_bootstrap.js"></script>
-    <script src="./js/bigData.js"></script>
     <script src="./js/http_cdn.jsdelivr.net_npm_echarts@5.4.3_dist_echarts.js"></script>
     <script src="./js/http_unpkg.com_vue@3_dist_vue.global.js"></script>
 
-
-
 </head>
-<body>
+<body style="display: flex; align-items: center; justify-content: center">
 <div id="app">
     <header class="header-background">
         <div class="header-background-container">
@@ -34,15 +31,15 @@
                     深圳市
                 </div>
                 <div class="header-text-left-frame">
-                    <img src="./img/rain.png" class="header-text-left-frame-rain">
-                    <span class="header-text-left-frame-text">下雨</span>
+                    <img src="./img/weather/sun.png" class="header-text-left-frame-rain">
+                    <span class="header-text-left-frame-text">天晴</span>
                 </div>
                 <div class="header-text-left-frame-temperature">
                     10-36℃
                 </div>
             </div>
             <div class="header-text-center">
-                汇智画册数据大屏
+                <b>汇智AI数据大屏</b>
             </div>
             <div class="header-text-right">
                 <div class="header-text-right-data" id="header-text-right-data">
@@ -61,39 +58,36 @@
         <div class="div-main-instrument">
             <div class="div-main-instrument-left">
                 <div class="div-main-instrument-left-top">
-                    <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000,9999)}}</span>
+                    <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
                     <span class="div-main-instrument-left-font-info">今日链接人数</span>
                 </div>
                 <div class="div-main-instrument-left-bottom">
                     <div class="div-main-instrument-left-bottom-left">
-                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000,9999)}}</span>
+                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
                         <span class="div-main-instrument-left-font-info">上新数据</span>
                     </div>
                     <div class="div-main-instrument-left-bottom-right">
-                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000,9999)}}</span>
+                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
                         <span class="div-main-instrument-left-font-info">浏览超过50%</span>
                     </div>
                 </div>
             </div>
-
             <div class="div-main-instrument-right">
-
                 <div class="div-main-instrument-left-top">
                     <span class="div-main-instrument-left-font-header">{{generateRandomNumber(10000, 99999)}}</span>
                     <span class="div-main-instrument-left-font-info">画册总访问数</span>
                 </div>
                 <div class="div-main-instrument-left-bottom">
                     <div class="div-main-instrument-left-bottom-left">
-                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000,9999)}}</span>
+                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
                         <span class="div-main-instrument-left-font-info">访问总时长</span>
                     </div>
                     <div class="div-main-instrument-left-bottom-right">
-                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000,9999)}}</span>
+                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
                         <span class="div-main-instrument-left-font-info">热门画册</span>
                     </div>
                 </div>
             </div>
-
             <div class="div-main-instrument-center">
                 <div id="main" style="width: 360px;height:360px;"></div>
             </div>
@@ -106,34 +100,31 @@
                     <img class="div-main-instrument-bottom-number-num" src="./img/number0.png">
                 </div>
                 <div class="div-main-instrument-bottom-size3 div-main-instrument-bottom-number-background">
-                    <img class="div-main-instrument-bottom-number-num" src="./img/number0.png">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
                 </div>
                 <div class="div-main-instrument-bottom-size4">
                     ,
                 </div>
                 <div class="div-main-instrument-bottom-size5 div-main-instrument-bottom-number-background">
-                    <img class="div-main-instrument-bottom-number-num" src="./img/number0.png">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
                 </div>
                 <div class="div-main-instrument-bottom-size6 div-main-instrument-bottom-number-background">
-                    <img class="div-main-instrument-bottom-number-num" src="./img/number0.png">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
                 </div>
                 <div class="div-main-instrument-bottom-size7 div-main-instrument-bottom-number-background">
-                    <img class="div-main-instrument-bottom-number-num" src="./img/number0.png">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
                 </div>
                 <div class="div-main-instrument-bottom-size8">
                     ,
                 </div>
                 <div class="div-main-instrument-bottom-size9 div-main-instrument-bottom-number-background">
-                    <img class="div-main-instrument-bottom-number-num"
-                         :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
                 </div>
                 <div class="div-main-instrument-bottom-size10 div-main-instrument-bottom-number-background">
-                    <img class="div-main-instrument-bottom-number-num"
-                         :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
                 </div>
                 <div class="div-main-instrument-bottom-size11 div-main-instrument-bottom-number-background">
-                    <img class="div-main-instrument-bottom-number-num"
-                         :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
                 </div>
                 <div class="div-main-instrument-bottom-size12">
                     元
@@ -148,7 +139,7 @@
         <div class="div-main-left">
             <div class="div-main-left-header">
                 <div class="div-main-left-header-1">
-                    今日链接人数
+                    <b>今日链接人数</b>
                 </div>
                 <div class="div-main-left-header-2">
                     <div class="col-6 div-main-left-header-2-font">
@@ -184,7 +175,7 @@
         <div class="div-main-right1">
             <div class="div-main-left-header">
                 <div class="div-main-left-header-1">
-                    今日链接人数
+                    <b>画册上新数据</b>
                 </div>
                 <div class="div-main-left-header-2">
                     <div class="col-6 div-main-left-header-2-font">
@@ -220,7 +211,7 @@
         <div class="div-main-right2">
             <div class="div-main-left-header">
                 <div class="div-main-left-header-1">
-                    今日链接人数
+                    <b>画册被访问数量统计</b>
                 </div>
                 <div class="div-main-left-header-2">
                     <div class="col-6 div-main-left-header-2-font">
@@ -256,7 +247,7 @@
         <div class="div-main-center1">
             <div class="div-main-left-header">
                 <div class="div-main-left-header-1">
-                    今日链接人数
+                   <b>实时画册在线人数</b>
                 </div>
                 <div class="div-main-left-header-2">
                     <div class="col-6 div-main-left-header-2-font">
@@ -292,7 +283,7 @@
         <div class="div-main-center2">
             <div class="div-main-left-header">
                 <div class="div-main-left-header-1">
-                    今日链接人数
+                    <b>收到需求对接数据</b>
                 </div>
                 <div class="div-main-left-header-2">
                     <div class="col-6 div-main-left-header-2-font">
@@ -361,12 +352,18 @@
                     console.log("请输入数字")
                 }
                 let randomChineseString = "";
-                const commonChars = "的一是了我不人在他有这个上们来到时大地为子中你说生国年着就那和要她出也得里后自以会家可下而过天去能对小多然于心学么之都好看起发";
+                const commonChars = "的一是了我不人在他有这个上们来到时大地为子中你说生国年着就那和要她出也得里后自以会家可下而过天去能对小多然于心学么之都好看起发菲总统对华为";
                 for (let i = 0; i < size; i++) {
                     //randomChineseString += String.fromCharCode(Math.floor(Math.random() * (0x9FFF - 0x4E00 + 1)) + 0x4E00);
                     randomChineseString += commonChars[Math.floor(Math.random() * commonChars.length)];
                 }
                 return randomChineseString;
+            }
+            /**
+             * 随机生成颜色
+             */
+            const generateRandomColor = () =>{
+                const commonChars = [];
             }
             const generateRandomNumber = (min = 0, max = 1) => {
                 if (typeof min != "number" || typeof max != "number") {
@@ -431,12 +428,9 @@
                             min: 0,
                             max: 600000,
                             splitNumber: 5,
-                            itemStyle: {
-                                color: '#00C2FF '
-                            },
+                            itemStyle: {color: '#00C2FF '},
                             progress: {
-                                show: true,
-                                width: 20
+                                show: true, width: 20
                             },
                             anchor: {
                                 show: false
@@ -578,5 +572,6 @@
 
     createApp(App).mount('#app');
 </script>
+<script src="./js/bigData.js"></script>
 </body>
 </html>

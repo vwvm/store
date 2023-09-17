@@ -1,7 +1,10 @@
 body{
+
     background-color: #434343;
     width: 1920px;
     height: 1080px;
+    top:0;
+    left: 0;
 }
 
 .header-background {
@@ -337,7 +340,7 @@ body{
     /* 自动布局 */
     display: flex;
     flex-direction: column;
-    padding: 0px;
+    padding: 20px;
     gap: 16px;
 
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(270deg, #08163E 0%, rgba(8,22,62,0.00) 99%);
@@ -368,7 +371,7 @@ body{
     /* Component 9 */
 
     position: absolute;
-    left: 500px;
+    left: 490px;
     top: 500px;
     width: 460px;
     height: 500px;
@@ -388,7 +391,7 @@ body{
     /* Component 10 */
 
     position: absolute;
-    left: 980px;
+    left: 970px;
     top: 500px;
     width: 460px;
     height: 500px;
@@ -598,10 +601,11 @@ body{
 .div-main-instrument {
     /* 数据表盘 */
     position: absolute;
-    left: 500px;
-    top: 44px;
+
+    left: 490px;
+    top: 26px;
     width: 940px;
-    height: 440px;
+    height: 455px;
     opacity: 1;
 
     background-image: url("../img/div-main-instrument-background.png");
@@ -743,7 +747,7 @@ body{
     opacity: 1;
 
     font-family: 思源黑体, serif;
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
     line-height: 32px;
     letter-spacing: 0px;
