@@ -1,0 +1,23 @@
+module:
+  path: \api\apiServer
+app:
+  name: MyApp
+  description: This is my application.
+  dir: ${user.dir}${module.path}
+spring:
+  docker:
+    compose:
+      file: ${app.dir}\compose.yaml
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:43306/api
+    username: root
+    password: root
+
+springdoc:
+  api-docs:
+    enabled: true
