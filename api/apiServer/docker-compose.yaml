@@ -1,0 +1,80 @@
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myDatabase
+      MYSQL_USER: root1235
+      MYSQL_PASSWORD: root1235
+    ports:
+      - "43306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    ports:
+      - "46379:6379"
+    volumes:
+      - redis_data:/data
+
+#  php5.6:
+#    image: php:5.6
+#    ports:
+#      - "48002:8002"
+
+#  gitlab:
+#    image: 'gitlab/gitlab-ce:latest'
+#    restart: always
+#    hostname: 'gitlab.example.com'
+#    environment:
+#      GITLAB_OMNIBUS_CONFIG: |
+#        external_url 'https://gitlab.example.com'
+#    ports:
+#      - '40080:80'
+#      - '40443:443'
+#      - '40022:22'
+#    volumes:
+#      - gitlab_config:/etc/gitlab
+#      - gitlab_logs:/var/log/gitlab
+#      - gitlab_data:/var/opt/gitlab
+
+
+volumes:
+  mysql_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./mysql_data
+
+  redis_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./redis_data
+
+  gitlab_config:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./gitlab/config
+
+  gitlab_logs:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./gitlab/logs
+
+  gitlab_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./gitlab/data
+
+
+
