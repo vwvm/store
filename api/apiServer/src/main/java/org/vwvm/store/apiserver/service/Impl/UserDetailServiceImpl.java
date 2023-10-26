@@ -1,10 +1,11 @@
 package org.vwvm.store.apiserver.service.Impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.Resource;
+
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.util.ObjectUtils;
 import org.vwvm.store.apiserver.entity.UserDetail;
@@ -18,8 +19,12 @@ import java.util.List;
 @Service
 public class UserDetailServiceImpl implements UserDetailService {
 
-    @Resource
-    private UserDetailRepository userDetailRepository;
+
+    private final UserDetailRepository userDetailRepository;
+    @Autowired
+    public UserDetailServiceImpl(UserDetailRepository userDetailRepository) {
+        this.userDetailRepository = userDetailRepository;
+    }
 
     @Override
     public Page<UserDetail> findByCondition(UserDetailParam detailParam, Pageable pageable){

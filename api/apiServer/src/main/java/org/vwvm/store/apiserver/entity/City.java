@@ -6,8 +6,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Data;
 
 @Entity
+@Data
 public class City implements Serializable {
 
     @Id
@@ -30,14 +32,6 @@ public class City implements Serializable {
     public City(String name, String state) {
         this.name = name;
         this.state = state;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getState() {
-        return this.state;
     }
 
     // ... etc

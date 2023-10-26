@@ -1,6 +1,7 @@
 package org.vwvm.store.apiserver.entity;
 
 
+import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -8,6 +9,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Data
 public class UserDetail {
 
     @Id
