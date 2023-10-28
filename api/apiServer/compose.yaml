@@ -1,22 +1,52 @@
 services:
-  mysql-db:
-    # 指定容器的名称
-    container_name: mysql
-    # 指定镜像和版本
-    image: mysql
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myDatabase
+      MYSQL_USER: root1235
+      MYSQL_PASSWORD: root1235
     ports:
       - "43306:3306"
-    restart: always
-    # 容器日志大小配置
-    logging:
-      driver: 'json-file'
-      options:
-        max-size: '2g'
-    environment:
-#      - "MYSQL_ROOT_PASSWORD: root"
-      - 'POSTGRES_USER=admin'
-      - 'POSTGRES_DB=online'
-      - 'POSTGRES_PASSWORD=admin'
     volumes:
-      - "./mysql/data:/var/lib/mysql"
-      - "./mysql/config:/etc/mysql/conf.d"
+      - mysql_data:/var/lib/mysql
+
+  mysql2:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myDatabase
+      MYSQL_USER: root1235
+      MYSQL_PASSWORD: root1235
+    ports:
+      - "43307:3306"
+    volumes:
+      - mysql_data2:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    ports:
+      - "46379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./mysql_data
+  mysql_data2:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./mysql_data2
+  redis_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./redis_data
+

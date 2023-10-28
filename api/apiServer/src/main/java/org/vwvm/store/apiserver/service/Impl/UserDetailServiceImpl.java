@@ -15,7 +15,6 @@ import org.vwvm.store.apiserver.service.UserDetailService;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Service
 public class UserDetailServiceImpl implements UserDetailService {
 
