@@ -46,8 +46,14 @@ private:
     // QLabel *label;
     QComboBox *comboBox;
     QTableWidget *tableWidget;
-    QMap<QString, int> dataMap;
+    QMap<QString, QVector<int>> dataMap;
+    // 飞船初始防线距离
     QVector<int> kData;
+    // 飞船初始攻击
+    QVector<int> speedData;
+    // 防线伤害
+    QVector<int> lineDamageData;
+
 
 
 };
