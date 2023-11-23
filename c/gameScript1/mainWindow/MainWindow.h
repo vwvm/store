@@ -46,6 +46,7 @@ private:
     // QLabel *label;
     QComboBox *comboBox;
     QTableWidget *tableWidget;
+    // 每条防线的的数据 QVector: 距离 攻击 血量
     QMap<QString, QVector<int>> dataMap;
     // 飞船初始防线距离
     QVector<int> kData;
@@ -53,7 +54,10 @@ private:
     QVector<int> speedData;
     // 防线伤害
     QVector<int> lineDamageData;
+    QLineEdit *currentLineOfDefenseEdit;
 
+    //最终结果值
+    QLabel *resultValue;
 
 
 };

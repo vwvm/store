@@ -37,38 +37,42 @@ MainWindow::MainWindow(QWidget *parent) {
 
     // 一个示例数组
     QStringList items = {
-            "k47", "k43", "k41", "k37", "k31", "k29", "k23", "k19", "k17", "k13", "k11", "k7", "k5", "k3", "k2"
+            "k47", "k43", "k41", "k37", "k31", "k29", "k23", "k19", "k17", "k13", "k11", "k7", "k5", "k3", "k2", "母星"
     };
+
     kData = {1000000, 999000, 1001000, 1010000, 1020000, 1500000, 1020000, 1010000, 1010000, 1020000};
     speedData = {300, 300, 300, 150, 200, 150, 100, 120, 50, 130};
     lineDamageData = {};
-    dataMap.insert("k47", {998000, 10});
-    dataMap.insert("k43", {950000, 100});
-    dataMap.insert("k41", {900000, 200});
+    dataMap.insert("k47", {998000, 10, 5000});
+    dataMap.insert("k43", {950000, 100, 10000});
+    dataMap.insert("k41", {900000, 200, 40000});
     dataMap.insert("k37",
-                   {850000, 300});
+                   {850000, 300, 80000});
     dataMap.insert("k31",
-                   {800000, 400});
+                   {800000, 400, 200000});
     dataMap.insert("k29",
-                   {750000, 500});
+                   {750000, 500, 400000});
     dataMap.insert("k23",
-                   {700000, 750});
+                   {700000, 750, 800000});
     dataMap.insert("k19",
-                   {650000, 1000});
+                   {650000, 1000, 1400000});
     dataMap.insert("k17",
-                   {600000, 1250});
+                   {600000, 1250, 2560000});
     dataMap.insert("k13",
-                   {550000, 1500});
+                   {550000, 1500, 5120000});
     dataMap.insert("k11",
-                   {500000, 1750});
+                   {500000, 1750, 10240000});
     dataMap.insert("k7",
-                   {450000, 2000});
+                   {450000, 2000, 20480000});
     dataMap.insert("k5",
-                   {400000, 2250});
+                   {400000, 2250, 30720000});
     dataMap.insert("k3",
-                   {350000, 2500});
+                   {350000, 2500, 46080000});
     dataMap.insert("k2",
-                   {300000, 2750});
+                   {300000, 2750, 69120000});
+    dataMap.insert("母星",
+                   {0, 5000, 100000000});
+
 
     // 添加数组数据到下拉框
     comboBox->addItems(items);
@@ -94,7 +98,26 @@ MainWindow::MainWindow(QWidget *parent) {
     layout->addWidget(currentDayLabel);
     layout->addWidget(currentDayEdit);
 
+    // 创建并添加 "现在日" 标签和输入框
+    auto *currentLineOfDefenseLabel = new QLabel("防线血量", this);
+    currentLineOfDefenseEdit = new QLineEdit(this);
+    layout->addWidget(currentLineOfDefenseLabel);
+    layout->addWidget(currentLineOfDefenseEdit);
+
+    // 水平布局添加到垂直布局中
     mainLayout->addLayout(layout);
+
+    // 创建结果的水平布局,并左对齐
+    // 最终结果
+    auto *resultLayout = new QHBoxLayout();
+    resultLayout->setAlignment(Qt::AlignLeft);
+    auto *resultTitle = new QLabel("结果:");
+    resultValue = new QLabel("不知道能不能打过,把数据填完试试");
+    resultLayout->addWidget(resultTitle);
+    resultLayout->addWidget(resultValue);
+    mainLayout->addLayout(resultLayout);
+
+
 
     // 将布局设置到主窗口或某个容器控件中
     auto *centralWidget = new QWidget(this);
@@ -102,8 +125,9 @@ MainWindow::MainWindow(QWidget *parent) {
     this->setCentralWidget(centralWidget);
 
     // 设置标题行
-    QStringList headers = {"名称", "目标距离", "攻击距离", "速度", "到达所需天数", "最终攻击距离",
-                           "出发年(顺序)", "出发日(延时)", "到达年", "到达日", "血量", "承受几次不死"};
+    QStringList headers = {"名称", "目标距离", "攻击距离", "速度", "到达所需天数",
+                           "最终攻击距离", "出发年(顺序)", "出发日(延时)", "到达年", "到达日",
+                           "血量", "承受几次不死", "飞船攻击伤害"};
     int rowCount = 10;
     int columnCount = static_cast<int>(headers.size());
     // 创建表格控件
@@ -137,7 +161,7 @@ MainWindow::MainWindow(QWidget *parent) {
 
     onComboBoxIndexChanged("k47");
 
-    // 连接下拉框的信号到槽函数
+    // 连接信号到槽函数
     connect(comboBox, &QComboBox::currentTextChanged, this, &MainWindow::onComboBoxIndexChanged);
     connect(tableWidget, &QTableWidget::itemChanged, this, &MainWindow::calculateDaysAndAttackDistance);
 
@@ -148,6 +172,8 @@ void MainWindow::onComboBoxIndexChanged(const QString &text) {
     // 检查是否有与当前选项对应的数据
     if (dataMap.contains(text)) {
         int data = dataMap.value(text)[0];
+        int hp = dataMap.value(text)[2];
+        currentLineOfDefenseEdit->setText(QString::number(hp));
         cout << kData[1] + data;
         int column = 1;
         for (int i = 0; i < kData.size(); ++i) {
@@ -167,7 +193,9 @@ void MainWindow::calculateDaysAndAttackDistance(QTableWidgetItem *item) {
     // 先断开信号与槽的连接，以防止无限循环
     disconnect(tableWidget, &QTableWidget::itemChanged, this, &MainWindow::calculateDaysAndAttackDistance);
 
+    // 计算距离
     if (column == 1 || column == 2 || column == 3) {
+
         for (int row = 0; row < tableWidget->rowCount(); ++row) {
             QTableWidgetItem *targetDistanceItem = tableWidget->item(row, 1); // "目标距离" 列
             QTableWidgetItem *attackDistanceItem = tableWidget->item(row, 2); // "攻击距离" 列
@@ -210,15 +238,17 @@ void MainWindow::calculateDaysAndAttackDistance(QTableWidgetItem *item) {
 
         // 计算出发日子
         int minValue = 0;
-        // 出发顺序数组
-        QVector<int> goOn = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        // 出发日子数组
-        QVector<int> goOn2 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        // 所需要天数数组
-        QVector<int> goOnList = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        // 最终攻击距离数组
-        QVector<int> goOnList2 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+        // 出发顺序数组
+        QVector<int> goOn(tableWidget->rowCount(),0);
+        // 出发日子数组
+        QVector<int> goOn2(tableWidget->rowCount(),0);
+        // 所需要天数数组
+        QVector<int> goOnList(tableWidget->rowCount(),0);
+        // 最终攻击距离数组
+        QVector<int> goOnList2(tableWidget->rowCount(),0);
+
+        // 读取数据到数组
         for (int i = 0; i < tableWidget->rowCount(); i++) {
             QTableWidgetItem *targetDistanceItem = tableWidget->item(i, 4); // "所需要天数" 列
             QTableWidgetItem *attackDistanceItem = tableWidget->item(i, 5); // "最终攻击距离" 列
@@ -234,16 +264,17 @@ void MainWindow::calculateDaysAndAttackDistance(QTableWidgetItem *item) {
             }
         }
 
-        // 存储排序去重
+        // 生成临时数组,并拷贝数据
         QVector<int> indices2(goOnList2.size());
-
-        // 生成下标数组
         for (int i = 0; i < goOnList2.size(); i++) {
             indices2[i] = goOnList2[i];
         }
 
         // 从大到小排序下标数组
         sort(indices2.rbegin(), indices2.rend());
+
+        cout<< indices2.toList().
+
         // 去重
         unique(indices2.rbegin(), indices2.rend());
 
@@ -264,12 +295,8 @@ void MainWindow::calculateDaysAndAttackDistance(QTableWidgetItem *item) {
             }
         }
         for (int i = 0; i < tableWidget->rowCount(); ++i) {
-
             goOn2[i] = goOn2[i] - value;
-
         }
-
-
         // 更新数据
         // 更新 "次序" 和 "延时" 列
         for (int row = 0; row < tableWidget->rowCount(); ++row) {
@@ -279,7 +306,7 @@ void MainWindow::calculateDaysAndAttackDistance(QTableWidgetItem *item) {
         }
     }
 
-
+    // 计算承受次数
     if (column == 10) {
         for (int row = 0; row < tableWidget->rowCount(); ++row) {
             // "血量" 列
@@ -306,6 +333,25 @@ void MainWindow::calculateDaysAndAttackDistance(QTableWidgetItem *item) {
             }
         }
     }
+
+    // 计数是否会能击破
+    // 剩余血量
+    int bossResidueHp = dataMap.value(comboBox->currentText())[2];
+    for (int row = 0; row < tableWidget->rowCount(); ++row) {
+        QTableWidgetItem *atkItem = tableWidget->item(row, 12);
+        QTableWidgetItem *countItem = tableWidget->item(row, 11);
+        QTableWidgetItem *hpItem = tableWidget->item(row, 10);
+        if (atkItem && !atkItem->text().isEmpty() && countItem && !countItem->text().isEmpty()) {
+               bossResidueHp = bossResidueHp - atkItem->text().toInt() * (countItem->text().toInt() + 1);
+        }
+    }
+
+    if (bossResidueHp <= 0) {
+        resultValue->setText(QString("恭喜,成功击破防线"));
+    } else {
+        resultValue->setText(QString("还剩下") + QString::number(bossResidueHp) + QString("hp哦"));
+    }
+
 
 
     // 链接槽

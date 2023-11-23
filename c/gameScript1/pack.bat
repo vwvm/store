@@ -1,0 +1,1 @@
+F:\Users\BlackBox\AppData\Qt\6.6.0\mingw_64\bin\windeployqt.exe F:\project\synthetical\store\c\gameScript1\pk\gameScript1.exe
