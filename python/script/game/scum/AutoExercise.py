@@ -25,7 +25,9 @@ def start():
         pyautogui.keyDown('7')
         pyautogui.sleep(0.3)
         pyautogui.keyUp('7')
-        pyautogui.sleep(20)
+        pyautogui.sleep(30)
+
+        take_bag()
 
         forward_and_backward()
 
