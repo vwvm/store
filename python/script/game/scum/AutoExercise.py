@@ -55,8 +55,17 @@ def take_bag():
     pyautogui.sleep(0.1)
 
 
+def start2():
+    # pyautogui.keyDown('7')
+    # pyautogui.sleep(0.1)
+    # pyautogui.keyUp('7')
+    # pyautogui.sleep(0.1)
+
+    pyautogui.moveRel(-1000, -1000, duration=1)
+
+
 if __name__ == '__main__':
     # start()
     pyautogui.sleep(3)
-    start()
+    start2()
     pass
