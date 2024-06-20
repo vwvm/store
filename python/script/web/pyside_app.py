@@ -1,0 +1,197 @@
+import sys
+import threading
+import requests
+import os
+import shutil
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QFileDialog, QLabel, QCheckBox, QGridLayout, QScrollArea, QFrame
+from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Qt
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
+class WebLauncher(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('Web Launcher')
+        self.setGeometry(100, 100, 800, 600)
+
+        layout = QVBoxLayout()
+
+        # URL输入和按钮在一行
+        url_layout = QHBoxLayout()
+        self.url_input = QLineEdit(self)
+        self.url_input.setText("https://flbook.com.cn/c/3Ma5hfa2WO")
+        self.url_input.setPlaceholderText('请输入网址')
+        self.launch_button = QPushButton('确认', self)
+        self.launch_button.clicked.connect(self.launch_website)
+        url_layout.addWidget(self.url_input)
+        url_layout.addWidget(self.launch_button)
+        layout.addLayout(url_layout)
+
+        # 保存位置输入和按钮在一行
+        save_layout = QHBoxLayout()
+        self.save_input = QLineEdit(self)
+        self.save_input.setPlaceholderText('请选择保存位置')
+        self.save_button = QPushButton('浏览', self)
+        self.save_button.clicked.connect(self.select_save_location)
+        save_layout.addWidget(self.save_input)
+        save_layout.addWidget(self.save_button)
+        layout.addLayout(save_layout)
+
+        # 图片显示区域
+        self.scroll_area = QScrollArea(self)
+        self.scroll_area.setWidgetResizable(True)
+        self.image_container = QWidget()
+        self.image_layout = QGridLayout(self.image_container)
+        self.scroll_area.setWidget(self.image_container)
+        layout.addWidget(self.scroll_area)
+
+        self.setLayout(layout)
+
+        self.image_infos = []  # 存储图片信息
+
+    def launch_website(self):
+        url = self.url_input.text()
+        if url:
+            thread = threading.Thread(target=self.load_website, args=(url,))
+            thread.start()
+
+    def load_website(self, url):
+        if not url.startswith(('http://', 'https://')):
+            url = 'http://' + url
+
+        options = webdriver.ChromeOptions()
+        options.add_argument('--disable-blink-features=AutomationControlled')
+        options.add_argument('--disable-extensions')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--disable-infobars')
+        options.add_argument('--disable-notifications')
+        options.add_argument('--disable-popup-blocking')
+        options.add_argument('--disable-web-security')
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--start-maximized')
+        options.add_experimental_option('excludeSwitches', ['enable-automation', 'useAutomationExtension'])
+
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+        driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {
+            'source': 'Object.defineProperty(navigator, "webdriver", {get: () => undefined})'
+        })
+
+        driver.get(url)
+
+        try:
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, 'body'))
+            )
+            print("网页加载完成")
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.NAME, 'thumbnail'))
+            )
+            driver.find_elements(By.NAME, 'thumbnail')[0].click()
+
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CLASS_NAME, 'page-li'))
+            )
+            print("图片加载完成")
+            page_li_elements = driver.find_elements(By.CLASS_NAME, 'page-li')
+            print("找到", len(page_li_elements))
+            row, col = 0, 0
+            for page_li in page_li_elements:
+                dhc_elements = page_li.find_elements(By.CLASS_NAME, 'dhc')
+                print("找到", len(dhc_elements))
+                for dhc in dhc_elements:
+                    style = dhc.get_attribute('style')
+                    if style:
+                        start = style.find('url("//') + len('url("//')
+                        end = style.find('?', start)
+                        if start != -1 and end != -1:
+                            image_url = style[start:end]
+                            if not image_url.startswith(('http://', 'https://')):
+                                image_url = 'https://' + image_url
+                            print(image_url)
+                            title = driver.title
+                            temp_folder = f"temp_{title}"
+                            os.makedirs(temp_folder, exist_ok=True)
+                            image_info = {'url': image_url, 'title': title, 'folder': temp_folder}
+                            self.image_infos.append(image_info)
+                            self.display_image(image_url, temp_folder, row, col)
+                            col += 1
+                            if col >= 5:
+                                col = 0
+                                row += 1
+        except Exception as e:
+            print("加载超时: ", e)
+
+    def display_image2(self, image_url):
+        # 下载图片
+        response = requests.get(image_url)
+        image_path = "temp_image.jpg"
+        with open(image_path, 'wb') as file:
+            file.write(response.content)
+        # 显示图片
+        pixmap = QPixmap(image_path)
+        self.image_label.setPixmap(pixmap)
+
+    def display_image(self, image_url, folder, row, col):
+        try:
+            response = requests.get(image_url)
+            image_data = response.content
+
+            image_name = os.path.basename(image_url)
+            image_path = os.path.join(folder, image_name)
+            with open(image_path, 'wb') as file:
+                file.write(image_data)
+
+            pixmap = QPixmap()
+            pixmap.loadFromData(image_data)
+            # pixmap = pixmap.scaled(150, 150, Qt.AspectRatioMode.KeepAspectRatio)
+
+            image_label = QLabel()
+            image_label.setPixmap(pixmap)
+
+            checkbox = QCheckBox()
+            checkbox.setChecked(True)
+            checkbox.image_path = image_path
+
+            container = QVBoxLayout()
+            container.addWidget(image_label)
+            container.addWidget(checkbox)
+
+            frame = QFrame()
+            frame.setLayout(container)
+
+            self.image_layout.addWidget(frame, row, col)
+        except Exception as e:
+            print(f"无法显示图片: {e}")
+
+    def select_save_location(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        folder = QFileDialog.getExistingDirectory(self, "选择保存位置", "", options=options)
+        if folder:
+            self.save_input.setText(folder)
+            self.save_selected_images(folder)
+
+    def save_selected_images(self, folder):
+        for i in range(self.image_layout.count()):
+            frame = self.image_layout.itemAt(i).widget()
+            checkbox = frame.findChild(QCheckBox)
+            if checkbox and checkbox.isChecked():
+                image_path = checkbox.image_path
+                shutil.move(image_path, folder)
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    launcher = WebLauncher()
+    launcher.show()
+    sys.exit(app.exec())
