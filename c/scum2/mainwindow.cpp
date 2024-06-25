@@ -7,13 +7,20 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include <QDateTime>
+#include <windows.h>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), scriptThread(nullptr), listening1(false), listening2(false){
+#define HOTKEY_START 1
+#define HOTKEY_STOP 2
+
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), scriptThread(nullptr), listening1(false), listening2(false) {
     setupUi();
+    GlobalHotkeyListener::getInstance()->setMainWindow(this); // 设置全局热键监听器的主窗口
+    GlobalHotkeyListener::getInstance()->registerHotKeys(); // 注册全局热键
 }
 
 MainWindow::~MainWindow() {
     stopScript();
+    GlobalHotkeyListener::getInstance()->unregisterHotKeys(); // 注销全局热键
 }
 
 void MainWindow::setupUi() {
@@ -132,12 +139,6 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
             }
         }
 
-        // 判断启动或停止脚本
-        if (outputText == findChild<QLineEdit *>("lineEdit1")->text()) {
-            startScript();
-        } else if (outputText == "Shift+F2") {
-            stopScript();
-        }
 
         return true; // 事件已经处理
     }
@@ -149,7 +150,7 @@ void MainWindow::startScript() {
         return; // 脚本已经在运行
     }
 
-    scriptThread = new ScriptThread();
+    scriptThread = new ScriptThread(this);
     connect(scriptThread, &ScriptThread::updateLog, this, [](const QString &text) {
         qDebug() << text; // 输出日志信息
     });
@@ -162,13 +163,5 @@ void MainWindow::stopScript() {
         scriptThread->wait();
         delete scriptThread;
         scriptThread = nullptr;
-    }
-}
-
-void ScriptThread::run() {
-    while (!isInterruptionRequested()) {
-        QString currentTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-        emit updateLog(currentTime);
-        QThread::sleep(1); // 每秒输出一次当前时间
     }
 }

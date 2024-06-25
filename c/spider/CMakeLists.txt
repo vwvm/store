@@ -14,7 +14,9 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(spider main.cpp)
+add_executable(spider main.cpp
+        BrowserAutomationApp.cpp
+        BrowserAutomationApp.h)
 target_link_libraries(spider
         Qt::Core
         Qt::Gui

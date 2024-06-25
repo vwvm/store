@@ -6,6 +6,21 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+# 添加WDK路径
+set(WDK_PATH "C:/Program Files (x86)/Windows Kits/10")
+
+# 包含WDK头文件路径
+include_directories("${WDK_PATH}/Include/10.0.26100.0")
+include_directories("${WDK_PATH}/Include/10.0.26100.0/shared")
+include_directories("${WDK_PATH}/Include/10.0.26100.0/ucrt")
+include_directories("${WDK_PATH}/Include/10.0.26100.0/um")
+include_directories("${WDK_PATH}/Include/10.0.26100.0/winrt")
+
+
+
+# 链接WDK库文件路径
+link_directories("${WDK_PATH}/Lib/10.0.26100.0")
+
 set(CMAKE_PREFIX_PATH "F:/ProgramData/Qt/6.7.1/mingw_64")
 
 find_package(Qt6 COMPONENTS
@@ -17,11 +32,17 @@ find_package(Qt6 COMPONENTS
 add_executable(scum2 main.cpp
         mainwindow.cpp
         mainwindow.h
+        globalhotkeylistener.cpp
+        globalhotkeylistener.h
+        scriptthread.cpp
+        scriptthread.h
+        main.h
 )
 target_link_libraries(scum2
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        kmdf
 )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
