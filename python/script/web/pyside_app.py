@@ -9,6 +9,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, Q
     QTextEdit, QLabel, QCheckBox, QGridLayout, QScrollArea, QFrame
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt, QObject, Signal
+from pyautogui import leftClick
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -39,7 +40,7 @@ class WebLauncher(QWidget):
         # URL输入和按钮在一行
         url_layout = QHBoxLayout()
         self.url_input = QLineEdit(self)
-        self.url_input.setText("https://flbook.com.cn/c/3Ma5hfa2WO")
+        self.url_input.setText("https://flbook.com.cn/c/ilJGbGEjF5")
         self.url_input.setPlaceholderText('请输入网址')
         self.launch_button = QPushButton('确认', self)
         self.launch_button.clicked.connect(self.launch_website)
@@ -166,7 +167,11 @@ class WebLauncher(QWidget):
         driver.get(url)
         self.log_emitter.log_updated.emit("执行调用浏览器代码后")
 
+        type_m = 2
+
         try:
+            if type_m != 1:
+                raise ValueError("负")
             WebDriverWait(driver, 60).until(
                 EC.presence_of_element_located((By.TAG_NAME, 'body'))
             )
@@ -196,7 +201,7 @@ class WebLauncher(QWidget):
                             image_url = style[start:end]
                             if not image_url.startswith(('http://', 'https://')):
                                 image_url = 'https://' + image_url
-                            print(f"下载图片：{image_url}")
+
                             self.log_emitter.log_updated.emit(f"下载图片：{image_url}")
                             title = driver.title
                             temp_folder = os.path.join("temp", title)
@@ -208,9 +213,54 @@ class WebLauncher(QWidget):
                             if col >= 5:
                                 col = 0
                                 row += 1
+                    else:
+                        self.log_emitter.log_updated.emit(f"方案1失败，清理中")
+                        break
+
         except Exception as e:
             print(f"加载超时: {e}")
             self.log_emitter.log_updated.emit(f"加载超时: {e}")
+
+        try:
+            self.log_emitter.log_updated.emit(f"启动方案2")
+            WebDriverWait(driver, 60).until(
+                EC.presence_of_element_located((By.NAME, 'prev'))
+            )
+            time.sleep(5)
+            self.log_emitter.log_updated.emit(f"启动方案2成功")
+            current_url = driver.current_url
+            temp_url = "temp_url"
+            row, col = 0, 0
+            page_img_list = []
+            while current_url != temp_url:
+                col += 1
+                page_img_list_temp = driver.find_elements(By.CLASS_NAME, 'pageImg')
+                for page_img in page_img_list_temp:
+                    if page_img not in page_img_list:
+                        page_img_list.append(page_img)
+                    else:
+                        continue
+                    image_url = page_img.get_attribute('src')
+                    start = image_url.find('blob:') + len('blob:')
+                    end = image_url.find('?', start)
+                    image_url = image_url[start:]
+                    title = driver.title
+                    temp_folder = os.path.join("temp", title)
+                    os.makedirs(temp_folder, exist_ok=True)
+                    image_info = {'url': image_url, 'title': title, 'folder': temp_folder}
+                    self.image_infos.append(image_info)
+                    self.display_image(image_url, temp_folder, row, col)
+
+                current_url = driver.current_url
+                driver.find_elements(By.NAME, 'next')[0].click()
+                temp_url = driver.current_url
+                self.log_emitter.log_updated.emit(f"current_url{current_url}//temp_url{temp_url}")
+                time.sleep(1)
+            time.sleep(100)
+            pass
+        except Exception as e:
+            self.log_emitter.log_updated.emit(f"方案2失败: {e}")
+
         self.log_emitter.log_updated.emit(f"采集的线程结束")
 
     def display_image(self, image_url, folder, row, col):
