@@ -1,0 +1,21 @@
+# 使用包含 JDK 17 的完整 Ubuntu 镜像进行构建
+FROM ubuntu:latest AS my-ubuntu-java-build
+
+# 更新包列表
+RUN apt-get update && apt-get install -y unzip wget openjdk-17-jdk
+
+# 下载并安装 Gradle
+RUN wget https://services.gradle.org/distributions/gradle-8.2.1-bin.zip -P /tmp \
+    && unzip /tmp/gradle-8.2.1-bin.zip -d /opt/gradle \
+    && ln -s /opt/gradle/gradle-8.2.1/bin/gradle /usr/bin/gradle
+
+# 第二阶段：使用自定义的 myGradleBuild 镜像构建应用
+FROM my-ubuntu-java-build AS my-ubuntu-java-build2
+COPY . /workspace
+WORKDIR /workspace
+RUN gradle clean build
+
+# 第三阶段：精简运行镜像，只包含 JRE 和构建的应用
+FROM openjdk:17-jdk-slim
+COPY --from=my-ubuntu-java-build2 /workspace/build/libs/*.jar /app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
