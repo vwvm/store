@@ -1,9 +1,0 @@
-{
-    "bpType": "LevelUpPart",
-    "changes": {},
-    "classType": "PartInstance",
-    "customVariables": [],
-    "directoryPath": "LevelUp",
-    "metaType": "LevelUpPartMeta",
-    "partType": "LevelUpPart"
-}

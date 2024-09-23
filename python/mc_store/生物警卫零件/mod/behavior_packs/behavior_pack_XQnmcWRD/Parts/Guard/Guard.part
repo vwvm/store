@@ -1,9 +1,0 @@
-{
-    "bpType": "GuardPart",
-    "changes": {},
-    "classType": "PartInstance",
-    "customVariables": [],
-    "directoryPath": "Guard",
-    "metaType": "GuardPartMeta",
-    "partType": "GuardPart"
-}
