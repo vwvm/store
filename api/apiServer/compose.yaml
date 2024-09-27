@@ -1,0 +1,52 @@
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myDatabase
+      MYSQL_USER: root1235
+      MYSQL_PASSWORD: root1235
+    ports:
+      - "43306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  mysql2:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myDatabase
+      MYSQL_USER: root1235
+      MYSQL_PASSWORD: root1235
+    ports:
+      - "43307:3306"
+    volumes:
+      - mysql_data2:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    ports:
+      - "46379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./mysql_data
+  mysql_data2:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./mysql_data2
+  redis_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./redis_data
+

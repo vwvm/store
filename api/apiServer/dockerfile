@@ -1,0 +1,18 @@
+# 使用一个包含 JDK 17 的基础镜像
+FROM openjdk:17-jdk-slim AS build
+
+# 将你的项目文件复制到镜像中
+COPY . /workspace
+
+# 切换到工作目录并构建你的项目
+WORKDIR /workspace
+RUN ./gradlew clean build -x test
+
+# 使用一个较小的基础镜像来运行你的应用
+FROM openjdk:17-jre-slim
+
+# 从构建镜像中复制构建的应用到运行时镜像中
+COPY --from=build /workspace/build/libs/*.jar /app.jar
+
+# 指定应用的入口点
+ENTRYPOINT ["java", "-jar", "/app.jar"]
