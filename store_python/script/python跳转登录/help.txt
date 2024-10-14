@@ -1,0 +1,2 @@
+´ò°üÃüÁî
+pyinstaller.exe -F -W pyside_app.py
