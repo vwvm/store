@@ -78,7 +78,7 @@ std::string GetWeChatInstallPath()
 
 void createAndShowMainWindow(const std::string& weChatPath) {
     int argc = 0;
-    const char *argv[] = {};
+    const char *argv[] = { nullptr }; // 定义一个包含 nullptr 的指针数组
 
     QApplication application(argc, const_cast<char **>(argv));
 

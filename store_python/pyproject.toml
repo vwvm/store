@@ -12,6 +12,8 @@ pandas = "^2.2.3"
 requests = "^2.32.3"
 webdriver-manager = "^4.0.2"
 pyautogui = "^0.9.54"
+matplotlib = "^3.9.2"
+openpyxl = "^3.1.5"
 
 [[tool.poetry.source]]
 name = "tsinghua"

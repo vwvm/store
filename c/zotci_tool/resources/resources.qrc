@@ -1,6 +1,15 @@
 <RCC>
-    <qresource prefix="/resources">
-        <file>zotci.png</file>
-        <file>qml/main.qml</file>
+    <qresource prefix="/">
+        <!-- 图像资源 -->
+        <file alias="logo">images/zotci.png</file>
+
+        <!-- HTML 文件 -->
+        <file alias="index">html/index.html</file>
+
+        <!-- QML 文件 -->
+        <file alias="mainQML">qml/main.qml</file>
+    </qresource>
+    <qresource prefix="/js">
+        <file alias="qwebchannel.js">html/js/qwebchannel.js</file>
     </qresource>
 </RCC>

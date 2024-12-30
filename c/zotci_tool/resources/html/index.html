@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qt WebChannel Example</title>
+    <script src="qrc:/js/qwebchannel.js"></script>
+</head>
+<body>
+<h1>Qt WebEngine and WebChannel Interaction</h1>
+<button onclick="sendMessageToCpp()">Send Message to C++</button>
+<p id="cppMessage">Waiting for message from C++...</p>
+
+<script>
+    let myObject;
+
+    // 初始化 QWebChannel
+    new QWebChannel(qt.webChannelTransport, function(channel) {
+        myObject = channel.objects.myObject;
+
+        // 监听 C++ 发送的消息
+        myObject.sendMessageToJS.connect(function(message) {
+            document.getElementById("cppMessage").innerText = "Message from C++: " + message;
+        });
+    });
+
+    // JavaScript 发送消息给 C++
+    function sendMessageToCpp() {
+        if (myObject) {
+            myObject.receiveMessageFromJS("Hello from JavaScript!");
+        }
+    }
+</script>
+</body>
+</html>
