@@ -1,9 +1,12 @@
 [tool.poetry]
-name = "store-python"
+name = "store_python"
 version = "0.1.0"
 description = ""
 authors = ["BlackBox <vwvmnu@gmail.com>"]
 readme = "HELP.md"
+packages = [
+    {include = "script"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -14,10 +17,11 @@ webdriver-manager = "^4.0.2"
 pyautogui = "^0.9.54"
 matplotlib = "^3.9.2"
 openpyxl = "^3.1.5"
+poetry-core = "^2.1.1"
 
 [[tool.poetry.source]]
-name = "tsinghua"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
 
 [build-system]
 requires = ["poetry-core"]

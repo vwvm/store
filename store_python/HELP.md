@@ -8,6 +8,15 @@ poetry install
 ```shell
 poetry lock
 ```
+运行以下命令激活虚拟环境：
+```shell
+poetry env activate
+```
+运行以下命令退出虚拟环境：
+```shell
+deactivate
+```
+
 
 ## 转换
 python -m PyQt5.uic.pyuic xxx.ui -o xxx.py
