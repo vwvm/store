@@ -15,6 +15,10 @@ pyautogui = "^0.9.54"
 matplotlib = "^3.9.2"
 openpyxl = "^3.1.5"
 
+[[tool.poetry.source]]
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
