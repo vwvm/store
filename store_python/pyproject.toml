@@ -3,7 +3,7 @@ name = "store-python"
 version = "0.1.0"
 description = ""
 authors = ["BlackBox <vwvmnu@gmail.com>"]
-readme = "README.md"
+readme = "HELP.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -14,12 +14,6 @@ webdriver-manager = "^4.0.2"
 pyautogui = "^0.9.54"
 matplotlib = "^3.9.2"
 openpyxl = "^3.1.5"
-
-[[tool.poetry.source]]
-name = "tsinghua"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-default = true
-
 
 [build-system]
 requires = ["poetry-core"]
