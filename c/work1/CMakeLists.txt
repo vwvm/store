@@ -8,6 +8,7 @@ add_library(work1 library.cpp
         window/SerialInterface.h
         library.h
         d.cpp
-        d.h)
+        d.h
+        temp.c)
 
 TARGET_LINK_LIBRARIES(work1 dl)

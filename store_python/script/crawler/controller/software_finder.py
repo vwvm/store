@@ -13,7 +13,12 @@ supported_domain_names = [
 ]
 
 
-def detail_tmall_com(options: WebDriver, emitter):
+def detail_tmall_com(driver: WebDriver,  emitter):
+    WebDriverWait(driver, 60).until(
+        ec.presence_of_element_located((By.TAG_NAME, 'body'))
+    )
+    emitter.log_updated.emit("网页加载完成")
+    time.sleep(10000)
     return None
 
 def flbook_com_cn(driver: WebDriver, emitter, self):
