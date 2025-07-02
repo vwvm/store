@@ -1,3 +1,15 @@
 pandas~=2.2.3
 numpy~=2.2.5
 scikit-learn~=1.6.1
+matplotlib~=3.10.3
+pyside6~=6.9.0
+pyautogui~=0.9.54
+requests~=2.32.3
+selenium~=4.33.0
+webdriver-manager~=4.0.2
+openpyxl~=3.1.5
+pyperclip~=1.9.0
+fonttools~=4.58.1
+frida~=17.0.7
+pillow~=11.2.1
+websocket-client~=1.8.0

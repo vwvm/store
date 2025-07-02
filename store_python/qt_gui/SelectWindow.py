@@ -10,8 +10,6 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QLabel,
                                QLineEdit, QPushButton, QVBoxLayout,
                                QWidget, QCheckBox, QMessageBox)
 
-import App
-
 
 class SelectWindow(QMainWindow):
     def __init__(self):

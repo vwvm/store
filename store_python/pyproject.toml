@@ -21,6 +21,10 @@ poetry-core = "^2.1.1"
 selenium = "^4.29.0"
 pyside6 = "^6.8.2.1"
 pyinstaller = "^6.12.0"
+frida-tools = "^14.0.2"
+psutil = "^7.0.0"
+schedule = "^1.2.2"
+pywin32 = "^310"
 
 [[tool.poetry.source]]
 name = "aliyun"
