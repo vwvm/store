@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "scum"
+version = "0.1.0"
+description = ""
+authors = ["BlackBox <vwvmnu@gmail.com>"]
+readme = "HELP.md"
+packages = [
+    {include = "script"}
+]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"  # 限制 Python 版本范围
+scikit-learn = "^1.5.2"
+pandas = "^2.2.3"
+requests = "^2.32.3"
+webdriver-manager = "^4.0.2"
+pyautogui = "^0.9.54"
+matplotlib = "^3.9.2"
+openpyxl = "^3.1.5"
+poetry-core = "^2.1.1"
+selenium = "^4.29.0"
+pyside6 = "^6.8.2.1"
+pyinstaller = "^6.12.0"
+frida-tools = "^14.0.2"
+psutil = "^7.0.0"
+schedule = "^1.2.2"
+pywin32 = "^310"
+
+[[tool.poetry.source]]
+name = "aliyun"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+
+#[build-system]
+#requires = ["poetry-core"]
+#build-backend = "poetry.core.masonry.api"
