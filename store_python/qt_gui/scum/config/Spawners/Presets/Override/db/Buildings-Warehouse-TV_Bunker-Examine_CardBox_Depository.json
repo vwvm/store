@@ -1,0 +1,89 @@
+{
+  "Items": [
+    {
+      "Rarity": "ExtremelyRare",
+      "Id": "Screwdriver"
+    },
+    {
+      "Rarity": "VeryRare",
+      "Id": "Screwdriver_Small"
+    },
+    {
+      "Rarity": "VeryRare",
+      "Id": "Lockpick_Advanced_Item"
+    },
+    {
+      "Rarity": "Rare",
+      "Id": "Batteries"
+    },
+    {
+      "Rarity": "Rare",
+      "Id": "Grinding_Stone_02"
+    },
+    {
+      "Rarity": "Rare",
+      "Id": "Sewing_kit"
+    },
+    {
+      "Rarity": "Rare",
+      "Id": "Tool_Box"
+    },
+    {
+      "Rarity": "Rare",
+      "Id": "Weapon_Cleaning_Kit"
+    },
+    {
+      "Rarity": "Uncommon",
+      "Id": "Compass"
+    },
+    {
+      "Rarity": "Common",
+      "Id": "Antibiotics_01"
+    },
+    {
+      "Rarity": "Common",
+      "Id": "Aspirin"
+    },
+    {
+      "Rarity": "Rare",
+      "Id": "AntiburnGel"
+    },
+    {
+      "Rarity": "Uncommon",
+      "Id": "Emergency_Bandage_Big"
+    },
+    {
+      "Rarity": "Rare",
+      "Id": "Tourniquet"
+    },
+    {
+      "Rarity": "Common",
+      "Id": "MRE_Cheeseburger"
+    },
+    {
+      "Rarity": "Common",
+      "Id": "Water_05l"
+    },
+    {
+      "Rarity": "Rare",
+      "Id": "Whiskey"
+    },
+    {
+      "Rarity": "ExtremelyRare",
+      "Id": "BCULock_Item"
+    },
+    {
+      "Rarity": "ExtremelyRare",
+      "Id": "Lock_Item_Advanced"
+    }
+  ],
+  "Probability": 100,
+  "QuantityMin": 2,
+  "QuantityMax": 3,
+  "AllowDuplicates": false,
+  "ShouldFilterItemsByZone": false,
+  "InitialDamage": 0,
+  "RandomDamage": 10,
+  "InitialUsage": 0,
+  "RandomUsage": 10
+}

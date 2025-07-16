@@ -1,0 +1,183 @@
+{
+	"Name": "ItemLootTreeNodes",
+	"Rarity": "Uncommon",
+	"Children": [
+		{
+			"Name": "Depository",
+			"Rarity": "Rare",
+			"Children": [
+				{
+					"Name": "Car",
+					"Rarity": "VeryRare",
+					"Children": [
+						{
+							"Name": "Phoenix_Tears",
+							"Rarity": "VeryRare"
+						},
+						{
+							"Name": "Antibiotics_03",
+							"Rarity": "Rare"
+						},
+						{
+							"Name": "Painkillers_03",
+							"Rarity": "VeryRare"
+						}
+					]
+				},
+				{
+					"Name": "Food",
+					"Rarity": "Rare",
+					"Children": [
+						{
+							"Name": "MRE_Cheeseburger",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "MRE_Stew",
+							"Rarity": "Uncommon"
+						}
+					]
+				},
+				{
+					"Name": "Medical",
+					"Rarity": "Uncommon",
+					"Children": [
+						{
+							"Name": "Antibiotics_01",
+							"Rarity": "Common"
+						},
+						{
+							"Name": "Phoenix_Tears",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Antibiotics_03",
+							"Rarity": "Rare"
+						},
+						{
+							"Name": "Isopropyl_alcohol",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Painkillers_01",
+							"Rarity": "Common"
+						},
+						{
+							"Name": "Painkillers_02",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "PainKillers_03",
+							"Rarity": "Rare"
+						},
+						{
+							"Name": "Syringe",
+							"Rarity": "Uncommon"
+						}
+					]
+				},
+				{
+					"Name": "MeM",
+					"Rarity": "Rare",
+					"PostSpawnActions": [
+						"SetUsage_Max"
+					],
+					"Children": [
+						{
+							"Name": "MemoryModule_Level1",
+							"Rarity": "Common"
+						},
+						{
+							"Name": "MemoryModule_Level2",
+							"Rarity": "Common"
+						},
+						{
+							"Name": "MemoryModule_Level3",
+							"Rarity": "Rare"
+						},
+						{
+							"Name": "MemoryModule_Level4",
+							"Rarity": "Rare"
+						}
+					]
+				},
+				{
+					"Name": "Misc",
+					"Rarity": "Rare",
+					"Children": [
+						{
+							"Name": "BCULock_Item",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "DialLock_Item",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Geiger_Counter_Analogue",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Lock_Item_Advanced",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Lockpick_Advanced_Item",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Smartphone_Battery",
+							"Rarity": "Rare"
+						}
+					]
+				},
+				{
+					"Name": "tools",
+					"Rarity": "Abundant",
+					"Children": [
+						{
+							"Name": "Hiking_Backpack_01_04",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Lockpick_Advanced_Item",
+							"Rarity": "Abundant"
+						},
+						{
+							"Name": "Screwdriver",
+							"Rarity": "Abundant"
+						},
+						{
+							"Name": "Fuse_1000A",
+							"Rarity": "Abundant"
+						},
+						{
+							"Name": "Grinding_Stone_02",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "KeyCard",
+							"Rarity": "Abundant"
+						},
+						{
+							"Name": "Screwdriver_Small",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Sewing_kit",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Tool_Box",
+							"Rarity": "Uncommon"
+						},
+						{
+							"Name": "Weapon_Cleaning_Kit",
+							"Rarity": "Uncommon"
+						}
+					]
+				}
+			]
+		}
+	]
+}

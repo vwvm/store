@@ -1,0 +1,11 @@
+{
+	"FixedItems": [
+		"Laika_Engine_Alternator_Item",
+		"WW_Engine_Alternator_Item",
+		"Rager_Engine_Alternator_Item"
+	],
+	"InitialDamage": 0,
+	"RandomDamage": 0,
+	"InitialUsage": 0,
+	"RandomUsage": 0
+}

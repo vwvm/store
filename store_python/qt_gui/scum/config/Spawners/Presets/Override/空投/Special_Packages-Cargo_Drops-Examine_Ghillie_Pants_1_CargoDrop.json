@@ -1,0 +1,16 @@
+{
+	"FixedItems": [
+		"Ghillie_Suit_Jacket_01",
+                                "Ghillie_Suit_Pants_01"
+                                "2H_Tang_Dao_Damascus",
+                                "Armor_Tactical_Vest_01_02",
+		"Hiking_Backpack_Tyrone",
+                                "MilitaryPants_01",
+                                "CombatBoots",
+		"Tactical_Sweater_01"
+	],
+	"InitialDamage": 0,
+	"RandomDamage": 0,
+	"InitialUsage": 0,
+	"RandomUsage": 0
+}

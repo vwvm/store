@@ -1,0 +1,14 @@
+{
+	"FixedItems": [
+		"2H_Tang_Dao_Black_Dragon",
+                                "Armor_Tactical_Vest_01_02",
+		"MilitaryPants_02",
+                                "Tactical_Jacket_01_02",
+                                "CombatBoots",
+		"Military_Backpack_02_02"
+	],
+	"InitialDamage": 0,
+	"RandomDamage": 0,
+	"InitialUsage": 0,
+	"RandomUsage": 0
+}

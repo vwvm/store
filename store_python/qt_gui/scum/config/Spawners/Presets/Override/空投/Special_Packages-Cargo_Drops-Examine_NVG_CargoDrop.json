@@ -1,0 +1,10 @@
+{
+	"FixedItems": [
+		"Night_Vision_Googles_01",
+		"Batteries"
+	],
+	"InitialDamage": 0,
+	"RandomDamage": 0,
+	"InitialUsage": 0,
+	"RandomUsage": 0
+}
