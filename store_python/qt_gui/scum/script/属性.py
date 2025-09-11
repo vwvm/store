@@ -13,7 +13,7 @@ def test(conn: Optional[sqlite3.Connection]) -> bool:
 
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT body_simulation FROM main.prisoner WHERE id = 2")
+        cursor.execute("SELECT body_simulation FROM main.prisoner WHERE id = 1")
         result = cursor.fetchone()
 
         if result and result[0]:
@@ -50,21 +50,17 @@ def test(conn: Optional[sqlite3.Connection]) -> bool:
                         # 检查是否有足够的数据
                         if data_end <= len(data):
                             value_bytes = data[data_start: data_end]
+                            print(value_bytes)
                             print(
                                 f"DoubleProperty后[{index_a_b[0]},{index_a_b[1]})位数据的十六进制表示:\n{value_bytes.hex()}")
 
-                            # 提取前8字节并按小端序解析为双精度浮点数
-                            try:
-                                # 确保有8字节数据
-                                if len(value_bytes) >= 8:
-                                    float_bytes = value_bytes[:8]
-                                    # 小端序解析双精度浮点数
-                                    float_value = struct.unpack('<d', float_bytes)[0]
-                                    print(f"解析为双精度浮点数: {float_value}")
-                                else:
-                                    print(f"错误: 数据不足（仅{len(value_bytes)}字节，需要8字节）")
-                            except Exception as e:
-                                print(f"解析失败: {e}")
+
+                            float_bytes = value_bytes[:8]
+                            # 小端序解析双精度浮点数
+                            float_value = struct.unpack('<d', float_bytes)[0]
+                            print(f"解析为双精度浮点数: {float_value}")
+
+
                         else:
                             print(
                                 f"错误: 数据不足，无法提取[{index_a_b[0]},{index_a_b[1]})位（仅{len(data) - value_start}字节）")
@@ -177,7 +173,7 @@ def main():
     """主函数: 查询属性值并允许用户修改"""
     try:
         # 连接数据库(请替换为实际数据库路径)
-        db_path = input("请输入数据库路径(默认为prisoner.db): ").strip()
+        db_path = input("请输入数据库路径(默认为SCUM.db): ").strip()
         if not db_path:
             db_path = "prisoner.db"
 

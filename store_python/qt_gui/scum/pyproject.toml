@@ -25,6 +25,10 @@ frida-tools = "^14.0.2"
 psutil = "^7.0.0"
 schedule = "^1.2.2"
 pywin32 = "^310"
+fastapi = "^0.116.1"
+uvicorn = "^0.35.0"
+pyuc = "^0.0.12"
+pynput = "^1.8.1"
 
 [[tool.poetry.source]]
 name = "aliyun"

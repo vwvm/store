@@ -1,0 +1,22 @@
+steamCMD中可以使用下面的命令
+#指定目录
+force_install_dir "C:\Users\Administrator\Desktop\my_tool\WindowsGSM\servers\1\serverfiles"
+#匿名登录
+login anonymous
+#更新
+app_update 3792580 validate
+设置-系统-功能中添加OpenSSH服务器
+# 设置为自动启动
+Set-Service -Name sshd -StartupType 'Automatic'
+# 启动SSH服务
+Start-Service sshd
+# 编辑SSH服务器配置文件
+C:\ProgramData\ssh\sshd_config
+配置
+ChrootDirectory "C:\game\steamapps\common\SCUM Server"
+修改后重启 SSH 服务：
+Restart-Service sshd
+把快捷方式放置在这里，开机启动
+C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
+安装：https://gitcode.com/open-source-toolkit/be069/blob/main/DirectX_V4.3.0.40864_XiTongZhiJia.zip
+安装：https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version
