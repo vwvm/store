@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!-- 必须的 meta 标签 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>work</title>
+    <!-- CSS 文件 -->
+    <link rel="stylesheet" href="./css/http_cdn.jsdelivr.net_npm_bootstrap@4.6.2_dist_css_bootstrap.css">
+    <link rel="stylesheet" href="./css/bigData.css">
+
+    <!-- 引入js文件 -->
+    <script src="./js/http_cdn.jsdelivr.net_npm_jquery@3.5.1_dist_jquery.slim.js"></script>
+    <script src="./js/http_cdn.jsdelivr.net_npm_popper.js@1.16.1_dist_umd_popper.js"></script>
+    <script src="./js/http_cdn.jsdelivr.net_npm_bootstrap@4.6.2_dist_js_bootstrap.js"></script>
+    <script src="./js/http_cdn.jsdelivr.net_npm_echarts@5.4.3_dist_echarts.js"></script>
+    <script src="./js/http_unpkg.com_vue@3_dist_vue.global.js"></script>
+
+</head>
+<body style="display: flex; align-items: center; justify-content: center">
+<div id="app">
+    <header class="header-background">
+        <div class="header-background-container">
+            <img src="./img/left.png" alt="" id="header-div-left">
+            <img src="./img/center.png" alt="" id="header-div-center">
+            <img src="./img/right.png" alt="" id="header-div-right">
+        </div>
+        <div class="header-text">
+            <div class="header-text-left">
+                <div class="header-text-left-city">
+                    深圳市
+                </div>
+                <div class="header-text-left-frame">
+                    <img src="./img/weather/sun.png" class="header-text-left-frame-rain">
+                    <span class="header-text-left-frame-text">天晴</span>
+                </div>
+                <div class="header-text-left-frame-temperature">
+                    10-36℃
+                </div>
+            </div>
+            <div class="header-text-center">
+                <b>汇智AI数据大屏</b>
+            </div>
+            <div class="header-text-right">
+                <div class="header-text-right-data" id="header-text-right-data">
+                    2023-09-11
+                </div>
+                <div class="header-text-right-week" id="header-text-right-week">
+                    星期一
+                </div>
+                <div class="header-text-right-time" id="header-text-right-time">
+                    15:20:33
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="div-main">
+        <div class="div-main-instrument">
+            <div class="div-main-instrument-left">
+                <div class="div-main-instrument-left-top">
+                    <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
+                    <span class="div-main-instrument-left-font-info">今日链接人数</span>
+                </div>
+                <div class="div-main-instrument-left-bottom">
+                    <div class="div-main-instrument-left-bottom-left">
+                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
+                        <span class="div-main-instrument-left-font-info">上新数据</span>
+                    </div>
+                    <div class="div-main-instrument-left-bottom-right">
+                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
+                        <span class="div-main-instrument-left-font-info">浏览超过50%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="div-main-instrument-right">
+                <div class="div-main-instrument-left-top">
+                    <span class="div-main-instrument-left-font-header">{{generateRandomNumber(10000, 99999)}}</span>
+                    <span class="div-main-instrument-left-font-info">画册总访问数</span>
+                </div>
+                <div class="div-main-instrument-left-bottom">
+                    <div class="div-main-instrument-left-bottom-left">
+                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
+                        <span class="div-main-instrument-left-font-info">访问总时长</span>
+                    </div>
+                    <div class="div-main-instrument-left-bottom-right">
+                        <span class="div-main-instrument-left-font-header">{{generateRandomNumber(1000, 9999)}}</span>
+                        <span class="div-main-instrument-left-font-info">热门画册</span>
+                    </div>
+                </div>
+            </div>
+            <div class="div-main-instrument-center">
+                <div id="main" style="width: 360px;height:360px;"></div>
+            </div>
+
+            <div class="div-main-instrument-bottom">
+                <div class="div-main-instrument-bottom-size1 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" src="./img/number0.png">
+                </div>
+                <div class="div-main-instrument-bottom-size2 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" src="./img/number0.png">
+                </div>
+                <div class="div-main-instrument-bottom-size3 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                </div>
+                <div class="div-main-instrument-bottom-size4">
+                    ,
+                </div>
+                <div class="div-main-instrument-bottom-size5 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                </div>
+                <div class="div-main-instrument-bottom-size6 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                </div>
+                <div class="div-main-instrument-bottom-size7 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                </div>
+                <div class="div-main-instrument-bottom-size8">
+                    ,
+                </div>
+                <div class="div-main-instrument-bottom-size9 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                </div>
+                <div class="div-main-instrument-bottom-size10 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                </div>
+                <div class="div-main-instrument-bottom-size11 div-main-instrument-bottom-number-background">
+                    <img class="div-main-instrument-bottom-number-num" :src="'img/number'+ generateRandomNumber(0,9) +'.png'">
+                </div>
+                <div class="div-main-instrument-bottom-size12">
+                    元
+                </div>
+
+            </div>
+
+            <div class="div-main-instrument-text">
+                平台预估成交金额
+            </div>
+        </div>
+        <div class="div-main-left">
+            <div class="div-main-left-header">
+                <div class="div-main-left-header-1">
+                    <b>今日链接人数</b>
+                </div>
+                <div class="div-main-left-header-2">
+                    <div class="col-6 div-main-left-header-2-font">
+                        服务企业
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        画册页数
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        访问人
+                    </div>
+                </div>
+            </div>
+            <div class="div-main-left-header-main">
+                <div class="div-main-left-header-main-row" v-for="_ in 5">
+                    <div class="col-1">
+                        <img class="triangle" src="./img/triangle.png" alt="">
+                    </div>
+                    <div class="col-5 div-main-left-header-main-font">
+                        {{ generateRandomChinese(7) }}公司
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        {{ generateRandomNumber(500, 5000) }}
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        <div class="div-main-left-header-main-man">
+                            {{ generateRandomChinese(3) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-main-right1">
+            <div class="div-main-left-header">
+                <div class="div-main-left-header-1">
+                    <b>画册上新数据</b>
+                </div>
+                <div class="div-main-left-header-2">
+                    <div class="col-6 div-main-left-header-2-font">
+                        服务企业
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        画册页数
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        访问人
+                    </div>
+                </div>
+            </div>
+            <div class="div-main-left-header-main">
+                <div class="div-main-left-header-main-row" v-for="_ in 5">
+                    <div class="col-1">
+                        <img class="triangle" src="./img/triangle.png" alt="">
+                    </div>
+                    <div class="col-5 div-main-left-header-main-font">
+                        {{ generateRandomChinese(7) }}公司
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        {{ generateRandomNumber(500, 5000) }}
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        <div class="div-main-left-header-main-man">
+                            {{ generateRandomChinese(3) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-main-right2">
+            <div class="div-main-left-header">
+                <div class="div-main-left-header-1">
+                    <b>画册被访问数量统计</b>
+                </div>
+                <div class="div-main-left-header-2">
+                    <div class="col-6 div-main-left-header-2-font">
+                        服务企业
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        画册页数
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        访问人
+                    </div>
+                </div>
+            </div>
+            <div class="div-main-left-header-main">
+                <div class="div-main-left-header-main-row" v-for="_ in 5">
+                    <div class="col-1">
+                        <img class="triangle" src="./img/triangle.png" alt="">
+                    </div>
+                    <div class="col-5 div-main-left-header-main-font">
+                        {{ generateRandomChinese(7) }}公司
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        {{ generateRandomNumber(500, 5000) }}
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        <div class="div-main-left-header-main-man">
+                            {{ generateRandomChinese(3) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-main-center1">
+            <div class="div-main-left-header">
+                <div class="div-main-left-header-1">
+                   <b>实时画册在线人数</b>
+                </div>
+                <div class="div-main-left-header-2">
+                    <div class="col-6 div-main-left-header-2-font">
+                        服务企业
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        画册页数
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        访问人
+                    </div>
+                </div>
+            </div>
+            <div class="div-main-left-header-main">
+                <div class="div-main-left-header-main-row" v-for="_ in 5">
+                    <div class="col-1">
+                        <img class="triangle" src="./img/triangle.png" alt="">
+                    </div>
+                    <div class="col-5 div-main-left-header-main-font">
+                        {{ generateRandomChinese(7) }}公司
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        {{ generateRandomNumber(500, 5000) }}
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        <div class="div-main-left-header-main-man">
+                            {{ generateRandomChinese(3) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-main-center2">
+            <div class="div-main-left-header">
+                <div class="div-main-left-header-1">
+                    <b>收到需求对接数据</b>
+                </div>
+                <div class="div-main-left-header-2">
+                    <div class="col-6 div-main-left-header-2-font">
+                        服务企业
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        画册页数
+                    </div>
+                    <div class="col-3 div-main-left-header-2-font">
+                        访问人
+                    </div>
+                </div>
+            </div>
+            <div class="div-main-left-header-main">
+                <div class="div-main-left-header-main-row" v-for="_ in 5">
+                    <div class="col-1">
+                        <img class="triangle" src="./img/triangle.png" alt="">
+                    </div>
+                    <div class="col-5 div-main-left-header-main-font">
+                        {{ generateRandomChinese(7) }}公司
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        {{ generateRandomNumber(500, 5000) }}
+                    </div>
+                    <div class="col-3 div-main-left-header-main-font">
+                        <div class="div-main-left-header-main-man">
+                            {{ generateRandomChinese(3) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script>
+
+    const {createApp, ref, onMounted} = Vue;
+    const UpIcon = {
+        template: `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+               width="51" height="29.75" viewBox="0 0 51 29.75">
+            <g>
+              <path
+                  d="M36.125,4.25C34.9514,4.25,34,3.29859,34,2.125C34,0.951394,34.9514,0,36.125,0C36.125,0,48.875,0,48.875,0C50.0486,0,51,0.951394,51,2.125C51,2.125,51,14.875,51,14.875C51,16.0486,50.0486,17,48.875,17C47.7014,17,46.75,16.0486,46.75,14.875C46.75,14.875,46.75,7.2552,46.75,7.2552C46.75,7.2552,30.1901,23.8151,30.1901,23.8151C29.3603,24.6449,28.0147,24.6449,27.1849,23.8151C27.1849,23.8151,18.0625,14.6927,18.0625,14.6927C18.0625,14.6927,3.62761,29.1276,3.62761,29.1276C2.79773,29.9574,1.45226,29.9574,0.622398,29.1276C-0.207466,28.2978,-0.207466,26.9522,0.622398,26.1224C0.622398,26.1224,16.5599,10.1849,16.5599,10.1849C17.3898,9.35504,18.7352,9.35504,19.5651,10.1849C19.5651,10.1849,28.6875,19.3073,28.6875,19.3073C28.6875,19.3073,43.7448,4.25,43.7448,4.25C43.7448,4.25,36.125,4.25,36.125,4.25C36.125,4.25,36.125,4.25,36.125,4.25Z"
+                  fill-rule="evenodd" fill="#FFFFFF" fill-opacity="1"/>
+            </g>
+          </svg>
+        `,
+        setup() {
+        }
+    };
+
+    const App = {
+        //使用短横线命名
+        components: {
+            UpIcon,
+        },
+        setup() {
+            /**
+             * 生成{size}大小的汉字
+             * @param size 传入大小,默认3
+             * @returns {string} 返回汉字
+             */
+            const generateRandomChinese = (size = 3) => {
+                if (typeof size != "number") {
+                    console.log("请输入数字")
+                }
+                let randomChineseString = "";
+                const commonChars = "的一是了我不人在他有这个上们来到时大地为子中你说生国年着就那和要她出也得里后自以会家可下而过天去能对小多然于心学么之都好看起发菲总统对华为";
+                for (let i = 0; i < size; i++) {
+                    //randomChineseString += String.fromCharCode(Math.floor(Math.random() * (0x9FFF - 0x4E00 + 1)) + 0x4E00);
+                    randomChineseString += commonChars[Math.floor(Math.random() * commonChars.length)];
+                }
+                return randomChineseString;
+            }
+            /**
+             * 随机生成颜色
+             */
+            const generateRandomColor = () =>{
+                const commonChars = [];
+            }
+            const generateRandomNumber = (min = 0, max = 1) => {
+                if (typeof min != "number" || typeof max != "number") {
+                    console.log("请输入数字")
+                }
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+            const albumDetailsData = ref([
+                {
+                    title: "某某画册",
+                    pageView: 120 + "+",
+                    whetherItIsGrowthOrNot: true,
+                }
+            ]);
+
+
+            const addData = () => {
+                albumDetailsData.value.push({
+                    title: generateRandomChinese(),
+                    pageView: (Math.floor(Math.random() * 200) + 100) + "+",
+                    whetherItIsGrowthOrNot: Math.random() < 0.5,
+                })
+            }
+
+            for (let i = 0; i < 4; i++) {
+                addData();
+            }
+
+            const loadMore = () => {
+                // 这里只是为了演示，实际情况可能需要从服务器加载数据
+                for (let i = 1; i <= 5; i++) {
+                    addData();
+                }
+            };
+
+            const handleScroll = (event) => {
+                if (window.innerHeight + window.scrollY > 20000) {
+                    return;
+                }
+                let nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000;
+                if (nearBottom) {
+                    loadMore();
+                }
+            };
+
+            // 添加滚动事件监听器
+            window.addEventListener('scroll', handleScroll);
+
+
+            onMounted(() => {
+                const chartRef = document.getElementById("main");
+
+                // ECharts 数据和配置
+                option = {
+                    series: [
+                        {
+                            type: 'gauge',
+                            center: ['50%', '60%'],
+                            startAngle: 200,
+                            endAngle: -20,
+                            min: 0,
+                            max: 600000,
+                            splitNumber: 5,
+                            itemStyle: {color: '#00C2FF '},
+                            progress: {
+                                show: true, width: 20
+                            },
+                            anchor: {
+                                show: false
+                            },
+                            pointer: {
+                                show: false
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    width: 20
+                                },
+                            },
+                            //坐标轴
+                            axisTick: {
+                                distance: -25,
+                                splitNumber: 5,
+                                lineStyle: {
+                                    width: 2,
+                                    color: '#999'
+                                },
+                                length: 4
+                            },
+
+                            //间隔标识刻度样式
+                            splitLine: {
+                                distance: -30,
+                                length: 8,
+                                lineStyle: {
+                                    width: 3,
+                                    color: '#999'
+                                },
+                                formatter: "的"
+                            },
+                            //间隔标识刻度字体
+                            axisLabel: {
+                                distance: -10,
+                                color: '#999',
+                                fontSize: 14,
+                                formatter: function (value, index) {
+                                    return value / 10000 + 'w';
+                                }
+                            },
+
+                            detail: {
+                                valueAnimation: true,
+                                width: '60%',
+                                lineHeight: 40,
+                                borderRadius: 8,
+                                offsetCenter: [0, '-15%'],
+                                fontSize: 40,
+                                fontWeight: 'bolder',
+                                formatter: '{value}',
+                                color: 'inherit'
+                            },
+                            title: {
+                                offsetCenter: [0, 10],
+                                fontSize: 18,
+                                color: "#ffffff",
+                            },
+                            data: [
+                                {
+                                    value: 20,
+                                    name: "已链接数量"
+                                }
+                            ]
+                        },
+                        {
+                            type: 'gauge',
+                            center: ['50%', '60%'],
+                            startAngle: 200,
+                            endAngle: -20,
+                            min: 0,
+                            max: 600000,
+                            itemStyle: {
+                                color: '#D200FF '
+                            },
+                            progress: {
+                                show: true,
+                                width: 8
+                            },
+                            pointer: {
+                                show: false
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            axisLabel: {
+                                show: false
+                            },
+                            detail: {
+                                show: false
+                            },
+                            data: [
+                                {
+                                    value: 20
+                                }
+                            ]
+                        }
+                    ]
+                };
+
+                setInterval(function () {
+                    const random = +(Math.random() * 600000).toFixed(0);
+                    myChart.setOption({
+                        series: [
+                            {
+                                data: [
+                                    {
+                                        value: random,
+                                        name: "已链接数量"
+                                    }
+                                ]
+                            },
+                            {
+                                data: [
+                                    {
+                                        value: random,
+                                    }
+                                ]
+                            }
+                        ]
+                    });
+                }, 2000);
+
+                // 使用 ECharts
+                const myChart = echarts.init(chartRef);
+                myChart.setOption(option);
+            })
+
+            return {albumDetailsData, generateRandomChinese, generateRandomNumber};
+        }
+    };
+
+    createApp(App).mount('#app');
+</script>
+<script src="./js/bigData.js"></script>
+</body>
+</html>
